@@ -15,8 +15,24 @@ import org.junit.Test;
 public class RailroadServiceTest {
 
 	@Test
-	public void test() {
-		assertThat(false).isTrue();
+	public void findsRouteBetweenTwoTowns() {
+		RailTracks railTracks = new RailTracks("AB5");
+		RailroadService railroadService = new RailroadService(railTracks);
+		
+		RouteSpec routeSpec = new RouteSpec("A-B");
+		Route resultRoute = railroadService.findRoute(routeSpec);
+		assertThat(resultRoute).isNotNull();
+	}
+	
+	@Test
+	public void computesDistanceOfRouteBetweenTwoTowns() {
+		RailTracks railTracks = new RailTracks("AB5");
+		RailroadService railroadService = new RailroadService(railTracks);
+		
+		RouteSpec routeSpec = new RouteSpec("A-B");
+		Route resultRoute = railroadService.findRoute(routeSpec);
+		assertThat(resultRoute).isNotNull();
+		assertThat(resultRoute.getTotalDistance()).equals(Distance.valueOf(5));
 	}
 
 }
