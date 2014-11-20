@@ -43,3 +43,11 @@ Output:	Information about routes
 Configuration validation:
 - track between start and end town will appear only once
 - track won't have same start and end town
+
+Scenario: Find distance for route A-B-C
+Pseudo code:
+- Find town A
+- Find exact route A-B-C
+	- Does track A-B exist?
+	- Does track B-C exist?
+- Compute distance of route found (or error message)
