@@ -15,12 +15,11 @@ public class RailroadTracks {
 
 	public void add(Track aTrack) {
 		Location fromLocation = aTrack.getFromLocation();
-//		this.trackList.add(aTrack);
 		if(locationList.contains(fromLocation)) {
-			
+//			fromLocation
 		}
 		else {
-			
+			locationList.add(fromLocation);
 		}
 	}
 
