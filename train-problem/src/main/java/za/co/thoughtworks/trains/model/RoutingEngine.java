@@ -13,6 +13,10 @@ import java.util.List;
 public class RoutingEngine {
 
 	public Route findRouteBetweenTwoLocations(Location startLocation, Location endLocation) {
+		if (startLocation == null || endLocation == null) {
+			throw new IllegalArgumentException("Start location and End location cannot be null");
+		}
+		
 		// Get all tracks from start location
 //		startLocation.getOutgoingTracks();
 		

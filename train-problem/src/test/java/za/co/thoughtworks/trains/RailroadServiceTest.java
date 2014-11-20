@@ -38,9 +38,8 @@ public class RailroadServiceTest {
 //		assertThat(resultRoute);
 	}
 	
-//	@Ignore
-	@Test
-	public void findsNoRouteBetweenTwoTownsWhenTownDoesntExist() {
+	@Test(expected=IllegalArgumentException.class)
+	public void findsNoRouteBetweenTwoTownsWhenEndTownDoesntExist() {
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
@@ -51,20 +50,31 @@ public class RailroadServiceTest {
 		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
 	}
 	
-	@Ignore
+	@Test(expected=IllegalArgumentException.class)
+	public void findsNoRouteBetweenTwoTownsWhenStartTownDoesntExist() {
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
+		
+		Route resultRoute = railroadService.findRouteWith(
+				aRouteSpec().fromTown("C").toTown("A")
+				.build());
+		
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
+	}
+	
 	@Test
 	public void findsNoRouteBetweenTwoTownsWhenPathDoesntExist() {
 		//"AB5-BC10"
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
-				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
+				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(10))
 				);
 		
 		Route resultRoute = railroadService.findRouteWith(
-				aRouteSpec().fromTown("A").toTown("B")
+				aRouteSpec().fromTown("A").toTown("D")
 				.build());
 		
-		assertThat(resultRoute).isNotNull();
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
 	}
 	
 	@Test
