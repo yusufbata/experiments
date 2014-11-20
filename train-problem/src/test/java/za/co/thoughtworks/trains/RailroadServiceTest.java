@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.application.RailroadApplicationService;
+import za.co.thoughtworks.trains.model.NoRoute;
 import za.co.thoughtworks.trains.model.RailroadTracks;
 import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
 import za.co.thoughtworks.trains.model.Route;
@@ -37,17 +38,17 @@ public class RailroadServiceTest {
 //		assertThat(resultRoute);
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void findsNoRouteBetweenTwoTownsWhenTownDoesntExist() {
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
 		Route resultRoute = railroadService.findRouteWith(
-				aRouteSpec().fromTown("A").toTown("B")
+				aRouteSpec().fromTown("A").toTown("C")
 				.build());
 		
-		assertThat(resultRoute).isNotNull();
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
 	}
 	
 	@Ignore

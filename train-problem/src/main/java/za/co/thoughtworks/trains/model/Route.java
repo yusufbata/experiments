@@ -14,6 +14,8 @@ import za.co.thoughtworks.trains.application.Distance;
  */
 public class Route {
 
+	public static final Route NO_ROUTE_EXISTS = null;
+	
 	private List<Track> trackList;
 	private Distance totalDistance;
 
