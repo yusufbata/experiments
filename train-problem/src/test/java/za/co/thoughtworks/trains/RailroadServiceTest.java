@@ -86,10 +86,23 @@ public class RailroadServiceTest {
 				aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
-		theDistanceOfTheRouteIs(5, resultRoute);
+		theTotalDistanceOfTheRouteIs(5, resultRoute);
 	}
 	
-	
+	@Test
+	public void computesDistanceOfRouteBetweenThreeTowns() {
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
+				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
+		);
+		
+		Route resultRoute = railroadService.findRouteWith(
+				aRouteSpec().fromTown("A").toTown("C")
+				.build());
+		
+		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
+		theTotalDistanceOfTheRouteIs(15, resultRoute);
+	}
 	
 	
 	
@@ -101,7 +114,7 @@ public class RailroadServiceTest {
 		this.railroadService = new RailroadApplicationService(railroadTracks);
 	}
 
-	private void theDistanceOfTheRouteIs(int distance, Route resultRoute) {
+	private void theTotalDistanceOfTheRouteIs(int distance, Route resultRoute) {
 		assertThat(resultRoute).isNotNull();
 		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}
