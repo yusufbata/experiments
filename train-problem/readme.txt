@@ -1,6 +1,6 @@
 Restrictions:
-- only 1 problem
-- no external libs for application
+- select only 1 problem
+- no external libs for application (only build and test tools)
 - no executable files in solution
 
 Outputs:
