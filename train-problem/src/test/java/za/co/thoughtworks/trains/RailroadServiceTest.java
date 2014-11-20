@@ -6,7 +6,17 @@ package za.co.thoughtworks.trains;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
+import za.co.thoughtworks.trains.application.Distance;
+import za.co.thoughtworks.trains.application.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.RouteSpec;
+import za.co.thoughtworks.trains.application.RouteSpecBuilder;
+import za.co.thoughtworks.trains.model.RailroadTracks;
+import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
+import za.co.thoughtworks.trains.model.Route;
+import za.co.thoughtworks.trains.model.TrackBuilder;
 
 /**
  * @author Yusuf
@@ -14,25 +24,89 @@ import org.junit.Test;
  */
 public class RailroadServiceTest {
 
+	private RailroadApplicationService railroadService;
+	
 	@Test
 	public void findsRouteBetweenTwoTowns() {
-		RailTracks railTracks = new RailTracks("AB5");
-		RailroadService railroadService = new RailroadService(railTracks);
+		havingConfigured(railRoadTracks());
 		
-		RouteSpec routeSpec = new RouteSpec("A-B");
-		Route resultRoute = railroadService.findRoute(routeSpec);
+		Route resultRoute = railroadService.findRouteWith(aRouteSpec().fromTown("A").toTown("B")
+				.build());
+		
+		assertThat(resultRoute).isNotNull();
+//		assertThat(resultRoute.getStartLocation())
+	}
+	
+	@Ignore
+	@Test
+	public void findsNoRouteBetweenTwoTownsWhenTownDoesntExist() {
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
+		
+		Route resultRoute = railroadService.findRouteWith(
+				aRouteSpec().fromTown("A").toTown("B")
+				.build());
+		
+		assertThat(resultRoute).isNotNull();
+	}
+	
+	@Ignore
+	@Test
+	public void findsNoRouteBetweenTwoTownsWhenPathDoesntExist() {
+		//"AB5-BC10"
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
+				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
+				);
+		
+		Route resultRoute = railroadService.findRouteWith(
+				aRouteSpec().fromTown("A").toTown("B")
+				.build());
+		
 		assertThat(resultRoute).isNotNull();
 	}
 	
 	@Test
 	public void computesDistanceOfRouteBetweenTwoTowns() {
-		RailTracks railTracks = new RailTracks("AB5");
-		RailroadService railroadService = new RailroadService(railTracks);
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		RouteSpec routeSpec = new RouteSpec("A-B");
-		Route resultRoute = railroadService.findRoute(routeSpec);
+		Route resultRoute = railroadService.findRouteWith(
+				aRouteSpec().fromTown("A").toTown("B")
+				.build());
+		
+		theDistanceOfTheRouteIs(5, resultRoute);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	private void theDistanceOfTheRouteIs(int distance, Route resultRoute) {
 		assertThat(resultRoute).isNotNull();
-		assertThat(resultRoute.getTotalDistance()).equals(Distance.valueOf(5));
+		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
+	}
+
+	private RouteSpecBuilder aRouteSpec() {
+		return new RouteSpecBuilder();
+	}
+
+	private void havingConfigured(RailroadTracksBuilder aRailroadTracksBuilder) {
+		RailroadTracks railroadTracks = aRailroadTracksBuilder.build();
+		this.railroadService = new RailroadApplicationService(railroadTracks);
+	}
+
+	private TrackBuilder aTrack() {
+		return new TrackBuilder();
+	}
+
+	public static RailroadTracksBuilder railRoadTracks() {
+		return new RailroadTracksBuilder();
 	}
 
 }

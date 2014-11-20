@@ -1,0 +1,47 @@
+/**
+ * 
+ */
+package za.co.thoughtworks.trains.application;
+
+/**
+ * @author Yusuf
+ *
+ */
+public class Distance {
+
+	private final int units;
+
+	/**
+	 * @param units
+	 */
+	private Distance(int units) {
+		this.units = units;
+	}
+
+	public static Distance valueOf(int units) {
+		return new Distance(units);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (31 * (31 + this.units));
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Distance) {
+			Distance other = (Distance)obj;
+			if (this.units == other.units) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Distance = ").append(this.units).append("]");
+		return sb.toString();
+	}
+}
