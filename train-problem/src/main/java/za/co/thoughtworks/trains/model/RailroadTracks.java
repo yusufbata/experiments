@@ -6,21 +6,28 @@ import java.util.List;
 
 public class RailroadTracks {
 
-//	private List<Track> trackList;
-	private List<Location> locationList;
+	private List<Track> trackList;
+//	private Map<Location, List<Track>> locationList;
 	
 	public RailroadTracks() {
-		locationList = new ArrayList<Location>();
+		trackList = new ArrayList<Track>();
+//		locationList = new HashMap<Location, List<Track>>();
 	}
 
 	public void add(Track aTrack) {
-		Location fromLocation = aTrack.getFromLocation();
-		if(locationList.contains(fromLocation)) {
-//			fromLocation
+		this.trackList.add(aTrack);
+		/*Location fromLocation = aTrack.getFromLocation();
+		if(locationList.containsKey(fromLocation)) {
+			locationList.get(fromLocation).add(aTrack);
 		}
 		else {
-			locationList.add(fromLocation);
-		}
+			List<Track> trackListForLocation = new ArrayList<Track>();
+			trackListForLocation.add(aTrack);
+			locationList.put(fromLocation, trackListForLocation);
+		}*/
 	}
 
+	public List<Track> getTrackList() {
+		return trackList;
+	}
 }

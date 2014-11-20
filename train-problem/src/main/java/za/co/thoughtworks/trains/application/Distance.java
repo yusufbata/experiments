@@ -44,4 +44,13 @@ public class Distance {
 		sb.append("[Distance = ").append(this.units).append("]");
 		return sb.toString();
 	}
+
+	public static Distance infinite() {
+		return new Distance(Integer.MAX_VALUE);
+	}
+
+	public Distance add(Distance otherDistance) {
+		int newValue = this.units + otherDistance.units;
+		return Distance.valueOf(newValue);
+	}
 }

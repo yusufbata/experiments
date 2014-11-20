@@ -18,13 +18,11 @@ public class RouteSpec {
 	}
 
 	public String getStartLocationId() {
-		// TODO Auto-generated method stub
-		return null;
+		return fromTown;
 	}
 
 	public String getEndLocationId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.toTown;
 	}
 
 }

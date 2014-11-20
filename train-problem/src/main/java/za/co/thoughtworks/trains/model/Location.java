@@ -1,13 +1,17 @@
 package za.co.thoughtworks.trains.model;
 
-import za.co.thoughtworks.trains.application.Distance;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Location {
 
-	private String locationId;
+	private String id;
+	private List<Track> outgoingTracks;
 	
 	public Location(String locationId) {
-		this.locationId = locationId;
+		this.id = locationId;
+		this.outgoingTracks = new ArrayList<Track>();
 	}
 
 	public static Location create(String locationId) {
@@ -18,11 +22,29 @@ public class Location {
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof Location) {
 			Location other = (Location)obj;
-			if (this.locationId == other.locationId) {
+			if (this.id == other.id) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void addOutgoingTrack(Track track) {
+		this.outgoingTracks.add(track);
+	}
+
+	public List<Track> getOutgoingTracks() {
+		return outgoingTracks;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Location id = ").append(this.id).append("]");
+		return sb.toString();
+	}
 }

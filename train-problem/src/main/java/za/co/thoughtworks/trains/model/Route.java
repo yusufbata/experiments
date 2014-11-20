@@ -3,7 +3,8 @@
  */
 package za.co.thoughtworks.trains.model;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import za.co.thoughtworks.trains.application.Distance;
 
@@ -13,9 +14,24 @@ import za.co.thoughtworks.trains.application.Distance;
  */
 public class Route {
 
+	private List<Track> trackList;
+	private Distance totalDistance;
+
+	protected Route(){}
+	
+	public Route(Track track) {
+		this.trackList = new ArrayList<Track>();
+		this.totalDistance = Distance.valueOf(0);
+		addTrack(track);
+	}
+
+	private void addTrack(Track track) {
+		this.trackList.add(track);
+		this.totalDistance = this.totalDistance.add(track.getDistance());
+	}
+
 	public Distance getTotalDistance() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.totalDistance;
 	}
 
 }

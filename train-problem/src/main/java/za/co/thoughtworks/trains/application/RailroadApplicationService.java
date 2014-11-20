@@ -3,6 +3,8 @@
  */
 package za.co.thoughtworks.trains.application;
 
+import java.util.List;
+
 import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.RailroadTracks;
 import za.co.thoughtworks.trains.model.Route;
@@ -14,10 +16,12 @@ import za.co.thoughtworks.trains.model.RoutingEngine;
  */
 public class RailroadApplicationService {
 
-	private LocationRepository locationRepository;
+	private final LocationRepository locationRepository;
 	
 	public RailroadApplicationService(RailroadTracks railroadTracks) {
-		this.locationRepository = ApplicationRegistry.getLocationRepository(railroadTracks);
+		LocationFactory locationFactory = ApplicationRegistry.getLocationFactory();
+		List<Location> locationList = locationFactory.constructLocationsFrom(railroadTracks);
+		this.locationRepository = ApplicationRegistry.getLocationRepository(locationList);
 	}
 
 	public Route findRouteWith(RouteSpec routeSpec) {

@@ -4,19 +4,18 @@
 package za.co.thoughtworks.trains;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.*;
+import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
+import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
+import static za.co.thoughtworks.trains.application.BuilderFactory.railRoadTracks;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.application.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.RouteSpec;
-import za.co.thoughtworks.trains.application.RouteSpecBuilder;
 import za.co.thoughtworks.trains.model.RailroadTracks;
 import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
 import za.co.thoughtworks.trains.model.Route;
-import za.co.thoughtworks.trains.model.TrackBuilder;
 
 /**
  * @author Yusuf
@@ -28,13 +27,14 @@ public class RailroadServiceTest {
 	
 	@Test
 	public void findsRouteBetweenTwoTowns() {
-		havingConfigured(railRoadTracks());
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B")));
 		
 		Route resultRoute = railroadService.findRouteWith(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
 		assertThat(resultRoute).isNotNull();
-//		assertThat(resultRoute.getStartLocation())
+//		assertThat(resultRoute);
 	}
 	
 	@Ignore
@@ -85,28 +85,14 @@ public class RailroadServiceTest {
 	
 	
 	
-	
-
-	private void theDistanceOfTheRouteIs(int distance, Route resultRoute) {
-		assertThat(resultRoute).isNotNull();
-		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
-	}
-
-	private RouteSpecBuilder aRouteSpec() {
-		return new RouteSpecBuilder();
-	}
-
 	private void havingConfigured(RailroadTracksBuilder aRailroadTracksBuilder) {
 		RailroadTracks railroadTracks = aRailroadTracksBuilder.build();
 		this.railroadService = new RailroadApplicationService(railroadTracks);
 	}
 
-	private TrackBuilder aTrack() {
-		return new TrackBuilder();
-	}
-
-	public static RailroadTracksBuilder railRoadTracks() {
-		return new RailroadTracksBuilder();
+	private void theDistanceOfTheRouteIs(int distance, Route resultRoute) {
+		assertThat(resultRoute).isNotNull();
+		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}
 
 }
