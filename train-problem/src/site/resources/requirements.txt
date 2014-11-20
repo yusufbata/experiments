@@ -17,7 +17,7 @@ Measurements:
 
 Problem requirements:
 - supply application with input data via text file
-- application must run
+- application must run 
 - evidence that it works - minimum is indication that it works with supplied test data
 
 Train problem:
