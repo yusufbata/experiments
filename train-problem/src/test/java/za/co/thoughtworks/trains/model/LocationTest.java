@@ -17,7 +17,7 @@ public class LocationTest {
 		List<Track> outgoingTracks = new ArrayList<Track>();
 		Location location = new Location("A", outgoingTracks);
 		Track newTrack = new Track(location, location, Distance.valueOf(5));
-		location = location.addOutgoingTrack(newTrack);
+		location.addOutgoingTrack(newTrack);
 		
 		assertThat(location.getOutgoingTracks()).isNotEmpty().hasSize(1);
 		assertThat(location.getOutgoingTracks().get(0)).isEqualTo(newTrack);
@@ -30,8 +30,8 @@ public class LocationTest {
 		Location location = new Location("A", outgoingTracks);
 		Track newTrack = new Track(location, location, Distance.valueOf(5));
 		
-		location = location.addOutgoingTrack(newTrack);
-		location = location.addOutgoingTrack(newTrack);
+		location.addOutgoingTrack(newTrack);
+		location.addOutgoingTrack(newTrack);
 		
 		assertThat(location.getOutgoingTracks()).isNotEmpty().hasSize(2);
 		assertThat(location.getOutgoingTracks().get(0)).isEqualTo(newTrack);

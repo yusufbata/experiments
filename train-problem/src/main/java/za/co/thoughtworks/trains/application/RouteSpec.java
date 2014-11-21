@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class RouteSpec {
 
-	private String fromTown;
-	private List<String> toTownList;
+	private final String fromTown;
+	private final List<String> targetPath;
 
-	public RouteSpec(String fromTown, List<String> toTownList) {
+	public RouteSpec(String fromTown, List<String> targetPath) {
 		this.fromTown = fromTown;
-		this.toTownList = toTownList;
+		this.targetPath = targetPath;
 	}
 
 	public String getStartLocationId() {
@@ -24,11 +24,11 @@ public class RouteSpec {
 	}
 
 	public String getEndLocationId() {
-		return this.toTownList.get(this.toTownList.size() - 1);
+		return this.targetPath.get(this.targetPath.size() - 1);
 	}
 
-	public List<String> getToTownList() {
-		return toTownList;
+	public List<String> getTargetPath() {
+		return targetPath;
 	}
 
 }

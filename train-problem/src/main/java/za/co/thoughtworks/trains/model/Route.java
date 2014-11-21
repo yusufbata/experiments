@@ -49,9 +49,9 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 	}
 
 	private Route addTrack(Track track)  {
-		List<Track> newTrackList = ListUtils.cloneListWithContents(this.trackList);
+		List<Track> newTrackList = new ArrayList<Track>(this.trackList);
 		newTrackList.add(track);
-		Route newRoute = new Route(this.getStartLocation().clone(), this.toTownList, newTrackList);
+		Route newRoute = new Route(this.getStartLocation(), this.toTownList, newTrackList);
 		return newRoute;
 	}
 
@@ -90,7 +90,7 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 		int completedLocationCount = this.completedLocationList.size();
 		for (int i = 0; i < completedLocationCount; i++) {
 			Location completedLocation = this.completedLocationList.get(i);
-			String targetPathItem = this.toTownList.get(0);
+			String targetPathItem = this.toTownList.get(i);
 			if (!completedLocation.hasId(targetPathItem)) {
 				return false;
 			}
@@ -104,8 +104,11 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 
 	public boolean isComplete() {
 		String lastLocationId = toTownList.get(toTownList.size() - 1);
-		Track lastTrack = getLastTrack();
-		return lastTrack.endLocationHasId(lastLocationId);
+		if (this.trackList.size() > 0) {
+			Track lastTrack = getLastTrack();
+			return lastTrack.endLocationHasId(lastLocationId);
+		}
+		return false;
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 
 
 
-public class Track extends TrackDescriptor implements Cloneable<Track> {
+public class Track extends TrackDescriptor {
 
 	private final Location fromLocation;
 	private final Location toLocation;
@@ -27,12 +27,6 @@ public class Track extends TrackDescriptor implements Cloneable<Track> {
 
 	public Location getToLocation() {
 		return this.toLocation;
-	}
-	
-	@Override
-	public Track clone() {
-		Track clone = new Track(fromLocation.clone(), toLocation.clone(), this.getDistance());
-		return clone;
 	}
 	
 	@Override

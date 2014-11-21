@@ -7,7 +7,7 @@ import java.util.List;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 
-public class Location implements Cloneable<Location> {
+public class Location {
 
 	private final String id;
 	private final List<Track> outgoingTracks;
@@ -52,22 +52,17 @@ public class Location implements Cloneable<Location> {
 		return this.id == id;
 	}
 
-	public Location addOutgoingTrack(Track track) {
+	public void addOutgoingTrack(Track track) {
 		// TODO: Validate duplicates here!!!
-		
-		List<Track> outgoingTracksClone = getCloneOfOutgoingTracks();
+		this.outgoingTracks.add(track);
+		/*List<Track> outgoingTracksClone = getCloneOfOutgoingTracks();
 		outgoingTracksClone.add(track);
 		Location clone = new Location(this.id, outgoingTracksClone);
-		return clone;
+		return clone;*/
 	}
 
-	private List<Track> getCloneOfOutgoingTracks() {
+	/*private List<Track> getCloneOfOutgoingTracks() {
 		List<Track> currentOutgoingTracks = ListUtils.cloneListWithContents(this.getOutgoingTracks());
 		return currentOutgoingTracks;
-	}
-	
-	public Location clone() {
-		Location clone = new Location(this.id, getCloneOfOutgoingTracks());
-		return clone;
-	}
+	}*/
 }

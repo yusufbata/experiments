@@ -17,9 +17,7 @@ public class LocationFactory {
 		List<Track> trackList = constructTrackListFrom(trackDescriptorList);
 		for (Track track : trackList) {
 			Location oldLocation = track.getFromLocation();
-			Location newLocation = oldLocation.addOutgoingTrack(track);
-			locationList.remove(oldLocation);
-			locationList.add(newLocation);
+			oldLocation.addOutgoingTrack(track);
 		}
 		return locationList;
 	}

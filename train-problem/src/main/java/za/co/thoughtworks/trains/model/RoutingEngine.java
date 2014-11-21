@@ -46,7 +46,8 @@ public class RoutingEngine {
 		List<Route> completedRoutes = new ArrayList<Route>();
 		List<Route> incompleteMatchingRoutes = new ArrayList<>();
 		
-		IRoute startingRoute = new Route(startLocation, toTownList);
+		Route startingRoute = new Route(startLocation, toTownList);
+		incompleteMatchingRoutes.add(startingRoute);
 		
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		
@@ -67,25 +68,28 @@ public class RoutingEngine {
 			System.err.println("Not looking further. Recursions max limit reached: " + currentIterations);
 			return;
 		}
-		for (Iterator<Route> it = incompleteMatchingRoutes.iterator(); it.hasNext();) {
-			Route potentialRoute = it.next();
+		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();
+		for (Route potentialRoute : incompleteMatchingRoutes) {
+//			Route potentialRoute = 
+//					it.next();
+//					incompleteMatchingRoutes.get(0);
 			if (potentialRoute.isValid()) {
 				if (potentialRoute.isComplete()) {
 //					incompleteMatchingRoutes.remove(potentialRoute);
-					it.remove();
+//					it.remove();
 					completedRoutes.add(potentialRoute);
 				}
 				else {
 					List<Route> morePotentialRoutes = potentialRoute.findNextPossibleRoutes();
-					incompleteMatchingRoutes.addAll(morePotentialRoutes);
+					newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
 				}
 			}
-			else {
-				it.remove();
-			}
+//			else {
+//				it.remove();
+//			}
 		}
-		if (incompleteMatchingRoutes.size() > 0) {
-			findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
+		if (newIncompleteMatchingRoutes.size() > 0) {
+			findAllValidRoutes(completedRoutes, newIncompleteMatchingRoutes);
 		}
 	}
 

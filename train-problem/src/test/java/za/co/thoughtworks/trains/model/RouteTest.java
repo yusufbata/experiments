@@ -58,7 +58,7 @@ public class RouteTest {
 		RouteSpec routeSpec = routeSpecBuilder.build();
 		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
 		
-		this.route = new Route(startLocation, routeSpec.getToTownList());
+		this.route = new Route(startLocation, routeSpec.getTargetPath());
 	}
 
 }

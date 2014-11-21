@@ -34,7 +34,7 @@ public class RailroadServiceTest {
 		IRoute resultRoute = railroadService.findRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
-		assertThat(resultRoute).isNotNull();
+		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
 //		assertThat(resultRoute);
 	}
 	
