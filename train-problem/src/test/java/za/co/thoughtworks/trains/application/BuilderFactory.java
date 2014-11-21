@@ -1,6 +1,5 @@
 package za.co.thoughtworks.trains.application;
 
-import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
 
 public class BuilderFactory {
 
@@ -12,8 +11,8 @@ public class BuilderFactory {
 		return new TrackDescriptorBuilder();
 	}
 
-	public static RailroadTracksBuilder railRoadTracks() {
-		return new RailroadTracksBuilder();
+	public static TrackDescriptorListBuilder aTrackList() {
+		return new TrackDescriptorListBuilder();
 	}
 
 }

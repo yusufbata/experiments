@@ -2,7 +2,7 @@ package za.co.thoughtworks.trains.application;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.railRoadTracks;
+import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class LocationFactoryTest {
 
 	@Test
 	public void constructsLocationsFromRailroadTracks() {
-		TrackDescriptorList trackDescriptorList = railRoadTracks()
+		TrackDescriptorList trackDescriptorList = aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(5))
 				.with(aTrack().fromTown("C").toTown("A").withADistanceOf(5))
@@ -36,7 +36,7 @@ public class LocationFactoryTest {
 	
 	@Test
 	public void hasCorrectTrackLinksWithSingleTrack() {
-		TrackDescriptorList trackDescriptorList = railRoadTracks()
+		TrackDescriptorList trackDescriptorList = aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.build();
 		LocationFactory locationFactory = new LocationFactory();
@@ -51,7 +51,7 @@ public class LocationFactoryTest {
 	
 	@Test
 	public void hasCorrectTrackLinksWithTwoTracks() {
-		TrackDescriptorList trackDescriptorList = railRoadTracks()
+		TrackDescriptorList trackDescriptorList = aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("A").toTown("C").withADistanceOf(5))
 				.build();

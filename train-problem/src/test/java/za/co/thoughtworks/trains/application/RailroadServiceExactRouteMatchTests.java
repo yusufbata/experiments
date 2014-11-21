@@ -6,7 +6,7 @@ package za.co.thoughtworks.trains.application;
 import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.railRoadTracks;
+import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,31 +16,29 @@ import za.co.thoughtworks.trains.application.RailroadApplicationService;
 import za.co.thoughtworks.trains.application.TrackDescriptorList;
 import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.NoRoute;
-import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
 
 /**
  * @author Yusuf
  *
  */
-public class RailroadServiceTest {
+public class RailroadServiceExactRouteMatchTests {
 
 	private RailroadApplicationService railroadService;
 	
 	@Test
 	public void findsRouteBetweenTwoTowns() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B")));
 		
 		IRoute resultRoute = railroadService.findRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
 		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
-//		assertThat(resultRoute);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void findsNoRouteBetweenTwoTownsWhenEndTownDoesntExist() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
 		IRoute resultRoute = railroadService.findRouteUsing(
@@ -52,7 +50,7 @@ public class RailroadServiceTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void findsNoRouteBetweenTwoTownsWhenStartTownDoesntExist() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
 		IRoute resultRoute = railroadService.findRouteUsing(
@@ -65,7 +63,7 @@ public class RailroadServiceTest {
 	@Test
 	public void findsNoRouteBetweenTwoTownsWhenPathDoesntExist() {
 		//"AB5-BC10"
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(10))
 				);
@@ -79,7 +77,7 @@ public class RailroadServiceTest {
 	
 	@Test
 	public void computesDistanceOfRouteBetweenTwoTowns() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
 		IRoute resultRoute = railroadService.findRouteUsing(
@@ -91,7 +89,7 @@ public class RailroadServiceTest {
 	
 	@Test
 	public void computesDistanceOfRouteBetweenThreeTowns() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
 		);
@@ -105,7 +103,7 @@ public class RailroadServiceTest {
 	
 	@Test
 	public void computesDistanceOfRouteBetweenTwoTownsWithLastOneLinkedBackToFirst() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
 		);
@@ -119,7 +117,7 @@ public class RailroadServiceTest {
 	
 	@Test
 	public void computesDistanceOfRouteBetweenTwoTownsViaStartTownBackToLast() {
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
 		);
@@ -134,7 +132,7 @@ public class RailroadServiceTest {
 	@Test
 	public void verifyProblemSampleDistanceCalculations() {
 		// AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
-		havingConfigured(railRoadTracks()
+		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(4))
 				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(8))
@@ -178,8 +176,8 @@ public class RailroadServiceTest {
 	
 	
 	
-	private void havingConfigured(RailroadTracksBuilder aRailroadTracksBuilder) {
-		TrackDescriptorList trackDescriptorList = aRailroadTracksBuilder.build();
+	private void havingConfigured(TrackDescriptorListBuilder aTrackListBuilder) {
+		TrackDescriptorList trackDescriptorList = aTrackListBuilder.build();
 		this.railroadService = new RailroadApplicationService(trackDescriptorList);
 	}
 

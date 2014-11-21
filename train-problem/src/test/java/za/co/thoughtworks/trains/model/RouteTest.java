@@ -3,7 +3,7 @@ package za.co.thoughtworks.trains.model;
 import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.railRoadTracks;
+import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,7 @@ import za.co.thoughtworks.trains.application.LocationRepository;
 import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.application.RouteSpecBuilder;
 import za.co.thoughtworks.trains.application.TrackDescriptor;
+import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
 
 public class RouteTest {
 
@@ -24,7 +25,7 @@ public class RouteTest {
 	@Test
 	public void testFindNextPossibleRoutesForSingleTrack() {
 		havingConfigured(
-				railRoadTracks()
+				aTrackList()
 					.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)),
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 		);
@@ -38,7 +39,7 @@ public class RouteTest {
 	@Test
 	public void testFindNextPossibleRoutesForDoubleTracks() {
 		havingConfigured(
-				railRoadTracks()
+				aTrackList()
 					.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 					.with(aTrack().fromTown("A").toTown("C").withADistanceOf(6)),
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
@@ -50,10 +51,10 @@ public class RouteTest {
 //		assertThat(nextPossibleRoutes.get(0)).isEqualTo(route.);
 	}
 
-	private void havingConfigured(RailroadTracksBuilder railroadTracksBuilder,
+	private void havingConfigured(TrackDescriptorListBuilder trackDescriptorListBuilder,
 			RouteSpecBuilder routeSpecBuilder) {
 		LocationFactory locationFactory = new LocationFactory();
-		List<Location> locationsList = locationFactory.constructLocationsFrom(railroadTracksBuilder.build());
+		List<Location> locationsList = locationFactory.constructLocationsFrom(trackDescriptorListBuilder.build());
 		LocationRepository locationRepository = ApplicationRegistry.getLocationRepository(locationsList);
 		RouteSpec routeSpec = routeSpecBuilder.build();
 		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());

@@ -18,8 +18,8 @@ public class RoutingEngine {
 	private final Location endLocation;
 	private final List<String> toTownList;
 	
-	private int maxIterations = 20;
-	private int currentIterations = 0;
+//	private int maxIterations = 20;
+//	private int currentIterations = 0;
 
 	public RoutingEngine(Location startLocation, Location endLocation,
 			List<String> toTownList) {
@@ -60,8 +60,8 @@ public class RoutingEngine {
 
 	private void findAllValidRoutes(List<Route> completedRoutes,
 			List<Route> incompleteMatchingRoutes) {
-		System.out.println("completedRoutes=" + completedRoutes);
-		System.out.println("incompleteMatchingRoutes=" + incompleteMatchingRoutes);
+//		System.out.println("completedRoutes=" + completedRoutes);
+//		System.out.println("incompleteMatchingRoutes=" + incompleteMatchingRoutes);
 		
 		/*currentIterations++;
 		if (currentIterations == maxIterations) {
@@ -70,13 +70,8 @@ public class RoutingEngine {
 		}*/
 		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();
 		for (Route potentialRoute : incompleteMatchingRoutes) {
-//			Route potentialRoute = 
-//					it.next();
-//					incompleteMatchingRoutes.get(0);
 			if (potentialRoute.isValid()) {
 				if (potentialRoute.isComplete()) {
-//					incompleteMatchingRoutes.remove(potentialRoute);
-//					it.remove();
 					completedRoutes.add(potentialRoute);
 				}
 				else {
@@ -84,9 +79,6 @@ public class RoutingEngine {
 					newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
 				}
 			}
-//			else {
-//				it.remove();
-//			}
 		}
 		if (newIncompleteMatchingRoutes.size() > 0) {
 			findAllValidRoutes(completedRoutes, newIncompleteMatchingRoutes);
