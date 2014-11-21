@@ -103,8 +103,11 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 	}
 
 	public boolean isComplete() {
+		// TODO: Perhaps add isValid check here as well
 		String lastLocationId = toTownList.get(toTownList.size() - 1);
-		if (this.trackList.size() > 0) {
+		if (this.trackList.size() > 0
+				&& this.toTownList.size() == (this.trackList.size() + 1)
+				) {
 			Track lastTrack = getLastTrack();
 			return lastTrack.endLocationHasId(lastLocationId);
 		}

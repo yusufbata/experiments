@@ -104,6 +104,34 @@ public class RailroadServiceTest {
 	}
 	
 	@Test
+	public void computesDistanceOfRouteBetweenTwoTownsWithLastOneLinkedBackToFirst() {
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
+				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
+		);
+		
+		IRoute resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("B").toTown("A")
+				.build());
+		
+		theTotalDistanceOfTheRouteIs(15, resultRoute);
+	}
+	
+	@Test
+	public void computesDistanceOfRouteBetweenTwoTownsViaStartTownBackToLast() {
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
+				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
+		);
+		
+		IRoute resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("B").toTown("A").toTown("B")
+				.build());
+		
+		theTotalDistanceOfTheRouteIs(20, resultRoute);
+	}
+	
+	@Test
 	public void verifyProblemSampleDistanceCalculations() {
 		// AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
 		havingConfigured(railRoadTracks()

@@ -63,11 +63,11 @@ public class RoutingEngine {
 		System.out.println("completedRoutes=" + completedRoutes);
 		System.out.println("incompleteMatchingRoutes=" + incompleteMatchingRoutes);
 		
-		currentIterations++;
+		/*currentIterations++;
 		if (currentIterations == maxIterations) {
 			System.err.println("Not looking further. Recursions max limit reached: " + currentIterations);
 			return;
-		}
+		}*/
 		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();
 		for (Route potentialRoute : incompleteMatchingRoutes) {
 //			Route potentialRoute = 
