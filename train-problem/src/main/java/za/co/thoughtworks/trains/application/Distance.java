@@ -37,13 +37,6 @@ public class Distance {
 		}
 		return false;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[Distance = ").append(this.units).append("]");
-		return sb.toString();
-	}
 
 	public static Distance infinite() {
 		return new Distance(Integer.MAX_VALUE);
@@ -56,5 +49,12 @@ public class Distance {
 
 	public int value() {
 		return this.units;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Distance=").append(this.units).append("]");
+		return sb.toString();
 	}
 }

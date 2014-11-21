@@ -116,7 +116,7 @@ public class Route implements IRoute {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[Route distance=").append(this.totalDistance)
+		sb.append("[Route ").append(this.totalDistance)
 				.append(" trackList = ").append(this.trackList)
 				.append("]");
 		return sb.toString();
