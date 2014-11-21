@@ -108,8 +108,8 @@ public class RailroadServiceMaximumStopsMatchTests {
 		System.out.println(matchingRoutes);
 		assertThat(matchingRoutes).isNotNull();
 		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(2);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(16));
-		assertThat(matchingRoutes.get(1).getTotalDistance()).isEqualTo(Distance.valueOf(9));
+		assertThat(matchingRoutes.findRouteWithPath("CDC").getTotalDistance()).isEqualTo(Distance.valueOf(16));
+		assertThat(matchingRoutes.findRouteWithPath("CEBC").getTotalDistance()).isEqualTo(Distance.valueOf(9));
 	}
 	
 	

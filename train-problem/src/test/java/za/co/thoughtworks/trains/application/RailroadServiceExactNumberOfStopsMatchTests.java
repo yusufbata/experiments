@@ -113,9 +113,9 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 		System.out.println(matchingRoutes);
 		assertThat(matchingRoutes).isNotNull();
 		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(3);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(25));
-		assertThat(matchingRoutes.get(1).getTotalDistance()).isEqualTo(Distance.valueOf(29));
-		assertThat(matchingRoutes.get(2).getTotalDistance()).isEqualTo(Distance.valueOf(18));
+		assertThat(matchingRoutes.findRouteWithPath("ABCDC").getTotalDistance()).isEqualTo(Distance.valueOf(25));
+		assertThat(matchingRoutes.findRouteWithPath("ADCDC").getTotalDistance()).isEqualTo(Distance.valueOf(29));
+		assertThat(matchingRoutes.findRouteWithPath("ADEBC").getTotalDistance()).isEqualTo(Distance.valueOf(18));
 	}
 	
 	
