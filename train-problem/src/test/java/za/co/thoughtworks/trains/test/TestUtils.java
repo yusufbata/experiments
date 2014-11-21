@@ -1,9 +1,11 @@
 package za.co.thoughtworks.trains.test;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
-
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
+import za.co.thoughtworks.trains.model.MatchingRoutes;
+import za.co.thoughtworks.trains.model.NoRoute;
 
 public class TestUtils {
 
@@ -18,5 +20,10 @@ public class TestUtils {
 				.with(aTrack().fromTown("C").toTown("E").withADistanceOf(2))
 				.with(aTrack().fromTown("E").toTown("B").withADistanceOf(3))
 				.with(aTrack().fromTown("A").toTown("E").withADistanceOf(7));
+	}
+
+	public static void containsASingleValidRoute(MatchingRoutes matchingRoutes) {
+		assertThat(matchingRoutes).isNotNull();
+		assertThat(matchingRoutes.getTheOnlyRoute()).isNotNull().isNotEqualTo(new NoRoute());
 	}
 }

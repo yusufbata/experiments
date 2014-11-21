@@ -16,7 +16,6 @@ import za.co.thoughtworks.trains.application.RailroadApplicationService;
 import za.co.thoughtworks.trains.application.TrackDescriptorList;
 import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.MatchingRoutes;
-import za.co.thoughtworks.trains.model.NoRoute;
 import za.co.thoughtworks.trains.test.TestUtils;
 
 /**
@@ -39,15 +38,10 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 				.build());
 		
 		System.out.println(matchingRoutes);
-		containsASingleValidRoute(matchingRoutes);
+		TestUtils.containsASingleValidRoute(matchingRoutes);
 		assertThat(matchingRoutes.getTheOnlyRoute().getTotalDistance()).isEqualTo(Distance.valueOf(15));
 	}
 
-	private void containsASingleValidRoute(MatchingRoutes matchingRoutes) {
-		assertThat(matchingRoutes).isNotNull();
-		assertThat(matchingRoutes.getTheOnlyRoute()).isNotNull().isNotEqualTo(new NoRoute());
-	}
-	
 	@Test
 	public void returnsTwoRouteForExactNumberOfStopsMatcher() {
 		havingConfigured(aTrackList()
@@ -82,7 +76,7 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 				.build());
 		
 		System.out.println(matchingRoutes);
-		containsASingleValidRoute(matchingRoutes);
+		TestUtils.containsASingleValidRoute(matchingRoutes);
 		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
 	
@@ -109,17 +103,9 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 		assertThat(matchingRoutes.findRouteWithPath("ADEBC").getTotalDistance()).isEqualTo(Distance.valueOf(18));
 	}
 	
-	
-	
-	
 	private void havingConfigured(TrackDescriptorListBuilder aTrackListBuilder) {
 		TrackDescriptorList trackDescriptorList = aTrackListBuilder.build();
 		this.railroadService = new RailroadApplicationService(trackDescriptorList);
-	}
-
-	private void theTotalDistanceOfTheRouteIs(int distance, IRoute resultRoute) {
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
-		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}
 
 }
