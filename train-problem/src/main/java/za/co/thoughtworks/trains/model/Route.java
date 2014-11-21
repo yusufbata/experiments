@@ -7,64 +7,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.application.Distance;
+import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
+import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 
 /**
  * @author Yusuf
  *
  */
-public class Route {
+public class Route /*implements Cloneable<Route>*/ implements IRoute {
 
-	public static final Route NO_ROUTE_EXISTS = null;
+	public static final IRoute NO_ROUTE_EXISTS = null;
 
-	private List<Track> trackList;
-	private Distance totalDistance;
-	private List<String> toTownList;
-	private List<Location> completedLocationList;
+	private final List<Track> trackList;
+	private final Distance totalDistance;
+	private final List<String> toTownList;
+	private final List<Location> completedLocationList;
 
-	protected Route() {
+	public Route(Location startLocation, List<String> toTownList) {
+		this(startLocation, toTownList, new ArrayList<Track>());
 	}
-
-	public Route(List<Track> trackList, List<String> toTownList) {
-		this.toTownList = toTownList;
+	
+	public Route(Location startLocation, List<String> toTownList, List<Track> trackList) {
+		if (startLocation == null) throw new IllegalArgumentException("startLocation cannot be null");
+		if (toTownList == null) throw new IllegalArgumentException("toTownList cannot be null");
+		if (trackList == null) throw new IllegalArgumentException("Route cannot be initialised with null track list");
+		
 		this.completedLocationList = new ArrayList<Location>();
-		
-		this.totalDistance = Distance.valueOf(0);
-//		this.trackList = new ArrayList<Track>();
+		this.completedLocationList.add(startLocation);
+		this.toTownList = toTownList;
 		this.trackList = trackList;
-		
-		initialise();
+		this.totalDistance = computeTotalDistanceAcrossTracks();
 	}
 
-	private void initialise() {
+	private Distance computeTotalDistanceAcrossTracks() {
+		Distance totalDistanceRunningTotal = Distance.valueOf(0);
 		for (Track currentTrack : this.trackList) {
-			this.totalDistance = this.totalDistance.add(currentTrack.getDistance());
+			totalDistanceRunningTotal = totalDistanceRunningTotal.add(currentTrack.getDistance());
 			this.completedLocationList.add(currentTrack.getToLocation());
 		}
+		return totalDistanceRunningTotal;
 	}
 
 	private Route addTrack(Track track)  {
-		Route newRoute = cloneRoute();
-		newRoute.trackList.add(track);
+		List<Track> newTrackList = ListUtils.cloneListWithContents(this.trackList);
+		newTrackList.add(track);
+		Route newRoute = new Route(this.getStartLocation().clone(), this.toTownList, newTrackList);
 		return newRoute;
 	}
 
-	private List<Track> cloneListWithContents(List<Track> aListToClone) {
-		List<Track> clone = new ArrayList<Track>(aListToClone.size());
-		for (Track track : aListToClone) {
-			clone.add((Track)track.clone());
-		}
-		return clone;
-	}
-
-	private Route cloneRoute() {
-		try {
-			Route newRoute = (Route) this.clone();
-			return newRoute;
-		} catch (CloneNotSupportedException e) {
-			throw new RuntimeException("Failed to clone Route. Take this Exception out!!!", e);
-		}
-	}
-
+	@Override
 	public Distance getTotalDistance() {
 		return this.totalDistance;
 	}
@@ -124,20 +115,20 @@ public class Route {
 		return sb.toString();
 	}
 	
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		List<Track> newTrackList = cloneListWithContents(this.trackList);
-		Route newRoute = new Route(newTrackList, this.toTownList);
-		newRoute.completedLocationList = this.completedLocationList;
+	/*@Override
+	public Route clone() {
+		Route newRoute = new Route(this.getStartLocation().clone(), this.toTownList, ListUtils.cloneListWithContents(this.trackList));
 		return newRoute;
+	}*/
+
+	private Location getStartLocation() {
+		return this.completedLocationList.get(0);
 	}
 
 	public List<Route> findNextPossibleRoutes() {
+		Location currentLocation = getCurrentLocation();
+		
 		List<Route> nextPossibleRoutes = new ArrayList<Route>();
-		// nextPossibleRoutes.add(this); // hack
-
-		Location currentLocation = completedLocationList
-				.get(completedLocationList.size() - 1);
 		List<Track> outgoingTracks = currentLocation.getOutgoingTracks();
 		for (Track track : outgoingTracks) {
 			Route newPotentialRoute = this.addTrack(track);
@@ -146,4 +137,18 @@ public class Route {
 
 		return nextPossibleRoutes;
 	}
+
+	private Location getCurrentLocation() {
+		Location currentLocation = completedLocationList
+				.get(completedLocationList.size() - 1);
+		return currentLocation;
+	}
+	
+	/*List<Track> outgoingTracks = startLocation.getOutgoingTracks();
+	for (Track track : outgoingTracks) {
+		List<Track> trackList = new ArrayList<Track>();
+		trackList.add(track);
+		Route potentialRoute = new Route(trackList, toTownList);
+		incompleteMatchingRoutes.add(potentialRoute);
+	}*/
 }

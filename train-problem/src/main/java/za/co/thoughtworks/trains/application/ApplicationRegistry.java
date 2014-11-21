@@ -4,6 +4,7 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.persistence.InMemoryLocationRepository;
 import za.co.thoughtworks.trains.model.Location;
+import za.co.thoughtworks.trains.model.LocationFactory;
 import za.co.thoughtworks.trains.model.RoutingEngineFactory;
 
 public class ApplicationRegistry {

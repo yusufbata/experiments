@@ -28,7 +28,7 @@ public class RoutingEngine {
 		this.toTownList = toTownList;
 	}
 
-	public Route findRoute() {
+	public IRoute findRoute() {
 		if (startLocation == null || endLocation == null) {
 			throw new IllegalArgumentException("Start location and End location cannot be null");
 		}
@@ -46,13 +46,7 @@ public class RoutingEngine {
 		List<Route> completedRoutes = new ArrayList<Route>();
 		List<Route> incompleteMatchingRoutes = new ArrayList<>();
 		
-		List<Track> outgoingTracks = startLocation.getOutgoingTracks();
-		for (Track track : outgoingTracks) {
-			List<Track> trackList = new ArrayList<Track>();
-			trackList.add(track);
-			Route potentialRoute = new Route(trackList, toTownList);
-			incompleteMatchingRoutes.add(potentialRoute);
-		}
+		IRoute startingRoute = new Route(startLocation, toTownList);
 		
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		

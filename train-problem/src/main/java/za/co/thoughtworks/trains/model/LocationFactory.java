@@ -1,10 +1,10 @@
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.Track;
+import za.co.thoughtworks.trains.application.TrackDescriptor;
+import za.co.thoughtworks.trains.application.TrackDescriptorList;
 
 public class LocationFactory {
 	
@@ -12,15 +12,23 @@ public class LocationFactory {
 	
 	public List<Location> constructLocationsFrom(TrackDescriptorList trackDescriptorList) {
 		
+		addAllLocationsToList(trackDescriptorList);
+		
+		List<Track> trackList = constructTrackListFrom(trackDescriptorList);
+		for (Track track : trackList) {
+			Location oldLocation = track.getFromLocation();
+			Location newLocation = oldLocation.addOutgoingTrack(track);
+			locationList.remove(oldLocation);
+			locationList.add(newLocation);
+		}
+		return locationList;
+	}
+
+	private void addAllLocationsToList(TrackDescriptorList trackDescriptorList) {
 		for (TrackDescriptor trackDescriptor : trackDescriptorList.getTrackDescriptorList()) {
 			addLocationToListIfDoesntExist(locationList, trackDescriptor.getFromLocationId());
 			addLocationToListIfDoesntExist(locationList, trackDescriptor.getToLocationId());
 		}
-		List<Track> trackList = constructTrackListFrom(trackDescriptorList);
-		for (Track track : trackList) {
-			track.getFromLocation().addOutgoingTrack(track);
-		}
-		return locationList;
 	}
 
 	private List<Track> constructTrackListFrom(
@@ -45,7 +53,7 @@ public class LocationFactory {
 	}
 
 	private void addLocationToListIfDoesntExist(List<Location> locationList, String locationId) {
-		Location newLocation = Location.create(locationId);
+		Location newLocation = new Location(locationId);
 		if(!locationList.contains(newLocation)) {
 			locationList.add(newLocation);
 		}

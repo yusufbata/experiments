@@ -2,7 +2,7 @@ package za.co.thoughtworks.trains.model;
 
 import za.co.thoughtworks.trains.application.Distance;
 
-public class NoRoute extends Route {
+public class NoRoute implements IRoute {
 
 	@Override
 	public Distance getTotalDistance() {

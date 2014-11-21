@@ -1,0 +1,15 @@
+package za.co.thoughtworks.trains.infrastructure.utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListUtils {
+
+	public static <T extends Cloneable> List<T> cloneListWithContents(List<T> aListToClone) {
+		List<T> clone = new ArrayList<T>(aListToClone.size());
+		for (T track : aListToClone) {
+			clone.add((T)track.clone());
+		}
+		return clone;
+	}
+}
