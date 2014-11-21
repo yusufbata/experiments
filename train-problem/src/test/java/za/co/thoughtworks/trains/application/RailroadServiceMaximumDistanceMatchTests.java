@@ -17,6 +17,7 @@ import za.co.thoughtworks.trains.application.TrackDescriptorList;
 import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.MatchingRoutes;
 import za.co.thoughtworks.trains.model.NoRoute;
+import za.co.thoughtworks.trains.test.TestUtils;
 
 /**
  * @author Yusuf
@@ -85,17 +86,7 @@ public class RailroadServiceMaximumDistanceMatchTests {
 	@Test
 	public void verifyProblemSampleDistanceCalculations() {
 		// AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
-				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(4))
-				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(8))
-				.with(aTrack().fromTown("D").toTown("C").withADistanceOf(8))
-				.with(aTrack().fromTown("D").toTown("E").withADistanceOf(6))
-				.with(aTrack().fromTown("A").toTown("D").withADistanceOf(5))
-				.with(aTrack().fromTown("C").toTown("E").withADistanceOf(2))
-				.with(aTrack().fromTown("E").toTown("B").withADistanceOf(3))
-				.with(aTrack().fromTown("A").toTown("E").withADistanceOf(7))
-		);
+		havingConfigured(TestUtils.buildSampleProblemTracks());
 		
 		/*
 			10.The number of different routes from C to C with a distance of less than 30.  
