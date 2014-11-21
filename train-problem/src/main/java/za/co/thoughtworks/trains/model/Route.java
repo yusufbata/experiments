@@ -60,11 +60,11 @@ public class Route implements IRoute {
 	}
 
 	public boolean isValid() {
-		return this.routeMatchers.isRouteValid(completedLocationList);
+		return this.routeMatchers.isRouteValid(this, completedLocationList);
 	}
 	
 	public boolean isComplete() {
-		return this.routeMatchers.isRouteComplete(this.trackList);
+		return this.routeMatchers.isRouteComplete(this, this.trackList);
 	}
 
 	/*private boolean hasRepeatingLocation() {
@@ -116,9 +116,25 @@ public class Route implements IRoute {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[Route ").append(this.totalDistance)
-				.append(" trackList = ").append(this.trackList)
+		sb.append("[Route ")
+				.append(this.createRoutePath()).append(" ")
+				.append(this.totalDistance)
 				.append("]");
 		return sb.toString();
+	}
+
+	private String createRoutePath() {
+		if (this.trackList.size() == 0) {
+			return "No Tracks";
+		}
+		StringBuilder sb = new StringBuilder(this.trackList.get(0).getFromLocationId());
+		for (Track track : this.trackList) {
+			sb.append(track.getToLocationId());
+		}
+		return sb.toString();
+	}
+
+	public boolean hasPath(String routePath) {
+		return this.createRoutePath().compareTo(routePath) == 0;
 	}
 }

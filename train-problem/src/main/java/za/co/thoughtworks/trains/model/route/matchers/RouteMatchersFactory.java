@@ -10,21 +10,25 @@ public class RouteMatchersFactory {
 	public static RouteMatchers constructRouteMatchers(RouteSpec routeSpec) {
 		List<RouteMatcher<?>> routeMatcherItemList = new ArrayList<RouteMatcher<?>>();
 		
-		if (routeSpec.getMaximumStops() == 0) {
-			if (routeSpec.getExactNumberOfStops() == 0) {
-				ExactRouteMatcher exactRouteMatcher = new ExactRouteMatcher(routeSpec.getTargetPath());
-				routeMatcherItemList.add(exactRouteMatcher);
-			}
-			else {
-				ExactNumberOfStopsRouteMatcher exactNumberOfStopsRouteMatcher = 
-						new ExactNumberOfStopsRouteMatcher(routeSpec.getTargetPath(), routeSpec.getExactNumberOfStops());
-				routeMatcherItemList.add(exactNumberOfStopsRouteMatcher);
-			}
-		}
-		else {
+		if (routeSpec.getMaximumStops() > 0) {
 			MaximumStopsRouteMatcher maximumStopsRouteMatcher = 
 					new MaximumStopsRouteMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumStops());
 			routeMatcherItemList.add(maximumStopsRouteMatcher);
+		}
+		if (routeSpec.getExactNumberOfStops() > 0) {
+			ExactNumberOfStopsRouteMatcher exactNumberOfStopsRouteMatcher = 
+					new ExactNumberOfStopsRouteMatcher(routeSpec.getTargetPath(), routeSpec.getExactNumberOfStops());
+			routeMatcherItemList.add(exactNumberOfStopsRouteMatcher);
+		}
+		if (routeSpec.getMaximumDistance() > 0) {
+			MaximumDistanceRouteMatcher maximumDistanceRouteMatcher = 
+					new MaximumDistanceRouteMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumDistance());
+			routeMatcherItemList.add(maximumDistanceRouteMatcher);
+		}
+		
+		if (routeMatcherItemList.size() == 0) {
+			ExactRouteMatcher exactRouteMatcher = new ExactRouteMatcher(routeSpec.getTargetPath());
+			routeMatcherItemList.add(exactRouteMatcher);
 		}
 		
 		RouteMatchers routeMatchers = new RouteMatchers(routeMatcherItemList);

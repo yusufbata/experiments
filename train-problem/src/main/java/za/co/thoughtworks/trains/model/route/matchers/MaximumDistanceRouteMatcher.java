@@ -3,29 +3,29 @@ package za.co.thoughtworks.trains.model.route.matchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.Route;
 import za.co.thoughtworks.trains.model.Track;
 
-public class MaximumStopsRouteMatcher  extends AbstractRouteMatcher  
-	implements RouteMatcher<MaximumStopsRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<MaximumStopsRouteMatcher> {
+public class MaximumDistanceRouteMatcher  extends AbstractRouteMatcher  
+	implements RouteMatcher<MaximumDistanceRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<MaximumDistanceRouteMatcher> {
 
-	private final int maximumStops;
+	private final int maximumDistance;
 
-	public MaximumStopsRouteMatcher(List<String> targetPath, int maximumStops) {
+	public MaximumDistanceRouteMatcher(List<String> targetPath, int maximumDistance) {
 		super(targetPath);
-		this.maximumStops = maximumStops;
+		this.maximumDistance = maximumDistance;
 	}
 
 	@Override
 	public boolean isRouteValid(Route route, List<Location> completedLocationList) {
-		return currentNumberOfStops(completedLocationList) <= maximumStops;
+		return route.getTotalDistance().value() <= maximumDistance;
 	}
 
 	@Override
 	public boolean isRouteComplete(Route route, List<Track> trackList) {
-		// TODO: Perhaps add isValid check here as well
 		String lastLocationId = ListUtils.getLastItemFromList(targetPath);
 		if (trackList.size() > 0) {
 			Track lastTrack = ListUtils.getLastItemFromList(trackList);
@@ -35,7 +35,7 @@ public class MaximumStopsRouteMatcher  extends AbstractRouteMatcher
 	}
 
 	@Override
-	public MaximumStopsRouteMatcher clone() {		
-		return new MaximumStopsRouteMatcher(new ArrayList<String>(this.targetPath), this.maximumStops);
+	public MaximumDistanceRouteMatcher clone() {		
+		return new MaximumDistanceRouteMatcher(new ArrayList<String>(this.targetPath), this.maximumDistance);
 	}
 }

@@ -15,12 +15,14 @@ public class RouteSpec {
 	private final List<String> targetPath;
 	private int maximumStops;
 	private int exactNumberOfStops;
+	private int maximumDistance;
 
-	public RouteSpec(String fromTown, List<String> targetPath, int maximumStops, int exactNumberOfStops) {
+	public RouteSpec(String fromTown, List<String> targetPath, int maximumStops, int exactNumberOfStops, int maximumDistance) {
 		this.fromTown = fromTown;
 		this.targetPath = targetPath;
 		this.maximumStops = maximumStops;
 		this.exactNumberOfStops = exactNumberOfStops;
+		this.maximumDistance = maximumDistance;
 	}
 
 	public String getStartLocationId() {
@@ -41,6 +43,10 @@ public class RouteSpec {
 
 	public int getExactNumberOfStops() {
 		return exactNumberOfStops;
+	}
+
+	public int getMaximumDistance() {
+		return maximumDistance;
 	}
 	
 }

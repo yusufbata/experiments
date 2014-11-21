@@ -51,5 +51,14 @@ public class MatchingRoutes {
 			.append("]");
 		return sb.toString();
 	}
+
+	public IRoute findRouteWithPath(String routePath) {
+		for (Route route : completedRoutes) {
+			if (route.hasPath(routePath)) {
+				return route;
+			}
+		}
+		return new NoRoute();
+	}
 	
 }

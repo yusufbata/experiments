@@ -5,6 +5,7 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
+import za.co.thoughtworks.trains.model.Route;
 import za.co.thoughtworks.trains.model.Track;
 
 public class ExactRouteMatcher  extends AbstractRouteMatcher 
@@ -15,12 +16,17 @@ public class ExactRouteMatcher  extends AbstractRouteMatcher
 	}
 
 	@Override
-	public boolean isRouteValid(List<Location> completedLocationList) {
-		return completedLocationListMatchesTargetPath(completedLocationList);
+	public boolean isRouteValid(Route route, List<Location> completedLocationList) {
+		if(completedLocationList.size() <= targetPath.size()
+				&& completedLocationListMatchesTargetPath(completedLocationList))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public boolean isRouteComplete(List<Track> trackList) {
+	public boolean isRouteComplete(Route route, List<Track> trackList) {
 		// TODO: Perhaps add isValid check here as well
 		String lastLocationId = ListUtils.getLastItemFromList(targetPath);
 		if (trackList.size() > 0

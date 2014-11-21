@@ -72,10 +72,9 @@ public class RoutingEngine {
 				if (potentialRoute.isComplete()) {
 					completedRoutes.add(potentialRoute);
 				}
-				else {
-					List<Route> morePotentialRoutes = potentialRoute.findNextPossibleRoutes();
-					newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
-				}
+
+				List<Route> morePotentialRoutes = potentialRoute.findNextPossibleRoutes();
+				newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
 			}
 		}
 		if (newIncompleteMatchingRoutes.size() > 0) {
