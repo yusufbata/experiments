@@ -53,8 +53,8 @@ public class RailroadServiceMaximumStopsMatchTests {
 		System.out.println(matchingRoutes);
 		assertThat(matchingRoutes).isNotNull();
 		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(2);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(30));
-		assertThat(matchingRoutes.get(1).getTotalDistance()).isEqualTo(Distance.valueOf(15));
+		assertThat(matchingRoutes.findRouteWithPath("ABC").getTotalDistance()).isEqualTo(Distance.valueOf(15));
+		assertThat(matchingRoutes.findRouteWithPath("AC").getTotalDistance()).isEqualTo(Distance.valueOf(30));
 	}
 	
 	@Test
@@ -71,7 +71,7 @@ public class RailroadServiceMaximumStopsMatchTests {
 		
 		System.out.println(matchingRoutes);
 		TestUtils.containsASingleValidRoute(matchingRoutes);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(45));
+		assertThat(matchingRoutes.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
 	
 	@Test

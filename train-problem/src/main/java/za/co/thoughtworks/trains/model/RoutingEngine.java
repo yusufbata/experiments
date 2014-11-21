@@ -50,10 +50,22 @@ public class RoutingEngine {
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		
 		if (completedRoutes.size() > 0) {
+			// required for shortest distance matcher
+			// perhaps only run required matchers - will need flag to identify global matchers
+			completedRoutes = validateAllCompletedRoutes(completedRoutes);
 			return MatchingRoutes.construct(completedRoutes);
 		}
 		
 		return new NoRoute();
+	}
+
+	private List<Route> validateAllCompletedRoutes(List<Route> allCompletedRoutes) {
+		List<Route> validatedCompletedRoutes = new ArrayList<Route>();
+		for (Route route : allCompletedRoutes) {
+			if(route.isValid(allCompletedRoutes))
+				validatedCompletedRoutes.add(route);
+		}
+		return validatedCompletedRoutes;
 	}
 
 	private void findAllValidRoutes(List<Route> completedRoutes,

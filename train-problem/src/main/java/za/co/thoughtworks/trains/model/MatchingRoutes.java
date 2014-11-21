@@ -40,10 +40,6 @@ public class MatchingRoutes {
 		return (this.completedRoutes != null) ? this.completedRoutes.size() : 0;
 	}
 
-	public Route get(int index) {
-		return completedRoutes.get(index);
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

@@ -24,7 +24,7 @@ public class RailroadServiceShortestDistanceMatchTests {
 	private RailroadApplicationService railroadService;
 	
 	@Test
-	public void returnsOneRouteForShortestDistanceMatcher() {
+	public void returnsOneRouteForShortestDistanceMatcherWithOnePossibility() {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
@@ -39,7 +39,7 @@ public class RailroadServiceShortestDistanceMatchTests {
 	}
 	
 	@Test
-	public void returnsTwoRouteForMaximumStopsMatcher() {
+	public void returnsOneRouteForShortestDistanceMatcherWithTwoPossibilities() {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
@@ -47,14 +47,12 @@ public class RailroadServiceShortestDistanceMatchTests {
 		);
 		
 		MatchingRoutes matchingRoutes = railroadService.findAllRoutesUsing(
-				aRouteSpec().fromTown("A").toTown("C").withMaximumStops(2)
+				aRouteSpec().fromTown("A").toTown("C").withShortestDistance()
 				.build());
 		
 		System.out.println(matchingRoutes);
-		assertThat(matchingRoutes).isNotNull();
-		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(2);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(30));
-		assertThat(matchingRoutes.get(1).getTotalDistance()).isEqualTo(Distance.valueOf(15));
+		TestUtils.containsASingleValidRoute(matchingRoutes);
+		assertThat(matchingRoutes.findRouteWithPath("ABC").getTotalDistance()).isEqualTo(Distance.valueOf(15));
 	}
 	
 	@Test
@@ -66,12 +64,12 @@ public class RailroadServiceShortestDistanceMatchTests {
 		);
 		
 		MatchingRoutes matchingRoutes = railroadService.findAllRoutesUsing(
-				aRouteSpec().fromTown("A").toTown("A").withMaximumStops(3)
+				aRouteSpec().fromTown("A").toTown("A").withShortestDistance()
 				.build());
 		
 		System.out.println(matchingRoutes);
 		TestUtils.containsASingleValidRoute(matchingRoutes);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(45));
+		assertThat(matchingRoutes.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
 	
 	@Test
@@ -80,18 +78,23 @@ public class RailroadServiceShortestDistanceMatchTests {
 		havingConfigured(TestUtils.buildSampleProblemTracks());
 		
 		/*
-			6. The number of trips starting at C and ending at C with a maximum of 3 stops.  
-			In the sample data below, there are two such trips: C-D-C (2 stops). and C-E-B-C (3 stops).
+			8. The length of the shortest route (in terms of distance to travel) from A to C.
+			9. The length of the shortest route (in terms of distance to travel) from B to B.
 		 */
 		
 		MatchingRoutes matchingRoutes = railroadService.findAllRoutesUsing(
-				aRouteSpec().fromTown("C").toTown("C").withMaximumStops(3).build());
+				aRouteSpec().fromTown("A").toTown("C").withShortestDistance().build());
 		
 		System.out.println(matchingRoutes);
-		assertThat(matchingRoutes).isNotNull();
-		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(2);
-		assertThat(matchingRoutes.findRouteWithPath("CDC").getTotalDistance()).isEqualTo(Distance.valueOf(16));
-		assertThat(matchingRoutes.findRouteWithPath("CEBC").getTotalDistance()).isEqualTo(Distance.valueOf(9));
+		TestUtils.containsASingleValidRoute(matchingRoutes);
+		assertThat(matchingRoutes.getTheOnlyRoute().getTotalDistance()).isEqualTo(Distance.valueOf(9));
+		
+		matchingRoutes = railroadService.findAllRoutesUsing(
+				aRouteSpec().fromTown("B").toTown("B").withShortestDistance().build());
+		
+		System.out.println(matchingRoutes);
+		TestUtils.containsASingleValidRoute(matchingRoutes);
+		assertThat(matchingRoutes.getTheOnlyRoute().getTotalDistance()).isEqualTo(Distance.valueOf(9));
 	}
 	
 	private void havingConfigured(TrackDescriptorListBuilder aTrackListBuilder) {

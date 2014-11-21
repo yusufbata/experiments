@@ -59,8 +59,8 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 		System.out.println(matchingRoutes);
 		assertThat(matchingRoutes).isNotNull();
 		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(2);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(45));
-		assertThat(matchingRoutes.get(1).getTotalDistance()).isEqualTo(Distance.valueOf(10));
+		assertThat(matchingRoutes.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
+		assertThat(matchingRoutes.findRouteWithPath("ABDA").getTotalDistance()).isEqualTo(Distance.valueOf(10));
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 		
 		System.out.println(matchingRoutes);
 		TestUtils.containsASingleValidRoute(matchingRoutes);
-		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(45));
+		assertThat(matchingRoutes.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
 	
 	@Test
