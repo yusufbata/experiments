@@ -8,6 +8,7 @@ public class RouteSpecBuilder {
 
 	private String fromTown;
 	private List<String> targetPath = new ArrayList<String>();
+	private int maximumStops;
 
 	public RouteSpecBuilder fromTown(String fromTown) {
 		this.targetPath.add(0, fromTown);
@@ -19,9 +20,18 @@ public class RouteSpecBuilder {
 		this.targetPath.add(toTown);
 		return this;
 	}
+	
+	public RouteSpecBuilder withMaximumStops(int maximumStops) {
+		this.maximumStops = maximumStops;
+		return this;
+	}
+	
+	
 
 	public RouteSpec build() {
-		return new RouteSpec(fromTown, targetPath);
+		return new RouteSpec(fromTown, targetPath, maximumStops);
 	}
+
+	
 
 }

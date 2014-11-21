@@ -12,4 +12,8 @@ public class ListUtils {
 		}
 		return clone;
 	}
+
+	public static <T> T getLastItemFromList(List<T> list) {
+		return list.get(list.size() - 1);
+	}
 }

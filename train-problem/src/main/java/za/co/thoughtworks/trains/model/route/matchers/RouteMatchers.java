@@ -11,6 +11,9 @@ public class RouteMatchers implements RouteMatcher<RouteMatchers>, za.co.thought
 	private final List<RouteMatcher<?>> routeMatcherList;
 
 	public RouteMatchers(List<RouteMatcher<?>> routeMatcherList) {
+		/*if (this.routeMatcherList == null || this.routeMatcherList.size() == 0) {
+			throw new IllegalArgumentException("At least one route matcher has to be present");
+		}*/
 		this.routeMatcherList = routeMatcherList;
 	}
 

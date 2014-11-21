@@ -32,9 +32,10 @@ public class Track extends TrackDescriptor {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[Track fromLocation = ").append(this.fromLocation)
-			.append(", toLocation=").append(this.toLocation)
-		.append("]");
+		sb.append("[Track from ").append(this.fromLocation.getId())
+			.append(" to ").append(this.toLocation.getId())
+			.append(" distance=").append(this.getDistance())
+			.append("]");
 		return sb.toString();
 	}
 }

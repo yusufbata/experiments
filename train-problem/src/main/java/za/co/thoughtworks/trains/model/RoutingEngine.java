@@ -4,7 +4,6 @@
 package za.co.thoughtworks.trains.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
@@ -27,7 +26,7 @@ public class RoutingEngine {
 		this.endLocation = endLocation;
 	}
 
-	public IRoute findRoute(RouteMatchers routeMatchers) {
+	public MatchingRoutes findRoute(RouteMatchers routeMatchers) {
 		if (startLocation == null || endLocation == null) {
 			throw new IllegalArgumentException("Start location and End location cannot be null");
 		}
@@ -51,7 +50,7 @@ public class RoutingEngine {
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		
 		if (completedRoutes.size() > 0) {
-			return completedRoutes.get(0);
+			return MatchingRoutes.construct(completedRoutes);
 		}
 		
 		return new NoRoute();

@@ -15,9 +15,7 @@ import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
  * @author Yusuf
  *
  */
-public class Route /*implements Cloneable<Route>*/ implements IRoute {
-
-	public static final IRoute NO_ROUTE_EXISTS = null;
+public class Route implements IRoute {
 	
 	private final Distance totalDistance;
 	private final List<Track> trackList;
@@ -85,13 +83,6 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 		}
 		return false;
 	}*/
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[Route trackList = ").append(this.trackList).append("]");
-		return sb.toString();
-	}
 	
 	/*@Override
 	public Route clone() {
@@ -122,11 +113,12 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 		return currentLocation;
 	}
 	
-	/*List<Track> outgoingTracks = startLocation.getOutgoingTracks();
-	for (Track track : outgoingTracks) {
-		List<Track> trackList = new ArrayList<Track>();
-		trackList.add(track);
-		Route potentialRoute = new Route(trackList, toTownList);
-		incompleteMatchingRoutes.add(potentialRoute);
-	}*/
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Route distance=").append(this.totalDistance)
+				.append(" trackList = ").append(this.trackList)
+				.append("]");
+		return sb.toString();
+	}
 }

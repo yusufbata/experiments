@@ -15,132 +15,50 @@ import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.application.RailroadApplicationService;
 import za.co.thoughtworks.trains.application.TrackDescriptorList;
 import za.co.thoughtworks.trains.model.IRoute;
+import za.co.thoughtworks.trains.model.MatchingRoutes;
 import za.co.thoughtworks.trains.model.NoRoute;
 
 /**
  * @author Yusuf
  *
  */
-public class RailroadServiceExactRouteMatchTests {
+public class RailroadServiceMaximumStopsMatchTests {
 
 	private RailroadApplicationService railroadService;
 	
 	@Test
-	public void findsRouteBetweenTwoTowns() {
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B")));
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(aRouteSpec().fromTown("A").toTown("B")
-				.build());
-		
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
-	}
-	
-	@Test
-	public void returnsOneRouteForExactMatch() {
+	public void returnsOneRouteForMaximumStopsMatcher() {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
 		);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("B").toTown("C")
+		MatchingRoutes matchingRoutes = railroadService.findAllRoutesUsing(
+				aRouteSpec().fromTown("A").toTown("C").withMaximumStops(2)
 				.build());
 		
-		theTotalDistanceOfTheRouteIs(15, resultRoute);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void findsNoRouteBetweenTwoTownsWhenEndTownDoesntExist() {
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("C")
-				.build());
-		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void findsNoRouteBetweenTwoTownsWhenStartTownDoesntExist() {
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("C").toTown("A")
-				.build());
-		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
+		assertThat(matchingRoutes).isNotNull();
+		assertThat(matchingRoutes.getTheOnlyRoute()).isNotNull().isNotEqualTo(new NoRoute());
+		assertThat(matchingRoutes.getTheOnlyRoute().getTotalDistance()).isEqualTo(Distance.valueOf(15));
 	}
 	
 	@Test
-	public void findsNoRouteBetweenTwoTownsWhenPathDoesntExist() {
-		//"AB5-BC10"
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
-				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(10))
-				);
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("D")
-				.build());
-		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
-	}
-	
-	@Test
-	public void computesDistanceOfRouteBetweenTwoTowns() {
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("B")
-				.build());
-		
-		theTotalDistanceOfTheRouteIs(5, resultRoute);
-	}
-	
-	@Test
-	public void computesDistanceOfRouteBetweenThreeTowns() {
+	public void returnsTwoRouteForMaximumStopsMatcher() {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
+				.with(aTrack().fromTown("A").toTown("C").withADistanceOf(30))
 		);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("B").toTown("C")
+		MatchingRoutes matchingRoutes = railroadService.findAllRoutesUsing(
+				aRouteSpec().fromTown("A").toTown("C").withMaximumStops(2)
 				.build());
 		
-		theTotalDistanceOfTheRouteIs(15, resultRoute);
-	}
-	
-	@Test
-	public void computesDistanceOfRouteBetweenTwoTownsWithLastOneLinkedBackToFirst() {
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
-				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
-		);
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("B").toTown("A")
-				.build());
-		
-		theTotalDistanceOfTheRouteIs(15, resultRoute);
-	}
-	
-	@Test
-	public void computesDistanceOfRouteBetweenTwoTownsViaStartTownBackToLast() {
-		havingConfigured(aTrackList()
-				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
-				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
-		);
-		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
-				aRouteSpec().fromTown("A").toTown("B").toTown("A").toTown("B")
-				.build());
-		
-		theTotalDistanceOfTheRouteIs(20, resultRoute);
+		System.out.println("Matching routes=" + matchingRoutes);
+		assertThat(matchingRoutes).isNotNull();
+		assertThat(matchingRoutes.getNumberOfRoutes()).isEqualTo(2);
+		assertThat(matchingRoutes.get(0).getTotalDistance()).isEqualTo(Distance.valueOf(30));
+		assertThat(matchingRoutes.get(1).getTotalDistance()).isEqualTo(Distance.valueOf(15));
 	}
 	
 	@Test
