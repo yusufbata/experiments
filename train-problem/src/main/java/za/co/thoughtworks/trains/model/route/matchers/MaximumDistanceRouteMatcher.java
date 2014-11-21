@@ -6,7 +6,6 @@ import java.util.List;
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.Route;
 import za.co.thoughtworks.trains.model.Track;
 
 public class MaximumDistanceRouteMatcher  extends AbstractRouteMatcher  
@@ -20,15 +19,15 @@ public class MaximumDistanceRouteMatcher  extends AbstractRouteMatcher
 	}
 
 	@Override
-	public boolean isRouteValid(Route route, List<Location> completedLocationList) {
-		return route.getTotalDistance().value() <= maximumDistance;
+	public boolean isRouteValid(RouteMatcherInput routeMatcherInput) {
+		return routeMatcherInput.getRoute().getTotalDistance().value() <= maximumDistance;
 	}
 
 	@Override
-	public boolean isRouteComplete(Route route, List<Track> trackList) {
+	public boolean isRouteComplete(RouteMatcherInput routeMatcherInput) {
 		String lastLocationId = ListUtils.getLastItemFromList(targetPath);
-		if (trackList.size() > 0) {
-			Track lastTrack = ListUtils.getLastItemFromList(trackList);
+		if (routeMatcherInput.getTrackList().size() > 0) {
+			Track lastTrack = ListUtils.getLastItemFromList(routeMatcherInput.getTrackList());
 			return lastTrack.endLocationHasId(lastLocationId);
 		}
 		return false;

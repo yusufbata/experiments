@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.application.Distance;
-import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
-import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
+import za.co.thoughtworks.trains.model.route.matchers.RouteMatcherInput;
 import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
 
 /**
@@ -59,12 +58,12 @@ public class Route implements IRoute {
 		return this.totalDistance;
 	}
 
-	public boolean isValid() {
-		return this.routeMatchers.isRouteValid(this, completedLocationList);
+	public boolean isValid(List<Route> allCompletedRoutes) {
+		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, completedLocationList, this.trackList, allCompletedRoutes));
 	}
 	
-	public boolean isComplete() {
-		return this.routeMatchers.isRouteComplete(this, this.trackList);
+	public boolean isComplete(List<Route> allCompletedRoutes) {
+		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, completedLocationList, this.trackList, allCompletedRoutes));
 	}
 
 	/*private boolean hasRepeatingLocation() {

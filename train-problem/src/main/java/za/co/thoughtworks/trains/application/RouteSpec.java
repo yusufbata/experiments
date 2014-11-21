@@ -16,13 +16,15 @@ public class RouteSpec {
 	private int maximumStops;
 	private int exactNumberOfStops;
 	private int maximumDistance;
+	private boolean findRouteWithShortestDistance;
 
-	public RouteSpec(String fromTown, List<String> targetPath, int maximumStops, int exactNumberOfStops, int maximumDistance) {
+	public RouteSpec(String fromTown, List<String> targetPath, int maximumStops, int exactNumberOfStops, int maximumDistance, boolean findRouteWithShortestDistance) {
 		this.fromTown = fromTown;
 		this.targetPath = targetPath;
 		this.maximumStops = maximumStops;
 		this.exactNumberOfStops = exactNumberOfStops;
 		this.maximumDistance = maximumDistance;
+		this.findRouteWithShortestDistance = findRouteWithShortestDistance;
 	}
 
 	public String getStartLocationId() {
@@ -48,5 +50,10 @@ public class RouteSpec {
 	public int getMaximumDistance() {
 		return maximumDistance;
 	}
+
+	public boolean shouldFindRouteWithShortestDistance() {
+		return findRouteWithShortestDistance;
+	}
+	
 	
 }

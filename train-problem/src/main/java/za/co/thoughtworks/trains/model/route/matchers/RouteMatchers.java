@@ -4,8 +4,6 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.Route;
-import za.co.thoughtworks.trains.model.Track;
 
 public class RouteMatchers implements RouteMatcher<RouteMatchers>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<RouteMatchers> {
 
@@ -19,9 +17,9 @@ public class RouteMatchers implements RouteMatcher<RouteMatchers>, za.co.thought
 	}
 
 	@Override
-	public boolean isRouteValid(Route route, List<Location> completedLocationList) {
+	public boolean isRouteValid(RouteMatcherInput routeMatcherInput) {
 		for (RouteMatcher<?> routeMatcher : routeMatcherList) {
-			if (!routeMatcher.isRouteValid(route, completedLocationList)) {
+			if (!routeMatcher.isRouteValid(routeMatcherInput)) {
 				return false;
 			}
 		}
@@ -29,9 +27,9 @@ public class RouteMatchers implements RouteMatcher<RouteMatchers>, za.co.thought
 	}
 
 	@Override
-	public boolean isRouteComplete(Route route, List<Track> trackList) {
+	public boolean isRouteComplete(RouteMatcherInput routeMatcherInput) {
 		for (RouteMatcher<?> routeMatcher : routeMatcherList) {
-			if (!routeMatcher.isRouteComplete(route, trackList)) {
+			if (!routeMatcher.isRouteComplete(routeMatcherInput)) {
 				return false;
 			}
 		}

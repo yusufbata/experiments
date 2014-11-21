@@ -9,7 +9,7 @@ public class RouteMatchersFactory {
 
 	public static RouteMatchers constructRouteMatchers(RouteSpec routeSpec) {
 		List<RouteMatcher<?>> routeMatcherItemList = new ArrayList<RouteMatcher<?>>();
-		
+
 		if (routeSpec.getMaximumStops() > 0) {
 			MaximumStopsRouteMatcher maximumStopsRouteMatcher = 
 					new MaximumStopsRouteMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumStops());
@@ -24,6 +24,13 @@ public class RouteMatchersFactory {
 			MaximumDistanceRouteMatcher maximumDistanceRouteMatcher = 
 					new MaximumDistanceRouteMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumDistance());
 			routeMatcherItemList.add(maximumDistanceRouteMatcher);
+		}
+		
+		// NOTE: Order is important for this matcher
+		if (routeSpec.shouldFindRouteWithShortestDistance()) {
+			ShortestDistanceRouteMatcher shortestDistanceRouteMatcher = 
+					new ShortestDistanceRouteMatcher(routeSpec.getTargetPath());
+			routeMatcherItemList.add(shortestDistanceRouteMatcher);
 		}
 		
 		if (routeMatcherItemList.size() == 0) {

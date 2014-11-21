@@ -58,18 +58,11 @@ public class RoutingEngine {
 
 	private void findAllValidRoutes(List<Route> completedRoutes,
 			List<Route> previousIncompleteMatchingRoutes) {
-//		System.out.println("completedRoutes=" + completedRoutes);
-//		System.out.println("incompleteMatchingRoutes=" + incompleteMatchingRoutes);
-		
-		/*currentIterations++;
-		if (currentIterations == maxIterations) {
-			System.err.println("Not looking further. Recursions max limit reached: " + currentIterations);
-			return;
-		}*/
+
 		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();
 		for (Route potentialRoute : previousIncompleteMatchingRoutes) {
-			if (potentialRoute.isValid()) {
-				if (potentialRoute.isComplete()) {
+			if (potentialRoute.isValid(completedRoutes)) {
+				if (potentialRoute.isComplete(completedRoutes)) {
 					completedRoutes.add(potentialRoute);
 				}
 

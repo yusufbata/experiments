@@ -5,7 +5,6 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.Route;
 import za.co.thoughtworks.trains.model.Track;
 
 public class ExactRouteMatcher  extends AbstractRouteMatcher 
@@ -16,9 +15,9 @@ public class ExactRouteMatcher  extends AbstractRouteMatcher
 	}
 
 	@Override
-	public boolean isRouteValid(Route route, List<Location> completedLocationList) {
-		if(completedLocationList.size() <= targetPath.size()
-				&& completedLocationListMatchesTargetPath(completedLocationList))
+	public boolean isRouteValid(RouteMatcherInput routeMatcherInput) {
+		if(routeMatcherInput.getCompletedLocationList().size() <= targetPath.size()
+				&& completedLocationListMatchesTargetPath(routeMatcherInput.getCompletedLocationList()))
 		{
 			return true;
 		}
@@ -26,12 +25,12 @@ public class ExactRouteMatcher  extends AbstractRouteMatcher
 	}
 
 	@Override
-	public boolean isRouteComplete(Route route, List<Track> trackList) {
+	public boolean isRouteComplete(RouteMatcherInput routeMatcherInput) {
 		// TODO: Perhaps add isValid check here as well
 		String lastLocationId = ListUtils.getLastItemFromList(targetPath);
-		if (trackList.size() > 0
-				&& numberOfTracksIsSameAsTargetPath(trackList) ) {
-			Track lastTrack = ListUtils.getLastItemFromList(trackList);
+		if (routeMatcherInput.getTrackList().size() > 0
+				&& numberOfTracksIsSameAsTargetPath(routeMatcherInput.getTrackList()) ) {
+			Track lastTrack = ListUtils.getLastItemFromList(routeMatcherInput.getTrackList());
 			return lastTrack.endLocationHasId(lastLocationId);
 		}
 		return false;

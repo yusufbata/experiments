@@ -11,9 +11,10 @@ public class RouteSpecBuilder {
 	private int maximumStops;
 	private int exactNumberOfStops;
 	private int maximumDistance;
+	private boolean findRouteWithShortestDistance;
 	
 	public RouteSpec build() {
-		return new RouteSpec(fromTown, targetPath, maximumStops, exactNumberOfStops, maximumDistance);
+		return new RouteSpec(fromTown, targetPath, maximumStops, exactNumberOfStops, maximumDistance, findRouteWithShortestDistance);
 	}
 
 	public RouteSpecBuilder fromTown(String fromTown) {
@@ -39,6 +40,11 @@ public class RouteSpecBuilder {
 
 	public RouteSpecBuilder withMaximumDistance(int maximumDistance) {
 		this.maximumDistance = maximumDistance;
+		return this;
+	}
+
+	public RouteSpecBuilder withShortestDistance() {
+		this.findRouteWithShortestDistance = true;
 		return this;
 	}
 
