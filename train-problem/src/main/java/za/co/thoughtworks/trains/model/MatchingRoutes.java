@@ -37,7 +37,7 @@ public class MatchingRoutes {
 	}
 
 	public int getNumberOfRoutes() {
-		return this.completedRoutes.size();
+		return (this.completedRoutes != null) ? this.completedRoutes.size() : 0;
 	}
 
 	public Route get(int index) {

@@ -37,24 +37,8 @@ public class MaximumStopsRouteMatcher implements RouteMatcher<MaximumStopsRouteM
 		return false;
 	}
 
-	private boolean numberOfTracksIsSameAsTargetPath(List<Track> trackList) {
-		return this.targetPath.size() == (trackList.size() + 1);
-	}
-
 	@Override
 	public MaximumStopsRouteMatcher clone() {		
 		return new MaximumStopsRouteMatcher(new ArrayList<String>(this.targetPath), this.maximumStops);
-	}
-	
-	private boolean completedLocationListMatchesTargetPath(List<Location> completedLocationList) {
-		int completedLocationCount = completedLocationList.size();
-		for (int i = 0; i < completedLocationCount; i++) {
-			Location completedLocation = completedLocationList.get(i);
-			String targetPathItem = this.targetPath.get(i);
-			if (!completedLocation.hasId(targetPathItem)) {
-				return false;
-			}
-		}
-		return true;
 	}
 }
