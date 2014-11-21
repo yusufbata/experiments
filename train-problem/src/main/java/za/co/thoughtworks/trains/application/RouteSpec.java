@@ -3,6 +3,8 @@
  */
 package za.co.thoughtworks.trains.application;
 
+import java.util.List;
+
 /**
  * @author Yusuf
  *
@@ -10,11 +12,11 @@ package za.co.thoughtworks.trains.application;
 public class RouteSpec {
 
 	private String fromTown;
-	private String toTown;
+	private List<String> toTownList;
 
-	public RouteSpec(String fromTown, String toTown) {
+	public RouteSpec(String fromTown, List<String> toTownList) {
 		this.fromTown = fromTown;
-		this.toTown = toTown;
+		this.toTownList = toTownList;
 	}
 
 	public String getStartLocationId() {
@@ -22,7 +24,11 @@ public class RouteSpec {
 	}
 
 	public String getEndLocationId() {
-		return this.toTown;
+		return this.toTownList.get(this.toTownList.size() - 1);
+	}
+
+	public List<String> getToTownList() {
+		return toTownList;
 	}
 
 }

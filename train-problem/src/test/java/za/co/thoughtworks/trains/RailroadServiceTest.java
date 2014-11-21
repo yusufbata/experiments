@@ -13,8 +13,8 @@ import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.application.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.TrackDescriptorList;
 import za.co.thoughtworks.trains.model.NoRoute;
-import za.co.thoughtworks.trains.model.RailroadTracks;
 import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
 import za.co.thoughtworks.trains.model.Route;
 
@@ -31,7 +31,7 @@ public class RailroadServiceTest {
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B")));
 		
-		Route resultRoute = railroadService.findRouteWith(aRouteSpec().fromTown("A").toTown("B")
+		Route resultRoute = railroadService.findRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
 		assertThat(resultRoute).isNotNull();
@@ -43,7 +43,7 @@ public class RailroadServiceTest {
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		Route resultRoute = railroadService.findRouteWith(
+		Route resultRoute = railroadService.findRouteUsing(
 				aRouteSpec().fromTown("A").toTown("C")
 				.build());
 		
@@ -55,7 +55,7 @@ public class RailroadServiceTest {
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		Route resultRoute = railroadService.findRouteWith(
+		Route resultRoute = railroadService.findRouteUsing(
 				aRouteSpec().fromTown("C").toTown("A")
 				.build());
 		
@@ -70,7 +70,7 @@ public class RailroadServiceTest {
 				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(10))
 				);
 		
-		Route resultRoute = railroadService.findRouteWith(
+		Route resultRoute = railroadService.findRouteUsing(
 				aRouteSpec().fromTown("A").toTown("D")
 				.build());
 		
@@ -82,7 +82,7 @@ public class RailroadServiceTest {
 		havingConfigured(railRoadTracks()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		Route resultRoute = railroadService.findRouteWith(
+		Route resultRoute = railroadService.findRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
@@ -96,8 +96,8 @@ public class RailroadServiceTest {
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
 		);
 		
-		Route resultRoute = railroadService.findRouteWith(
-				aRouteSpec().fromTown("A").toTown("C")
+		Route resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 				.build());
 		
 		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
@@ -110,8 +110,8 @@ public class RailroadServiceTest {
 	
 	
 	private void havingConfigured(RailroadTracksBuilder aRailroadTracksBuilder) {
-		RailroadTracks railroadTracks = aRailroadTracksBuilder.build();
-		this.railroadService = new RailroadApplicationService(railroadTracks);
+		TrackDescriptorList trackDescriptorList = aRailroadTracksBuilder.build();
+		this.railroadService = new RailroadApplicationService(trackDescriptorList);
 	}
 
 	private void theTotalDistanceOfTheRouteIs(int distance, Route resultRoute) {

@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.RailroadTracks;
-import za.co.thoughtworks.trains.model.Track;
 
 public class LocationFactory {
 	
-	public List<Location> constructLocationsFrom(RailroadTracks railroadTracks) {
+	public List<Location> constructLocationsFrom(TrackDescriptorList trackDescriptorList) {
 		List<Location> locationList = new ArrayList<>();
-		for (Track track : railroadTracks.getTrackList()) {
-			addLocationToListIfDoesntExist(locationList, track.getFromLocation());
-			addLocationToListIfDoesntExist(locationList, track.getToLocation());
-			track.getFromLocation().addOutgoingTrack(track);
+		for (TrackDescriptor trackDescriptor : trackDescriptorList.getTrackList()) {
+			addLocationToListIfDoesntExist(locationList, trackDescriptor.getFromLocation());
+			addLocationToListIfDoesntExist(locationList, trackDescriptor.getToLocation());
+			trackDescriptor.getFromLocation().addOutgoingTrack(trackDescriptor);
 		}
 		return locationList;
 	}

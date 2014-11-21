@@ -6,7 +6,6 @@ package za.co.thoughtworks.trains.application;
 import java.util.List;
 
 import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.RailroadTracks;
 import za.co.thoughtworks.trains.model.Route;
 import za.co.thoughtworks.trains.model.RoutingEngine;
 
@@ -18,18 +17,18 @@ public class RailroadApplicationService {
 
 	private final LocationRepository locationRepository;
 	
-	public RailroadApplicationService(RailroadTracks railroadTracks) {
+	public RailroadApplicationService(TrackDescriptorList trackDescriptorList) {
 		LocationFactory locationFactory = ApplicationRegistry.getLocationFactory();
-		List<Location> locationList = locationFactory.constructLocationsFrom(railroadTracks);
+		List<Location> locationList = locationFactory.constructLocationsFrom(trackDescriptorList);
 		this.locationRepository = ApplicationRegistry.getLocationRepository(locationList);
 	}
 
-	public Route findRouteWith(RouteSpec routeSpec) {
+	public Route findRouteUsing(RouteSpec routeSpec) {
 		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
 		Location endLocation = locationRepository.findLocationWithId(routeSpec.getEndLocationId());
-		RoutingEngine routingEngine = ApplicationRegistry.getRoutingEngineFactory().constructRoutingEngine(routeSpec);
+		RoutingEngine routingEngine = ApplicationRegistry.getRoutingEngineFactory().constructRoutingEngine(routeSpec, startLocation, endLocation);
 		
-		Route route = routingEngine.findRouteBetweenTwoLocations(startLocation, endLocation);
+		Route route = routingEngine.findRoute();
 		return route;
 	}
 

@@ -1,7 +1,6 @@
 package za.co.thoughtworks.trains.application;
 
 import za.co.thoughtworks.trains.model.RailroadTracksBuilder;
-import za.co.thoughtworks.trains.model.TrackBuilder;
 
 public class BuilderFactory {
 
@@ -9,8 +8,8 @@ public class BuilderFactory {
 		return new RouteSpecBuilder();
 	}
 
-	public static TrackBuilder aTrack() {
-		return new TrackBuilder();
+	public static TrackDescriptorBuilder aTrack() {
+		return new TrackDescriptorBuilder();
 	}
 
 	public static RailroadTracksBuilder railRoadTracks() {

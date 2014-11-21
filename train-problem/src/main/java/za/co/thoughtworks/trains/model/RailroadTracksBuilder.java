@@ -3,6 +3,9 @@
  */
 package za.co.thoughtworks.trains.model;
 
+import za.co.thoughtworks.trains.application.TrackDescriptorBuilder;
+import za.co.thoughtworks.trains.application.TrackDescriptorList;
+
 
 /**
  * @author F3657051
@@ -10,19 +13,19 @@ package za.co.thoughtworks.trains.model;
  */
 public class RailroadTracksBuilder {
 	
-	private RailroadTracks railroadTracks;
+	private TrackDescriptorList trackDescriptorList;
 
 	public RailroadTracksBuilder() {
-		this.railroadTracks = new RailroadTracks();
+		this.trackDescriptorList = new TrackDescriptorList();
 	}
 
-	public RailroadTracksBuilder with(TrackBuilder trackBuilder) {
-		this.railroadTracks.add(trackBuilder.build());
+	public RailroadTracksBuilder with(TrackDescriptorBuilder trackDescriptorBuilder) {
+		this.trackDescriptorList.add(trackDescriptorBuilder.build());
 		return this;
 	}
 
-	public RailroadTracks build() {
-		return railroadTracks;
+	public TrackDescriptorList build() {
+		return trackDescriptorList;
 	}
 
 }

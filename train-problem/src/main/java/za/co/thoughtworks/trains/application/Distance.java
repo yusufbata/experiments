@@ -53,4 +53,8 @@ public class Distance {
 		int newValue = this.units + otherDistance.units;
 		return Distance.valueOf(newValue);
 	}
+
+	public int value() {
+		return this.units;
+	}
 }

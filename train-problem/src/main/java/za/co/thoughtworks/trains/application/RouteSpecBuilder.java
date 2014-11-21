@@ -1,10 +1,13 @@
 package za.co.thoughtworks.trains.application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RouteSpecBuilder {
 
 	private String fromTown;
-	private String toTown;
+	private List<String> toTownList = new ArrayList<String>();
 
 	public RouteSpecBuilder fromTown(String fromTown) {
 		this.fromTown = fromTown;
@@ -12,12 +15,12 @@ public class RouteSpecBuilder {
 	}
 
 	public RouteSpecBuilder toTown(String toTown) {
-		this.toTown = toTown;
+		this.toTownList.add(toTown);
 		return this;
 	}
 
 	public RouteSpec build() {
-		return new RouteSpec(fromTown, toTown);
+		return new RouteSpec(fromTown, toTownList);
 	}
 
 }
