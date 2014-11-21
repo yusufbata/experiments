@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.application.Distance;
-import za.co.thoughtworks.trains.application.TrackDescriptor;
 
 /**
  * @author Yusuf
@@ -17,45 +16,42 @@ public class Route {
 
 	public static final Route NO_ROUTE_EXISTS = null;
 
-	private List<TrackDescriptor> trackList;
+	private List<Track> trackList;
 	private Distance totalDistance;
-	private Location targetEndLocation;
 	private List<String> toTownList;
 	private List<Location> completedLocationList;
 
 	protected Route() {
 	}
 
-	public Route(List<TrackDescriptor> trackList, Location targetEndLocation,
-			List<String> toTownList) {
-		this.targetEndLocation = targetEndLocation;
+	public Route(List<Track> trackList, List<String> toTownList) {
 		this.toTownList = toTownList;
 		this.completedLocationList = new ArrayList<Location>();
 		
 		this.totalDistance = Distance.valueOf(0);
-//		this.trackList = new ArrayList<TrackDescriptor>();
+//		this.trackList = new ArrayList<Track>();
 		this.trackList = trackList;
 		
 		initialise();
 	}
 
 	private void initialise() {
-		for (TrackDescriptor currentTrack : this.trackList) {
+		for (Track currentTrack : this.trackList) {
 			this.totalDistance = this.totalDistance.add(currentTrack.getDistance());
 			this.completedLocationList.add(currentTrack.getToLocation());
 		}
 	}
 
-	private Route addTrack(TrackDescriptor trackDescriptor)  {
+	private Route addTrack(Track track)  {
 		Route newRoute = cloneRoute();
-		newRoute.trackList.add(trackDescriptor);
+		newRoute.trackList.add(track);
 		return newRoute;
 	}
 
-	private List<TrackDescriptor> cloneListWithContents(List<TrackDescriptor> aListToClone) {
-		List<TrackDescriptor> clone = new ArrayList<TrackDescriptor>(aListToClone.size());
-		for (TrackDescriptor trackDescriptor : aListToClone) {
-			clone.add((TrackDescriptor)trackDescriptor.clone());
+	private List<Track> cloneListWithContents(List<Track> aListToClone) {
+		List<Track> clone = new ArrayList<Track>(aListToClone.size());
+		for (Track track : aListToClone) {
+			clone.add((Track)track.clone());
 		}
 		return clone;
 	}
@@ -74,7 +70,7 @@ public class Route {
 	}
 
 	public boolean isValid() {
-		// TrackDescriptor lastTrack = getLastTrack();
+		// Track lastTrack = getLastTrack();
 		// return lastTrack.endLocationEquals(targetEndLocation);
 		if (/* hasRepeatingLocation() && */completedLocationListMatchesTargetPath()) {
 			return true;
@@ -111,13 +107,14 @@ public class Route {
 		return true;
 	}
 
-	private TrackDescriptor getLastTrack() {
+	private Track getLastTrack() {
 		return this.trackList.get(this.trackList.size() - 1);
 	}
 
 	public boolean isComplete() {
-		TrackDescriptor lastTrack = getLastTrack();
-		return lastTrack.endLocationEquals(targetEndLocation);
+		String lastLocationId = toTownList.get(toTownList.size() - 1);
+		Track lastTrack = getLastTrack();
+		return lastTrack.endLocationHasId(lastLocationId);
 	}
 
 	@Override
@@ -129,8 +126,8 @@ public class Route {
 	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		List<TrackDescriptor> newTrackList = cloneListWithContents(this.trackList);
-		Route newRoute = new Route(newTrackList, this.targetEndLocation, this.toTownList);
+		List<Track> newTrackList = cloneListWithContents(this.trackList);
+		Route newRoute = new Route(newTrackList, this.toTownList);
 		newRoute.completedLocationList = this.completedLocationList;
 		return newRoute;
 	}
@@ -141,9 +138,9 @@ public class Route {
 
 		Location currentLocation = completedLocationList
 				.get(completedLocationList.size() - 1);
-		List<TrackDescriptor> outgoingTracks = currentLocation.getOutgoingTracks();
-		for (TrackDescriptor trackDescriptor : outgoingTracks) {
-			Route newPotentialRoute = this.addTrack(trackDescriptor);
+		List<Track> outgoingTracks = currentLocation.getOutgoingTracks();
+		for (Track track : outgoingTracks) {
+			Route newPotentialRoute = this.addTrack(track);
 			nextPossibleRoutes.add(newPotentialRoute);
 		}
 

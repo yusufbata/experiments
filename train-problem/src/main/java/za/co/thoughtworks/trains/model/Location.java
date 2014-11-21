@@ -3,17 +3,14 @@ package za.co.thoughtworks.trains.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.TrackDescriptor;
-
-
 public class Location {
 
 	private String id;
-	private List<TrackDescriptor> outgoingTracks;
+	private List<Track> outgoingTracks;
 	
 	public Location(String locationId) {
 		this.id = locationId;
-		this.outgoingTracks = new ArrayList<TrackDescriptor>();
+		this.outgoingTracks = new ArrayList<Track>();
 	}
 
 	public static Location create(String locationId) {
@@ -35,11 +32,11 @@ public class Location {
 		return id;
 	}
 
-	public void addOutgoingTrack(TrackDescriptor trackDescriptor) {
-		this.outgoingTracks.add(trackDescriptor);
+	public void addOutgoingTrack(Track track) {
+		this.outgoingTracks.add(track);
 	}
 
-	public List<TrackDescriptor> getOutgoingTracks() {
+	public List<Track> getOutgoingTracks() {
 		return outgoingTracks;
 	}
 

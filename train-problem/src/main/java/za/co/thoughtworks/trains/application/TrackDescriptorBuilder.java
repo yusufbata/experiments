@@ -22,7 +22,7 @@ public class TrackDescriptorBuilder {
 	}
 
 	public TrackDescriptor build() {
-		return new TrackDescriptor(fromTownId, toTownId, trackDistance);
+		return new TrackDescriptor(fromTownId, toTownId, Distance.valueOf(trackDistance));
 	}
 
 }

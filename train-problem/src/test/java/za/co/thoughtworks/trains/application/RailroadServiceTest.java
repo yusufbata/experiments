@@ -1,7 +1,7 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains;
+package za.co.thoughtworks.trains.application;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;

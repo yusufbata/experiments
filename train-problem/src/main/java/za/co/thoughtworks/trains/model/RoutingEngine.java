@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.TrackDescriptor;
-
 
 /**
  * @author Yusuf
@@ -48,11 +46,11 @@ public class RoutingEngine {
 		List<Route> completedRoutes = new ArrayList<Route>();
 		List<Route> incompleteMatchingRoutes = new ArrayList<>();
 		
-		List<TrackDescriptor> outgoingTracks = startLocation.getOutgoingTracks();
-		for (TrackDescriptor trackDescriptor : outgoingTracks) {
-			List<TrackDescriptor> trackList = new ArrayList<TrackDescriptor>();
-			trackList.add(trackDescriptor);
-			Route potentialRoute = new Route(trackList, endLocation, toTownList);
+		List<Track> outgoingTracks = startLocation.getOutgoingTracks();
+		for (Track track : outgoingTracks) {
+			List<Track> trackList = new ArrayList<Track>();
+			trackList.add(track);
+			Route potentialRoute = new Route(trackList, toTownList);
 			incompleteMatchingRoutes.add(potentialRoute);
 		}
 		

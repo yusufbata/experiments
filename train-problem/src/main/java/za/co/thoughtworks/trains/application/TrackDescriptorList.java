@@ -27,7 +27,7 @@ public class TrackDescriptorList {
 		}*/
 	}
 
-	public List<TrackDescriptor> getTrackList() {
+	public List<TrackDescriptor> getTrackDescriptorList() {
 		return trackList;
 	}
 }

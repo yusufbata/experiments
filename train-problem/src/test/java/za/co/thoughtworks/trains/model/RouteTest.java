@@ -1,6 +1,8 @@
 package za.co.thoughtworks.trains.model;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
+import static za.co.thoughtworks.trains.application.BuilderFactory.railRoadTracks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,9 +16,14 @@ public class RouteTest {
 
 	@Test
 	public void testFindNextPossibleRoutes() {
-		TrackDescriptor aToB = new TrackDescriptor("A", "B", 5);
-		TrackDescriptor bToC = new TrackDescriptor("B", "C", 6);
-		List<TrackDescriptor> trackList = new ArrayList<TrackDescriptor>(Arrays.asList(aToB, bToC));
+//		TrackDescriptor aToB = new TrackDescriptor("A", "B", 5);
+//		TrackDescriptor bToC = new TrackDescriptor("B", "C", 6);
+//		List<TrackDescriptor> trackList = new ArrayList<TrackDescriptor>(Arrays.asList(aToB, bToC));
+		
+		/*havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
+				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(6))
+		);
 
 		Location targetEndLocation = new Location("C");
 		
@@ -29,6 +36,6 @@ public class RouteTest {
 		
 		assertThat(nextPossibleRoutes).isNotNull().isNotEmpty().hasSize(1);
 //		assertThat(nextPossibleRoutes.get(0)).isEqualTo(route.);
-	}
+*/	}
 
 }
