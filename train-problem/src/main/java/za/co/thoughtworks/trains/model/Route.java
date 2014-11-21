@@ -9,6 +9,7 @@ import java.util.List;
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
+import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
 
 /**
  * @author Yusuf
@@ -17,24 +18,24 @@ import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 public class Route /*implements Cloneable<Route>*/ implements IRoute {
 
 	public static final IRoute NO_ROUTE_EXISTS = null;
-
-	private final List<Track> trackList;
+	
 	private final Distance totalDistance;
-	private final List<String> toTownList;
+	private final List<Track> trackList;
 	private final List<Location> completedLocationList;
+	private final RouteMatchers routeMatchers;
 
-	public Route(Location startLocation, List<String> toTownList) {
-		this(startLocation, toTownList, new ArrayList<Track>());
+	public Route(RouteMatchers routeMatchers, Location startLocation) {
+		this(routeMatchers, startLocation, new ArrayList<Track>());
 	}
 	
-	public Route(Location startLocation, List<String> toTownList, List<Track> trackList) {
+	public Route(RouteMatchers routeMatchers, Location startLocation, List<Track> trackList) {
+		if (routeMatchers == null) throw new IllegalArgumentException("routeMatchers cannot be null");
 		if (startLocation == null) throw new IllegalArgumentException("startLocation cannot be null");
-		if (toTownList == null) throw new IllegalArgumentException("toTownList cannot be null");
 		if (trackList == null) throw new IllegalArgumentException("Route cannot be initialised with null track list");
 		
+		this.routeMatchers = routeMatchers;
 		this.completedLocationList = new ArrayList<Location>();
 		this.completedLocationList.add(startLocation);
-		this.toTownList = toTownList;
 		this.trackList = trackList;
 		this.totalDistance = computeTotalDistanceAcrossTracks();
 	}
@@ -51,7 +52,7 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 	private Route addTrack(Track track)  {
 		List<Track> newTrackList = new ArrayList<Track>(this.trackList);
 		newTrackList.add(track);
-		Route newRoute = new Route(this.getStartLocation(), this.toTownList, newTrackList);
+		Route newRoute = new Route(this.routeMatchers.clone(), this.getStartLocation(), newTrackList);
 		return newRoute;
 	}
 
@@ -61,15 +62,14 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 	}
 
 	public boolean isValid() {
-		// Track lastTrack = getLastTrack();
-		// return lastTrack.endLocationEquals(targetEndLocation);
-		if (/* hasRepeatingLocation() && */completedLocationListMatchesTargetPath()) {
-			return true;
-		}
-		return false;
+		return this.routeMatchers.isRouteValid(completedLocationList);
+	}
+	
+	public boolean isComplete() {
+		return this.routeMatchers.isRouteComplete(this.trackList);
 	}
 
-	private boolean hasRepeatingLocation() {
+	/*private boolean hasRepeatingLocation() {
 		for (int currentLocationIndex = 0; currentLocationIndex < this.completedLocationList
 				.size(); currentLocationIndex++) {
 			for (int currentListIndex = currentLocationIndex + 1; currentListIndex < this.completedLocationList
@@ -84,35 +84,7 @@ public class Route /*implements Cloneable<Route>*/ implements IRoute {
 			}
 		}
 		return false;
-	}
-
-	private boolean completedLocationListMatchesTargetPath() {
-		int completedLocationCount = this.completedLocationList.size();
-		for (int i = 0; i < completedLocationCount; i++) {
-			Location completedLocation = this.completedLocationList.get(i);
-			String targetPathItem = this.toTownList.get(i);
-			if (!completedLocation.hasId(targetPathItem)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private Track getLastTrack() {
-		return this.trackList.get(this.trackList.size() - 1);
-	}
-
-	public boolean isComplete() {
-		// TODO: Perhaps add isValid check here as well
-		String lastLocationId = toTownList.get(toTownList.size() - 1);
-		if (this.trackList.size() > 0
-				&& this.toTownList.size() == (this.trackList.size() + 1)
-				) {
-			Track lastTrack = getLastTrack();
-			return lastTrack.endLocationHasId(lastLocationId);
-		}
-		return false;
-	}
+	}*/
 
 	@Override
 	public String toString() {

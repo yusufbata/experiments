@@ -17,6 +17,8 @@ import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.application.RouteSpecBuilder;
 import za.co.thoughtworks.trains.application.TrackDescriptor;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
+import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
+import za.co.thoughtworks.trains.model.route.matchers.RouteMatchersFactory;
 
 public class RouteTest {
 
@@ -58,8 +60,9 @@ public class RouteTest {
 		LocationRepository locationRepository = ApplicationRegistry.getLocationRepository(locationsList);
 		RouteSpec routeSpec = routeSpecBuilder.build();
 		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
+		RouteMatchers routeMatchers = RouteMatchersFactory.constructRouteMatchers(routeSpec);
 		
-		this.route = new Route(startLocation, routeSpec.getTargetPath());
+		this.route = new Route(routeMatchers, startLocation);
 	}
 
 }

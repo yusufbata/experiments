@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
+
 
 /**
  * @author Yusuf
@@ -16,19 +18,16 @@ public class RoutingEngine {
 
 	private final Location startLocation;
 	private final Location endLocation;
-	private final List<String> toTownList;
 	
 //	private int maxIterations = 20;
 //	private int currentIterations = 0;
 
-	public RoutingEngine(Location startLocation, Location endLocation,
-			List<String> toTownList) {
+	public RoutingEngine(Location startLocation, Location endLocation) {
 		this.startLocation = startLocation;
 		this.endLocation = endLocation;
-		this.toTownList = toTownList;
 	}
 
-	public IRoute findRoute() {
+	public IRoute findRoute(RouteMatchers routeMatchers) {
 		if (startLocation == null || endLocation == null) {
 			throw new IllegalArgumentException("Start location and End location cannot be null");
 		}
@@ -46,7 +45,7 @@ public class RoutingEngine {
 		List<Route> completedRoutes = new ArrayList<Route>();
 		List<Route> incompleteMatchingRoutes = new ArrayList<>();
 		
-		Route startingRoute = new Route(startLocation, toTownList);
+		Route startingRoute = new Route(routeMatchers, startLocation);
 		incompleteMatchingRoutes.add(startingRoute);
 		
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
@@ -59,7 +58,7 @@ public class RoutingEngine {
 	}
 
 	private void findAllValidRoutes(List<Route> completedRoutes,
-			List<Route> incompleteMatchingRoutes) {
+			List<Route> previousIncompleteMatchingRoutes) {
 //		System.out.println("completedRoutes=" + completedRoutes);
 //		System.out.println("incompleteMatchingRoutes=" + incompleteMatchingRoutes);
 		
@@ -69,7 +68,7 @@ public class RoutingEngine {
 			return;
 		}*/
 		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();
-		for (Route potentialRoute : incompleteMatchingRoutes) {
+		for (Route potentialRoute : previousIncompleteMatchingRoutes) {
 			if (potentialRoute.isValid()) {
 				if (potentialRoute.isComplete()) {
 					completedRoutes.add(potentialRoute);
