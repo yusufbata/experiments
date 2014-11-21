@@ -119,16 +119,32 @@ public class RailroadServiceTest {
 		);
 		
 		/*
-				1. The distance of the route A-B-C.
-				2. The distance of the route A-D.
-				3. The distance of the route A-D-C.
-				4. The distance of the route A-E-B-C-D.
-				5. The distance of the route A-E-D.
+			1. The distance of the route A-B-C.
+			2. The distance of the route A-D.
+			3. The distance of the route A-D-C.
+			4. The distance of the route A-E-B-C-D.
+			5. The distance of the route A-E-D.
 		 */
 		
 		IRoute resultRoute = railroadService.findRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B").toTown("C").build());
 		theTotalDistanceOfTheRouteIs(9, resultRoute);
+		
+		resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("D").build());
+		theTotalDistanceOfTheRouteIs(5, resultRoute);
+		
+		resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("D").toTown("C").build());
+		theTotalDistanceOfTheRouteIs(13, resultRoute);
+		
+		resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("E").toTown("B").toTown("C").toTown("D").build());
+		theTotalDistanceOfTheRouteIs(22, resultRoute);
+		
+		resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("E").toTown("D").build());
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
 	}
 	
 	
