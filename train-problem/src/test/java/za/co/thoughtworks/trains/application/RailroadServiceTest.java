@@ -100,11 +100,36 @@ public class RailroadServiceTest {
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
 		theTotalDistanceOfTheRouteIs(15, resultRoute);
 	}
 	
-	
+	@Test
+	public void verifyProblemSampleDistanceCalculations() {
+		// AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
+		havingConfigured(railRoadTracks()
+				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5))
+				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(4))
+				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(8))
+				.with(aTrack().fromTown("D").toTown("C").withADistanceOf(8))
+				.with(aTrack().fromTown("D").toTown("E").withADistanceOf(6))
+				.with(aTrack().fromTown("A").toTown("D").withADistanceOf(5))
+				.with(aTrack().fromTown("C").toTown("E").withADistanceOf(2))
+				.with(aTrack().fromTown("E").toTown("B").withADistanceOf(3))
+				.with(aTrack().fromTown("A").toTown("E").withADistanceOf(7))
+		);
+		
+		/*
+				1. The distance of the route A-B-C.
+				2. The distance of the route A-D.
+				3. The distance of the route A-D-C.
+				4. The distance of the route A-E-B-C-D.
+				5. The distance of the route A-E-D.
+		 */
+		
+		IRoute resultRoute = railroadService.findRouteUsing(
+				aRouteSpec().fromTown("A").toTown("B").toTown("C").build());
+		theTotalDistanceOfTheRouteIs(9, resultRoute);
+	}
 	
 	
 	
@@ -115,7 +140,7 @@ public class RailroadServiceTest {
 	}
 
 	private void theTotalDistanceOfTheRouteIs(int distance, IRoute resultRoute) {
-		assertThat(resultRoute).isNotNull();
+		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
 		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}
 
