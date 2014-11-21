@@ -7,12 +7,11 @@ import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.Track;
 
-public class ExactRouteMatcher implements RouteMatcher<ExactRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<ExactRouteMatcher> {
-
-	private final List<String> targetPath;
+public class ExactRouteMatcher  extends AbstractRouteMatcher 
+	implements RouteMatcher<ExactRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<ExactRouteMatcher> {
 
 	public ExactRouteMatcher(List<String> targetPath) {
-		this.targetPath = targetPath;
+		super(targetPath);
 	}
 
 	@Override

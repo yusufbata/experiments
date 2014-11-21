@@ -9,6 +9,7 @@ public class RouteSpecBuilder {
 	private String fromTown;
 	private List<String> targetPath = new ArrayList<String>();
 	private int maximumStops;
+	private int exactNumberOfStops;
 
 	public RouteSpecBuilder fromTown(String fromTown) {
 		this.targetPath.add(0, fromTown);
@@ -26,11 +27,16 @@ public class RouteSpecBuilder {
 		return this;
 	}
 	
-	
+	public RouteSpecBuilder withExactNumberOfStops(int exactNumberOfStops) {
+		this.exactNumberOfStops = exactNumberOfStops;
+		return this;
+	}
 
 	public RouteSpec build() {
-		return new RouteSpec(fromTown, targetPath, maximumStops);
+		return new RouteSpec(fromTown, targetPath, maximumStops, exactNumberOfStops);
 	}
+
+	
 
 	
 

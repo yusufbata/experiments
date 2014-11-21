@@ -11,8 +11,15 @@ public class RouteMatchersFactory {
 		List<RouteMatcher<?>> routeMatcherItemList = new ArrayList<RouteMatcher<?>>();
 		
 		if (routeSpec.getMaximumStops() == 0) {
-			ExactRouteMatcher exactRouteMatcher = new ExactRouteMatcher(routeSpec.getTargetPath());
-			routeMatcherItemList.add(exactRouteMatcher);
+			if (routeSpec.getExactNumberOfStops() == 0) {
+				ExactRouteMatcher exactRouteMatcher = new ExactRouteMatcher(routeSpec.getTargetPath());
+				routeMatcherItemList.add(exactRouteMatcher);
+			}
+			else {
+				ExactNumberOfStopsRouteMatcher exactNumberOfStopsRouteMatcher = 
+						new ExactNumberOfStopsRouteMatcher(routeSpec.getTargetPath(), routeSpec.getExactNumberOfStops());
+				routeMatcherItemList.add(exactNumberOfStopsRouteMatcher);
+			}
 		}
 		else {
 			MaximumStopsRouteMatcher maximumStopsRouteMatcher = 

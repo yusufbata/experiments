@@ -7,23 +7,19 @@ import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.Track;
 
-public class MaximumStopsRouteMatcher implements RouteMatcher<MaximumStopsRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<MaximumStopsRouteMatcher> {
+public class MaximumStopsRouteMatcher  extends AbstractRouteMatcher  
+	implements RouteMatcher<MaximumStopsRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<MaximumStopsRouteMatcher> {
 
-	private final List<String> targetPath;
 	private final int maximumStops;
 
 	public MaximumStopsRouteMatcher(List<String> targetPath, int maximumStops) {
-		this.targetPath = targetPath;
+		super(targetPath);
 		this.maximumStops = maximumStops;
 	}
 
 	@Override
 	public boolean isRouteValid(List<Location> completedLocationList) {
 		return currentNumberOfStops(completedLocationList) <= maximumStops;
-	}
-
-	private int currentNumberOfStops(List<Location> completedLocationList) {
-		return completedLocationList.size() - 1;
 	}
 
 	@Override
