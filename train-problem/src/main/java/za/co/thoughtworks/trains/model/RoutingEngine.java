@@ -41,7 +41,7 @@ public class RoutingEngine {
 		// Get next location from each valid track
 		// repeat above steps for each location
 		
-		List<Route> completedRoutes = new ArrayList<Route>();
+		List<Path> completedRoutes = new ArrayList<Path>();
 		List<Route> incompleteMatchingRoutes = new ArrayList<>();
 		
 		Route startingRoute = new Route(routeMatchers, startLocation);
@@ -59,16 +59,16 @@ public class RoutingEngine {
 		return new NoRoute();
 	}
 
-	private List<Route> validateAllCompletedRoutes(List<Route> allCompletedRoutes) {
-		List<Route> validatedCompletedRoutes = new ArrayList<Route>();
-		for (Route route : allCompletedRoutes) {
+	private List<Path> validateAllCompletedRoutes(List<Path> allCompletedRoutes) {
+		List<Path> validatedCompletedRoutes = new ArrayList<Path>();
+		for (Path route : allCompletedRoutes) {
 			if(route.isValid(allCompletedRoutes))
 				validatedCompletedRoutes.add(route);
 		}
 		return validatedCompletedRoutes;
 	}
 
-	private void findAllValidRoutes(List<Route> completedRoutes,
+	private void findAllValidRoutes(List<Path> completedRoutes,
 			List<Route> previousIncompleteMatchingRoutes) {
 
 		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();

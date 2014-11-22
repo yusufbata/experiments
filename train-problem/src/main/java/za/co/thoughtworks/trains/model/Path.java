@@ -13,5 +13,6 @@ public interface Path {
 	public abstract boolean hasEndLocationId(String lastLocationId);
 	public abstract boolean completedLocationListMatchesTargetPath(
 			List<String> targetPath);
+	public abstract boolean isValid(List<Path> allCompletedRoutes);
 
 }

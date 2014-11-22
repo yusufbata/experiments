@@ -5,10 +5,10 @@ package za.co.thoughtworks.trains.application;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.LocationFactory;
 import za.co.thoughtworks.trains.model.MatchingRoutes;
+import za.co.thoughtworks.trains.model.Path;
 import za.co.thoughtworks.trains.model.RoutingEngine;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
@@ -27,7 +27,7 @@ public class RailroadApplicationService {
 		this.locationRepository = ApplicationRegistry.getLocationRepository(locationList);
 	}
 
-	public IRoute findSingleRouteUsing(RouteSpec routeSpec) {
+	public Path findSingleRouteUsing(RouteSpec routeSpec) {
 		MatchingRoutes matchingRoutes = findAllRoutesUsing(routeSpec);
 		return matchingRoutes.getTheOnlyRoute();
 	}

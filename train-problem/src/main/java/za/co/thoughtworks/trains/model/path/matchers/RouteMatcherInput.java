@@ -2,9 +2,7 @@ package za.co.thoughtworks.trains.model.path.matchers;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.Path;
-import za.co.thoughtworks.trains.model.Route;
 
 public class RouteMatcherInput {
 	public Path route;

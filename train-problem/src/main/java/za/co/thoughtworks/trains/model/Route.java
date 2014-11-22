@@ -15,7 +15,7 @@ import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
  * @author Yusuf
  *
  */
-public class Route implements IRoute, Path {
+class Route implements IRoute, Path {
 	
 	private final Distance totalDistance;
 	private final List<Track> trackList;
@@ -59,11 +59,11 @@ public class Route implements IRoute, Path {
 		return this.totalDistance;
 	}
 
-	public boolean isValid(List<Route> allCompletedRoutes) {
+	public boolean isValid(List<Path> allCompletedRoutes) {
 		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, allCompletedRoutes));
 	}
 	
-	public boolean isComplete(List<Route> allCompletedRoutes) {
+	public boolean isComplete(List<Path> allCompletedRoutes) {
 		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, allCompletedRoutes));
 	}
 
@@ -176,4 +176,5 @@ public class Route implements IRoute, Path {
 		}
 		return true;
 	}
+
 }

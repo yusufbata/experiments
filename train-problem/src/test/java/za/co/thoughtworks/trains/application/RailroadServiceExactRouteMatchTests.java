@@ -8,14 +8,10 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.Distance;
-import za.co.thoughtworks.trains.application.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.TrackDescriptorList;
-import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.NoRoute;
+import za.co.thoughtworks.trains.model.Path;
 import za.co.thoughtworks.trains.test.TestUtils;
 
 /**
@@ -31,7 +27,7 @@ public class RailroadServiceExactRouteMatchTests {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B")));
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(aRouteSpec().fromTown("A").toTown("B")
+		Path resultRoute = railroadService.findSingleRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
 		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
@@ -44,7 +40,7 @@ public class RailroadServiceExactRouteMatchTests {
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
 		);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 				.build());
 		
@@ -56,7 +52,7 @@ public class RailroadServiceExactRouteMatchTests {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("C")
 				.build());
 		
@@ -68,7 +64,7 @@ public class RailroadServiceExactRouteMatchTests {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("C").toTown("A")
 				.build());
 		
@@ -83,7 +79,7 @@ public class RailroadServiceExactRouteMatchTests {
 				.with(aTrack().fromTown("C").toTown("D").withADistanceOf(10))
 				);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("D")
 				.build());
 		
@@ -95,7 +91,7 @@ public class RailroadServiceExactRouteMatchTests {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
@@ -109,7 +105,7 @@ public class RailroadServiceExactRouteMatchTests {
 				.with(aTrack().fromTown("B").toTown("C").withADistanceOf(10))
 		);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 				.build());
 		
@@ -123,7 +119,7 @@ public class RailroadServiceExactRouteMatchTests {
 				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
 		);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B").toTown("A")
 				.build());
 		
@@ -137,7 +133,7 @@ public class RailroadServiceExactRouteMatchTests {
 				.with(aTrack().fromTown("B").toTown("A").withADistanceOf(10))
 		);
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B").toTown("A").toTown("B")
 				.build());
 		
@@ -157,7 +153,7 @@ public class RailroadServiceExactRouteMatchTests {
 			5. The distance of the route A-E-D.
 		 */
 		
-		IRoute resultRoute = railroadService.findSingleRouteUsing(
+		Path resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("B").toTown("C").build());
 		theTotalDistanceOfTheRouteIs(9, resultRoute);
 		
@@ -186,7 +182,7 @@ public class RailroadServiceExactRouteMatchTests {
 		this.railroadService = new RailroadApplicationService(trackDescriptorList);
 	}
 
-	private void theTotalDistanceOfTheRouteIs(int distance, IRoute resultRoute) {
+	private void theTotalDistanceOfTheRouteIs(int distance, Path resultRoute) {
 		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
 		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}

@@ -12,21 +12,21 @@ import java.util.List;
  */
 public class MatchingRoutes {
 
-	private final List<Route> completedRoutes;
+	private final List<Path> completedRoutes;
 
 	protected MatchingRoutes(){
 		completedRoutes = null;
 	}
 	
-	public MatchingRoutes(List<Route> completedRoutes) {
+	public MatchingRoutes(List<Path> completedRoutes) {
 		this.completedRoutes = completedRoutes;
 	}
 
-	public static MatchingRoutes construct(List<Route> completedRoutes) {
+	public static MatchingRoutes construct(List<Path> completedRoutes) {
 		return new MatchingRoutes(completedRoutes);
 	}
 
-	public IRoute getTheOnlyRoute() {
+	public Path getTheOnlyRoute() {
 		if (this instanceof NoRoute) {
 			return (NoRoute)this;
 		}
@@ -48,8 +48,8 @@ public class MatchingRoutes {
 		return sb.toString();
 	}
 
-	public IRoute findRouteWithPath(String routePath) {
-		for (Route route : completedRoutes) {
+	public Path findRouteWithPath(String routePath) {
+		for (Path route : completedRoutes) {
 			if (route.hasPath(routePath)) {
 				return route;
 			}
