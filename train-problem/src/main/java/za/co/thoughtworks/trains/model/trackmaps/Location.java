@@ -49,7 +49,7 @@ public class Location {
 	}
 
 	public boolean hasId(String id) {
-		return this.id == id;
+		return this.id.compareTo(id) == 0;
 	}
 
 	public void addOutgoingTrack(Track track) {

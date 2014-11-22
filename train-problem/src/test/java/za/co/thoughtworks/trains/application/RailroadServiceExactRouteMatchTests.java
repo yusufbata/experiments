@@ -8,12 +8,16 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.services.Distance;
 import za.co.thoughtworks.trains.application.services.NoPath;
 import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.services.RouteSpec;
 import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 import za.co.thoughtworks.trains.test.TestUtils;
 
@@ -33,7 +37,12 @@ public class RailroadServiceExactRouteMatchTests {
 		Path resultRoute = railroadService.findSingleRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
+		System.out.println(resultRoute);
 		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoPath());
+//		
+//		BatchApplicationRunner runner = new BatchApplicationRunner(railroadService, 
+//				new ArrayList<RouteSpec>(Arrays.asList(aRouteSpec().fromTown("A").toTown("B").build())));
+//		runner.run();
 	}
 	
 	@Test

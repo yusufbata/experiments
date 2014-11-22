@@ -30,4 +30,12 @@ public class TrackDescriptorList {
 	public List<TrackDescriptor> getTrackDescriptorList() {
 		return trackList;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[TrackDescriptorList tracks=").append(this.trackList)
+		.append("]");
+		return sb.toString();
+	}
 }

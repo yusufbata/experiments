@@ -1,9 +1,8 @@
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.application.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import za.co.thoughtworks.trains.application.services.RouteSpec;
 
 
 public class RouteSpecBuilder {
@@ -49,5 +48,4 @@ public class RouteSpecBuilder {
 		this.findRouteWithShortestDistance = true;
 		return this;
 	}
-
 }

@@ -14,8 +14,9 @@ import org.junit.Test;
 public class AppTest {
 
 	@Test
-	public void test() {
-//		fail("Not yet implemented");
+	public void testApplicationWithSampleData() {
+		String[] args = {"/sample-tracks.txt", "/sample-routespecs.txt"};
+		App.main(args);
 	}
 
 }

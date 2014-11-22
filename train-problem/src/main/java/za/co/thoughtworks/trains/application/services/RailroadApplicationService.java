@@ -33,6 +33,7 @@ public class RailroadApplicationService {
 	}
 
 	public MatchingPaths findAllRoutesUsing(RouteSpec routeSpec) {
+		System.out.println("finding all routes using: " + routeSpec);
 		RouteMatchers routeMatchers = RouteMatchersFactory.constructRouteMatchers(routeSpec);
 		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
 		Location endLocation = locationRepository.findLocationWithId(routeSpec.getEndLocationId());

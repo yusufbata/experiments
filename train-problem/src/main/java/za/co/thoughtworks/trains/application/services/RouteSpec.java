@@ -53,5 +53,14 @@ public class RouteSpec {
 
 	public boolean shouldFindRouteWithShortestDistance() {
 		return findRouteWithShortestDistance;
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[RouteSpec fromTown=").append(this.fromTown)
+			.append(" targetPath=").append(this.targetPath)
+			.append("]");
+		return sb.toString();
+	}
 }

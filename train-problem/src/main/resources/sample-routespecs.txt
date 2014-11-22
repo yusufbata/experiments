@@ -1,0 +1,9 @@
+# Sample route-specs
+# Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAXHOPS/EXACTSTOPS/MAXDISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  DISTANCE/PATH_COUNT
+#	 
+#	 Element separators '|' . Note that they can't be used for values.
+#	 Exactly one item required per element (NONE allowed if not required).
+#	 Exact number of elements (4) required in every line, including NONE if element not required.
+#	 Key value separators '='. Values ignored when NONE specified.
+
+EXACT_PATH = A-B-C | NONE | NONE | DISTANCE

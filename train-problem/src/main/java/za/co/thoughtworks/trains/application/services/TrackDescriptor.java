@@ -21,8 +21,8 @@ public class TrackDescriptor {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[TrackDescriptor fromLocationId = ").append(this.fromLocationId)
-			.append(", toLocationId=").append(this.toLocationId)
+		sb.append("[TrackDescriptor ").append(this.fromLocationId)
+			.append("-").append(this.toLocationId).append("-").append(this.distance.value())
 		.append("]");
 		return sb.toString();
 	}
