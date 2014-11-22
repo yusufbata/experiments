@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.model.route.matchers;
+package za.co.thoughtworks.trains.model.path.matchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,15 @@ public class MaximumStopsRouteMatcher  extends AbstractRouteMatcher
 
 	@Override
 	public boolean isRouteValid(RouteMatcherInput routeMatcherInput) {
-		return currentNumberOfStops(routeMatcherInput.getCompletedLocationList()) <= maximumStops;
+		return routeMatcherInput.getRoute().getCurrentNumberOfStops() <= maximumStops;
 	}
 
 	@Override
 	public boolean isRouteComplete(RouteMatcherInput routeMatcherInput) {
 		// TODO: Perhaps add isValid check here as well
 		String lastLocationId = ListUtils.getLastItemFromList(targetPath);
-		if (routeMatcherInput.getTrackList().size() > 0) {
-			Track lastTrack = ListUtils.getLastItemFromList(routeMatcherInput.getTrackList());
-			return lastTrack.endLocationHasId(lastLocationId);
+		if (routeMatcherInput.getRoute().getCurrentNumberOfStops() > 0) {
+			return routeMatcherInput.getRoute().hasEndLocationId(lastLocationId);
 		}
 		return false;
 	}

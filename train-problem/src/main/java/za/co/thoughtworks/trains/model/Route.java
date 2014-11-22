@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.application.Distance;
-import za.co.thoughtworks.trains.model.route.matchers.RouteMatcherInput;
-import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
+import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
+import za.co.thoughtworks.trains.model.path.matchers.RouteMatcherInput;
+import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 
 /**
  * @author Yusuf
@@ -59,11 +60,11 @@ public class Route implements IRoute {
 	}
 
 	public boolean isValid(List<Route> allCompletedRoutes) {
-		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, completedLocationList, this.trackList, allCompletedRoutes));
+		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, completedLocationList, allCompletedRoutes));
 	}
 	
 	public boolean isComplete(List<Route> allCompletedRoutes) {
-		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, completedLocationList, this.trackList, allCompletedRoutes));
+		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, completedLocationList, allCompletedRoutes));
 	}
 
 	/*private boolean hasRepeatingLocation() {
@@ -135,5 +136,18 @@ public class Route implements IRoute {
 
 	public boolean hasPath(String routePath) {
 		return this.createRoutePath().compareTo(routePath) == 0;
+	}
+	
+	public int getCurrentNumberOfStopsUsingTracks() {
+		return trackList.size();
+	}
+	
+	public int getCurrentNumberOfStops() {
+		return completedLocationList.size() - 1;
+	}
+
+	public boolean hasEndLocationId(String lastLocationId) {
+		Track lastTrack = ListUtils.getLastItemFromList(this.trackList);
+		return lastTrack.endLocationHasId(lastLocationId);
 	}
 }

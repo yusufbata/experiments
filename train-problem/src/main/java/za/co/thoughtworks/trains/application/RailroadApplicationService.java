@@ -10,8 +10,8 @@ import za.co.thoughtworks.trains.model.Location;
 import za.co.thoughtworks.trains.model.LocationFactory;
 import za.co.thoughtworks.trains.model.MatchingRoutes;
 import za.co.thoughtworks.trains.model.RoutingEngine;
-import za.co.thoughtworks.trains.model.route.matchers.RouteMatchers;
-import za.co.thoughtworks.trains.model.route.matchers.RouteMatchersFactory;
+import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
+import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
 
 /**
  * @author Yusuf

@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.model.route.matchers;
+package za.co.thoughtworks.trains.model.path.matchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +28,15 @@ public class ExactRouteMatcher  extends AbstractRouteMatcher
 	public boolean isRouteComplete(RouteMatcherInput routeMatcherInput) {
 		// TODO: Perhaps add isValid check here as well
 		String lastLocationId = ListUtils.getLastItemFromList(targetPath);
-		if (routeMatcherInput.getTrackList().size() > 0
-				&& numberOfTracksIsSameAsTargetPath(routeMatcherInput.getTrackList()) ) {
-			Track lastTrack = ListUtils.getLastItemFromList(routeMatcherInput.getTrackList());
-			return lastTrack.endLocationHasId(lastLocationId);
+		if (routeMatcherInput.getRoute().getCurrentNumberOfStops() > 0
+				&& numberOfHopsIsSameAsTargetPath(routeMatcherInput.getRoute().getCurrentNumberOfStops())) {
+			return routeMatcherInput.getRoute().hasEndLocationId(lastLocationId);
 		}
 		return false;
 	}
 
-	private boolean numberOfTracksIsSameAsTargetPath(List<Track> trackList) {
-		return this.targetPath.size() == (trackList.size() + 1);
+	private boolean numberOfHopsIsSameAsTargetPath(int numberOfHops) {
+		return this.targetPath.size() == (numberOfHops + 1);
 	}
 
 	@Override

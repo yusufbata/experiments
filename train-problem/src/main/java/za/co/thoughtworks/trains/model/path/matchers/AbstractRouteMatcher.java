@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.model.route.matchers;
+package za.co.thoughtworks.trains.model.path.matchers;
 
 import java.util.List;
 
@@ -13,13 +13,4 @@ public class AbstractRouteMatcher {
 	public AbstractRouteMatcher(List<String> targetPath) {
 		this.targetPath = targetPath;
 	}
-
-	protected int currentNumberOfStops(List<Location> completedLocationList) {
-		return completedLocationList.size() - 1;
-	}
-	
-	protected int currentNumberOfStopsUsingTracks(List<Track> trackList) {
-		return trackList.size();
-	}
-
 }

@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.model.route.matchers;
+package za.co.thoughtworks.trains.model.path.matchers;
 
 import java.util.ArrayList;
 import java.util.List;
