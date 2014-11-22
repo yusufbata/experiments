@@ -37,7 +37,7 @@ public class RailroadServiceExactRouteMatchTests {
 		Path resultRoute = railroadService.findSingleRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
-		System.out.println(resultRoute);
+		// System.out.println(resultRoute);
 		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoPath());
 //		
 //		BatchApplicationRunner runner = new BatchApplicationRunner(railroadService, 

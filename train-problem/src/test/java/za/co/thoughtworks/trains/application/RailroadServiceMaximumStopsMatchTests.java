@@ -53,7 +53,7 @@ public class RailroadServiceMaximumStopsMatchTests {
 				aRouteSpec().fromTown("A").toTown("C").withMaximumStops(2)
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		assertThat(matchingPaths).isNotNull();
 		assertThat(matchingPaths.getNumberOfRoutes()).isEqualTo(2);
 		assertThat(matchingPaths.findRouteWithPath("ABC").getTotalDistance()).isEqualTo(Distance.valueOf(15));
@@ -72,7 +72,7 @@ public class RailroadServiceMaximumStopsMatchTests {
 				aRouteSpec().fromTown("A").toTown("A").withMaximumStops(3)
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
@@ -90,7 +90,7 @@ public class RailroadServiceMaximumStopsMatchTests {
 		MatchingPaths matchingPaths = railroadService.findAllRoutesUsing(
 				aRouteSpec().fromTown("C").toTown("C").withMaximumStops(3).build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		assertThat(matchingPaths).isNotNull();
 		assertThat(matchingPaths.getNumberOfRoutes()).isEqualTo(2);
 		assertThat(matchingPaths.findRouteWithPath("CDC").getTotalDistance()).isEqualTo(Distance.valueOf(16));

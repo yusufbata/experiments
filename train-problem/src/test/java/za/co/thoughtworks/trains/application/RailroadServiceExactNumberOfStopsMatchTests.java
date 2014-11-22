@@ -35,7 +35,7 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 				aRouteSpec().fromTown("A").toTown("C").withExactNumberOfStops(2)
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findTheOnlyPath().getTotalDistance()).isEqualTo(Distance.valueOf(15));
 	}
@@ -54,7 +54,7 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 				aRouteSpec().fromTown("A").toTown("A").withExactNumberOfStops(3)
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		assertThat(matchingPaths).isNotNull();
 		assertThat(matchingPaths.getNumberOfRoutes()).isEqualTo(2);
 		assertThat(matchingPaths.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
@@ -73,7 +73,7 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 				aRouteSpec().fromTown("A").toTown("A").withExactNumberOfStops(3)
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
@@ -93,7 +93,7 @@ public class RailroadServiceExactNumberOfStopsMatchTests {
 				aRouteSpec().fromTown("A").toTown("C").withExactNumberOfStops(4)
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		assertThat(matchingPaths).isNotNull();
 		assertThat(matchingPaths.getNumberOfRoutes()).isEqualTo(3);
 		assertThat(matchingPaths.findRouteWithPath("ABCDC").getTotalDistance()).isEqualTo(Distance.valueOf(25));

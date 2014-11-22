@@ -37,8 +37,9 @@ public class App {
 	private static void runApplicationUsingInputFiles(String trackDescriptorFileName,
 			String routeSpecsFileName) {
 		try {
-			RailroadApplicationService railroadService = FileAdapter.configureRailroadApplicationServiceWith(trackDescriptorFileName);		
-			List<RouteSpec> routeSpecList = FileAdapter.constructRouteSpecsFromFileWithName(routeSpecsFileName);
+			FileAdapter fileAdapter = new FileAdapter();
+			RailroadApplicationService railroadService = fileAdapter.configureRailroadApplicationServiceWith(trackDescriptorFileName);		
+			List<RouteSpec> routeSpecList = fileAdapter.constructRouteSpecsFromFileWithName(routeSpecsFileName);
 			BatchApplicationRunner runner = new BatchApplicationRunner(railroadService, routeSpecList);
 			runner.run();
 		} catch (Exception e) {

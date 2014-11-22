@@ -52,7 +52,7 @@ public class RailroadServiceShortestDistanceMatchTests {
 				aRouteSpec().fromTown("A").toTown("C").withShortestDistance()
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findRouteWithPath("ABC").getTotalDistance()).isEqualTo(Distance.valueOf(15));
 	}
@@ -69,7 +69,7 @@ public class RailroadServiceShortestDistanceMatchTests {
 				aRouteSpec().fromTown("A").toTown("A").withShortestDistance()
 				.build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findRouteWithPath("ABCA").getTotalDistance()).isEqualTo(Distance.valueOf(45));
 	}
@@ -87,14 +87,14 @@ public class RailroadServiceShortestDistanceMatchTests {
 		MatchingPaths matchingPaths = railroadService.findAllRoutesUsing(
 				aRouteSpec().fromTown("A").toTown("C").withShortestDistance().build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findTheOnlyPath().getTotalDistance()).isEqualTo(Distance.valueOf(9));
 		
 		matchingPaths = railroadService.findAllRoutesUsing(
 				aRouteSpec().fromTown("B").toTown("B").withShortestDistance().build());
 		
-		System.out.println(matchingPaths);
+		// System.out.println(matchingPaths);
 		TestUtils.containsASingleValidRoute(matchingPaths);
 		assertThat(matchingPaths.findTheOnlyPath().getTotalDistance()).isEqualTo(Distance.valueOf(9));
 	}
