@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import za.co.thoughtworks.trains.adapters.OutputMeasurement;
+
 
 public class RouteSpecBuilder {
 
@@ -13,9 +15,10 @@ public class RouteSpecBuilder {
 	private int exactNumberOfStops;
 	private int maximumDistance;
 	private boolean findRouteWithShortestDistance;
+	private OutputMeasurement outputMeasurement;
 	
 	public RouteSpec build() {
-		return new RouteSpec(fromTown, targetPath, maximumStops, exactNumberOfStops, maximumDistance, findRouteWithShortestDistance);
+		return new RouteSpec(fromTown, targetPath, maximumStops, exactNumberOfStops, maximumDistance, findRouteWithShortestDistance, outputMeasurement);
 	}
 
 	public RouteSpecBuilder fromTown(String fromTown) {
@@ -46,6 +49,11 @@ public class RouteSpecBuilder {
 
 	public RouteSpecBuilder withShortestDistance() {
 		this.findRouteWithShortestDistance = true;
+		return this;
+	}
+
+	public RouteSpecBuilder with(OutputMeasurement outputMeasurement) {
+		this.outputMeasurement = outputMeasurement;
 		return this;
 	}
 }

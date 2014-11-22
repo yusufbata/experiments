@@ -4,9 +4,17 @@ import java.io.PrintStream;
 
 public class Printer {
 
-	private static PrintStream printStream = System.out;
+	private PrintStream printStream;
 	
-	public static void printLine(Object object){
+	public Printer() {
+		printStream = System.out;
+	}
+	
+	public Printer(PrintStream printStream) {
+		this.printStream = printStream;
+	}
+
+	public void printLine(Object object){
 		printStream.println(object);
 	}
 }

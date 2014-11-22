@@ -13,5 +13,6 @@ public interface Path {
 			List<String> targetPath);
 	public abstract boolean isValid(List<Path> allCompletedRoutes);
 	public abstract boolean isComplete(List<Path> completedRoutes);
+	public abstract String getPrintString();
 
 }

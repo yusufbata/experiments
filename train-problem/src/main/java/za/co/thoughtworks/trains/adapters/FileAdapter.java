@@ -26,7 +26,7 @@ public class FileAdapter {
 			String trackDescriptorFileName) {
 		List<String> lines = getAllNonEmptyAndNonCommentLinesFromFile(trackDescriptorFileName);
 		TrackDescriptorList trackDescriptorList = constructTrackDescriptorListUsing(lines);
-		System.out.println("Constructed trackDescriptorList=" + trackDescriptorList);
+		// // System.out.println("Constructed trackDescriptorList=" + trackDescriptorList);
 		RailroadApplicationService railroadService = new RailroadApplicationService(trackDescriptorList);
 		return railroadService;
 	}
@@ -71,9 +71,9 @@ public class FileAdapter {
 
 	private static void printLinesFromFile(String trackDescriptorFileName,
 			List<String> lines) {
-		System.out.println("Loading following lines from file: " + trackDescriptorFileName);
+		// // System.out.println("Loading following lines from file: " + trackDescriptorFileName);
 		for (String line : lines) {
-			System.out.println(line);
+			// // System.out.println(line);
 		}
 	}
 
@@ -88,7 +88,7 @@ public class FileAdapter {
 			String routeSpecsFileName) {
 		List<String> lines = getAllNonEmptyAndNonCommentLinesFromFile(routeSpecsFileName);
 		List<RouteSpec> routeSpecList = new RouteSpecParser().constructRouteSpecListUsing(lines);
-		System.out.println("Constructed routeSpecList=" + routeSpecList);
+		// // System.out.println("Constructed routeSpecList=" + routeSpecList);
 		return routeSpecList;
 	}
 

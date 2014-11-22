@@ -19,7 +19,7 @@ import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
 public class RouteSpecParser {
 
 	/**
-	 * Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  DISTANCE/PATH_COUNT
+	 * Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
 	 * 
 	 * Element separators '|' . Note that they can't be used for values.
 	 * Exactly one item required per element (NONE allowed if not required).
@@ -59,8 +59,12 @@ public class RouteSpecParser {
 		String pathElementKey = getKeyFromElement(pathElement);
 		String pathElementValue = getValueFromElement(pathElement);
 		
-		String measureElementKey = getKeyFromElement(measureElement);
-		String measureElementValue = getValueFromElement(measureElement);
+		String measureElementKey = null;
+		String measureElementValue = null;
+		if (measureElement.compareTo("NONE") != 0) {
+			measureElementKey = getKeyFromElement(measureElement);
+			measureElementValue = getValueFromElement(measureElement);
+		}
 
 		String[] pathElementValueItems = pathElementValue.split("-");
 		
@@ -86,6 +90,7 @@ public class RouteSpecParser {
 					break;
 				case "MAX_DISTANCE":
 					aRouteSpec.withMaximumDistance(value);
+					break;
 				default:
 					System.err.println("Ignoring unknown measureElementKey: " + measureElementKey);
 					break;
@@ -100,6 +105,18 @@ public class RouteSpecParser {
 				break;
 			default:
 				System.err.println("Ignoring unknown pathFilterElement: " + pathFilterElement);
+				break;
+			}
+		}
+		
+		if (outputElement != null) {
+			switch (outputElement) {
+			case "PATH_DISTANCE":
+				aRouteSpec.with(OutputMeasurement.PathDistance);
+				break;
+			case "PATH_COUNT":
+				aRouteSpec.with(OutputMeasurement.PathCount);
+			default:
 				break;
 			}
 		}

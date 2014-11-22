@@ -5,6 +5,8 @@ package za.co.thoughtworks.trains.application.services;
 
 import java.util.List;
 
+import za.co.thoughtworks.trains.adapters.OutputMeasurement;
+
 /**
  * @author Yusuf
  *
@@ -13,18 +15,20 @@ public class RouteSpec {
 
 	private final String fromTown;
 	private final List<String> targetPath;
-	private int maximumStops;
-	private int exactNumberOfStops;
-	private int maximumDistance;
-	private boolean findRouteWithShortestDistance;
+	private final int maximumStops;
+	private final int exactNumberOfStops;
+	private final int maximumDistance;
+	private final boolean findRouteWithShortestDistance;
+	private final OutputMeasurement outputMeasurement;
 
-	public RouteSpec(String fromTown, List<String> targetPath, int maximumStops, int exactNumberOfStops, int maximumDistance, boolean findRouteWithShortestDistance) {
+	public RouteSpec(String fromTown, List<String> targetPath, int maximumStops, int exactNumberOfStops, int maximumDistance, boolean findRouteWithShortestDistance, OutputMeasurement outputMeasurement) {
 		this.fromTown = fromTown;
 		this.targetPath = targetPath;
 		this.maximumStops = maximumStops;
 		this.exactNumberOfStops = exactNumberOfStops;
 		this.maximumDistance = maximumDistance;
 		this.findRouteWithShortestDistance = findRouteWithShortestDistance;
+		this.outputMeasurement = (outputMeasurement != null) ? outputMeasurement : OutputMeasurement.PathCount;
 	}
 
 	public String getStartLocationId() {
@@ -55,6 +59,10 @@ public class RouteSpec {
 		return findRouteWithShortestDistance;
 	}
 	
+	public OutputMeasurement getOutputMeasurement() {
+		return outputMeasurement;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

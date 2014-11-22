@@ -56,5 +56,18 @@ public class MatchingPaths {
 		}
 		return new NoPath();
 	}
+
+	public Object getOutputMeasurement(RouteSpec routeSpec) {
+		switch (routeSpec.getOutputMeasurement()) {
+		case PathDistance:
+			return this.findTheOnlyPath().getPrintString();
+		case PathCount:
+			return this.getNumberOfRoutes();
+		default:
+			System.err.println("Unknown OutputMeasurement: " + routeSpec.getOutputMeasurement());
+			break;
+		}
+		return this.getNumberOfRoutes();
+	}
 	
 }

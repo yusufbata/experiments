@@ -177,4 +177,9 @@ class Route implements Path {
 		return true;
 	}
 
+	@Override
+	public String getPrintString() {
+		return this.getTotalDistance().value() + "";
+	}
+
 }

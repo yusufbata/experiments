@@ -62,4 +62,9 @@ public class NoPath extends MatchingPaths implements Path {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String getPrintString() {
+		return "NO SUCH ROUTE";
+	}
 }
