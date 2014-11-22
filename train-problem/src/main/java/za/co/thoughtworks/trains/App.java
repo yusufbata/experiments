@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.adapters.FileAdapter;
-import za.co.thoughtworks.trains.application.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.RouteSpec;
-import za.co.thoughtworks.trains.application.TrackDescriptorList;
-import za.co.thoughtworks.trains.model.MatchingRoutes;
+import za.co.thoughtworks.trains.application.services.MatchingPaths;
+import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.services.RouteSpec;
+import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 
 /**
  * @author Yusuf
@@ -33,7 +33,7 @@ public class App {
 		List<RouteSpec> routeSpecList = FileAdapter.constructRouteSpecsFromFileWithName(routeSpecsFileName);
 		
 		for (RouteSpec routeSpec : routeSpecList) {
-			MatchingRoutes allMatchingRoutesForSpec = railroadService.findAllRoutesUsing(routeSpec);
+			MatchingPaths allMatchingRoutesForSpec = railroadService.findAllRoutesUsing(routeSpec);
 			System.out.println(allMatchingRoutesForSpec);
 		}
 	}

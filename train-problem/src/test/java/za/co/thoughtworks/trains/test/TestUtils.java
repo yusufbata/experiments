@@ -4,8 +4,8 @@ import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
-import za.co.thoughtworks.trains.model.MatchingRoutes;
-import za.co.thoughtworks.trains.model.NoRoute;
+import za.co.thoughtworks.trains.application.services.MatchingPaths;
+import za.co.thoughtworks.trains.application.services.NoPath;
 
 public class TestUtils {
 
@@ -22,8 +22,8 @@ public class TestUtils {
 				.with(aTrack().fromTown("A").toTown("E").withADistanceOf(7));
 	}
 
-	public static void containsASingleValidRoute(MatchingRoutes matchingRoutes) {
-		assertThat(matchingRoutes).isNotNull();
-		assertThat(matchingRoutes.getTheOnlyRoute()).isNotNull().isNotEqualTo(new NoRoute());
+	public static void containsASingleValidRoute(MatchingPaths matchingPaths) {
+		assertThat(matchingPaths).isNotNull();
+		assertThat(matchingPaths.findTheOnlyPath()).isNotNull().isNotEqualTo(new NoPath());
 	}
 }

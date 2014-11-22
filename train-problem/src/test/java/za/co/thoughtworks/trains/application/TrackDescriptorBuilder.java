@@ -1,5 +1,8 @@
 package za.co.thoughtworks.trains.application;
 
+import za.co.thoughtworks.trains.application.services.Distance;
+import za.co.thoughtworks.trains.application.services.TrackDescriptor;
+
 public class TrackDescriptorBuilder {
 
 	private String fromTownId;

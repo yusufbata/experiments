@@ -10,8 +10,11 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.model.NoRoute;
-import za.co.thoughtworks.trains.model.Path;
+import za.co.thoughtworks.trains.application.services.Distance;
+import za.co.thoughtworks.trains.application.services.NoPath;
+import za.co.thoughtworks.trains.application.services.Path;
+import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 import za.co.thoughtworks.trains.test.TestUtils;
 
 /**
@@ -30,7 +33,7 @@ public class RailroadServiceExactRouteMatchTests {
 		Path resultRoute = railroadService.findSingleRouteUsing(aRouteSpec().fromTown("A").toTown("B")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
+		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoPath());
 	}
 	
 	@Test
@@ -56,7 +59,7 @@ public class RailroadServiceExactRouteMatchTests {
 				aRouteSpec().fromTown("A").toTown("C")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -68,7 +71,7 @@ public class RailroadServiceExactRouteMatchTests {
 				aRouteSpec().fromTown("C").toTown("A")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
 	}
 	
 	@Test
@@ -83,7 +86,7 @@ public class RailroadServiceExactRouteMatchTests {
 				aRouteSpec().fromTown("A").toTown("D")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
 	}
 	
 	@Test
@@ -171,7 +174,7 @@ public class RailroadServiceExactRouteMatchTests {
 		
 		resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("E").toTown("D").build());
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoRoute());
+		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
 	}
 	
 	
@@ -183,7 +186,7 @@ public class RailroadServiceExactRouteMatchTests {
 	}
 
 	private void theTotalDistanceOfTheRouteIs(int distance, Path resultRoute) {
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
+		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoPath());
 		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}
 

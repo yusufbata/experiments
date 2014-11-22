@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.application.services;
 
 import java.util.ArrayList;
 import java.util.List;

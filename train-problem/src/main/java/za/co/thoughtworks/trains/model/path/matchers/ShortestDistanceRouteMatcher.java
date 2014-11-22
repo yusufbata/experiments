@@ -3,8 +3,8 @@ package za.co.thoughtworks.trains.model.path.matchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
-import za.co.thoughtworks.trains.model.Path;
 
 public class ShortestDistanceRouteMatcher  extends AbstractRouteMatcher  
 	implements RouteMatcher<ShortestDistanceRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<ShortestDistanceRouteMatcher> {

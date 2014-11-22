@@ -13,10 +13,11 @@ import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.ApplicationRegistry;
 import za.co.thoughtworks.trains.application.LocationRepository;
-import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.application.RouteSpecBuilder;
-import za.co.thoughtworks.trains.application.TrackDescriptor;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
+import za.co.thoughtworks.trains.application.services.Path;
+import za.co.thoughtworks.trains.application.services.RouteSpec;
+import za.co.thoughtworks.trains.application.services.TrackDescriptor;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
@@ -34,7 +35,7 @@ public class RouteTest {
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 		);
 		
-		List<Route> nextPossibleRoutes = route.findNextPossibleRoutes();
+		List<Path> nextPossibleRoutes = route.findNextPossibleRoutes();
 		
 		assertThat(nextPossibleRoutes).isNotNull().isNotEmpty().hasSize(1);
 //		assertThat(nextPossibleRoutes.get(0)).isEqualTo(route.);
@@ -49,7 +50,7 @@ public class RouteTest {
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 		);
 		
-		List<Route> nextPossibleRoutes = route.findNextPossibleRoutes();
+		List<Path> nextPossibleRoutes = route.findNextPossibleRoutes();
 		
 		assertThat(nextPossibleRoutes).isNotNull().isNotEmpty().hasSize(2);
 //		assertThat(nextPossibleRoutes.get(0)).isEqualTo(route.);

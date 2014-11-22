@@ -6,7 +6,8 @@ package za.co.thoughtworks.trains.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.Distance;
+import za.co.thoughtworks.trains.application.services.Distance;
+import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatcherInput;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
@@ -96,14 +97,11 @@ class Route implements Path {
 		return this.completedLocationList.get(0);
 	}
 
-	/* (non-Javadoc)
-	 * @see za.co.thoughtworks.trains.model.Path#findNextPossibleRoutes()
-	 */
 	@Override
-	public List<Route> findNextPossibleRoutes() {
+	public List<Path> findNextPossibleRoutes() {
 		Location currentLocation = getCurrentLocation();
 		
-		List<Route> nextPossibleRoutes = new ArrayList<Route>();
+		List<Path> nextPossibleRoutes = new ArrayList<Path>();
 		List<Track> outgoingTracks = currentLocation.getOutgoingTracks();
 		for (Track track : outgoingTracks) {
 			Route newPotentialRoute = this.addTrack(track);

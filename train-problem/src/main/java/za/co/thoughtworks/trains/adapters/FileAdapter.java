@@ -5,8 +5,8 @@ package za.co.thoughtworks.trains.adapters;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.RouteSpec;
+import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.services.RouteSpec;
 
 /**
  * @author F3657051

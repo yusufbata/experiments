@@ -6,6 +6,9 @@ package za.co.thoughtworks.trains.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.application.services.MatchingPaths;
+import za.co.thoughtworks.trains.application.services.NoPath;
+import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 
@@ -27,7 +30,7 @@ public class RoutingEngine {
 		this.endLocation = endLocation;
 	}
 
-	public MatchingRoutes findRoute(RouteMatchers routeMatchers) {
+	public MatchingPaths findRoute(RouteMatchers routeMatchers) {
 		if (startLocation == null || endLocation == null) {
 			throw new IllegalArgumentException("Start location and End location cannot be null");
 		}
@@ -43,9 +46,9 @@ public class RoutingEngine {
 		// repeat above steps for each location
 		
 		List<Path> completedRoutes = new ArrayList<Path>();
-		List<Route> incompleteMatchingRoutes = new ArrayList<>();
+		List<Path> incompleteMatchingRoutes = new ArrayList<>();
 		
-		Route startingRoute = new Route(routeMatchers, startLocation);
+		Path startingRoute = new Route(routeMatchers, startLocation);
 		incompleteMatchingRoutes.add(startingRoute);
 		
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
@@ -54,10 +57,10 @@ public class RoutingEngine {
 			// required for shortest distance matcher
 			// perhaps only run required matchers - will need flag to identify global matchers
 			completedRoutes = validateAllCompletedRoutes(completedRoutes);
-			return MatchingRoutes.construct(completedRoutes);
+			return MatchingPaths.construct(completedRoutes);
 		}
 		
-		return new NoRoute();
+		return new NoPath();
 	}
 
 	private List<Path> validateAllCompletedRoutes(List<Path> allCompletedRoutes) {
@@ -70,16 +73,16 @@ public class RoutingEngine {
 	}
 
 	private void findAllValidRoutes(List<Path> completedRoutes,
-			List<Route> previousIncompleteMatchingRoutes) {
+			List<Path> previousIncompleteMatchingRoutes) {
 
-		List<Route> newIncompleteMatchingRoutes = new ArrayList<Route>();
-		for (Route potentialRoute : previousIncompleteMatchingRoutes) {
+		List<Path> newIncompleteMatchingRoutes = new ArrayList<Path>();
+		for (Path potentialRoute : previousIncompleteMatchingRoutes) {
 			if (potentialRoute.isValid(completedRoutes)) {
 				if (potentialRoute.isComplete(completedRoutes)) {
 					completedRoutes.add(potentialRoute);
 				}
 
-				List<Route> morePotentialRoutes = potentialRoute.findNextPossibleRoutes();
+				List<Path> morePotentialRoutes = potentialRoute.findNextPossibleRoutes();
 				newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
 			}
 		}

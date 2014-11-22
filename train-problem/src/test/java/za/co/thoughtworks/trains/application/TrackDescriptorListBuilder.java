@@ -4,7 +4,7 @@
 package za.co.thoughtworks.trains.application;
 
 import za.co.thoughtworks.trains.application.TrackDescriptorBuilder;
-import za.co.thoughtworks.trains.application.TrackDescriptorList;
+import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 
 
 /**

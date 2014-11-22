@@ -1,11 +1,9 @@
-package za.co.thoughtworks.trains.model;
+package za.co.thoughtworks.trains.application.services;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.Distance;
 
-
-public class NoRoute extends MatchingRoutes implements Path {
+public class NoPath extends MatchingPaths implements Path {
 
 	@Override
 	public Distance getTotalDistance() {
@@ -14,7 +12,7 @@ public class NoRoute extends MatchingRoutes implements Path {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof NoRoute) {
+		if (obj != null && obj instanceof NoPath) {
 			return true;
 		}
 		return false;
@@ -23,12 +21,12 @@ public class NoRoute extends MatchingRoutes implements Path {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[NoRoute]");
+		sb.append("[NoPath]");
 		return sb.toString();
 	}
 
 	@Override
-	public List<Route> findNextPossibleRoutes() {
+	public List<Path> findNextPossibleRoutes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -56,6 +54,12 @@ public class NoRoute extends MatchingRoutes implements Path {
 
 	@Override
 	public boolean isValid(List<Path> allCompletedRoutes) {
+		return false;
+	}
+
+	@Override
+	public boolean isComplete(List<Path> completedRoutes) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

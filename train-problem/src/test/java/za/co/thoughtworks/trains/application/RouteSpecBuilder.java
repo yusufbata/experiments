@@ -3,6 +3,8 @@ package za.co.thoughtworks.trains.application;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.application.services.RouteSpec;
+
 
 public class RouteSpecBuilder {
 

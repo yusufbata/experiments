@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.Distance;
+import za.co.thoughtworks.trains.application.services.Distance;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.Track;
 
@@ -24,8 +24,7 @@ public class LocationTest {
 		assertThat(location.getOutgoingTracks()).isNotEmpty().hasSize(1);
 		assertThat(location.getOutgoingTracks().get(0)).isEqualTo(newTrack);
 	}
-	
-	@Ignore
+
 	@Test
 	public void testAddOutgoingTrackTwice() {
 		List<Track> outgoingTracks = new ArrayList<Track>();

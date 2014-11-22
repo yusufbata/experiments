@@ -1,12 +1,12 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.application.services;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.model.MatchingRoutes;
-import za.co.thoughtworks.trains.model.Path;
+import za.co.thoughtworks.trains.application.ApplicationRegistry;
+import za.co.thoughtworks.trains.application.LocationRepository;
 import za.co.thoughtworks.trains.model.RoutingEngine;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
@@ -28,18 +28,18 @@ public class RailroadApplicationService {
 	}
 
 	public Path findSingleRouteUsing(RouteSpec routeSpec) {
-		MatchingRoutes matchingRoutes = findAllRoutesUsing(routeSpec);
-		return matchingRoutes.getTheOnlyRoute();
+		MatchingPaths matchingPaths = findAllRoutesUsing(routeSpec);
+		return matchingPaths.findTheOnlyPath();
 	}
 
-	public MatchingRoutes findAllRoutesUsing(RouteSpec routeSpec) {
+	public MatchingPaths findAllRoutesUsing(RouteSpec routeSpec) {
 		RouteMatchers routeMatchers = RouteMatchersFactory.constructRouteMatchers(routeSpec);
 		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
 		Location endLocation = locationRepository.findLocationWithId(routeSpec.getEndLocationId());
 		RoutingEngine routingEngine = ApplicationRegistry.getRoutingEngineFactory().constructRoutingEngine(routeSpec, startLocation, endLocation);
 		
-		MatchingRoutes matchingRoutes = routingEngine.findRoute(routeMatchers);
-		return matchingRoutes;
+		MatchingPaths matchingPaths = routingEngine.findRoute(routeMatchers);
+		return matchingPaths;
 	}
 
 }
