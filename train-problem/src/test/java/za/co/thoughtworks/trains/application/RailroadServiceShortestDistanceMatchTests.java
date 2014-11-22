@@ -10,7 +10,6 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.MatchingRoutes;
 import za.co.thoughtworks.trains.model.NoRoute;
 import za.co.thoughtworks.trains.test.TestUtils;
@@ -101,10 +100,4 @@ public class RailroadServiceShortestDistanceMatchTests {
 		TrackDescriptorList trackDescriptorList = aTrackListBuilder.build();
 		this.railroadService = new RailroadApplicationService(trackDescriptorList);
 	}
-
-	private void theTotalDistanceOfTheRouteIs(int distance, IRoute resultRoute) {
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoRoute());
-		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
-	}
-
 }

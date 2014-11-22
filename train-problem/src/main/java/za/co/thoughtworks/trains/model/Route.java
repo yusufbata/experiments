@@ -15,7 +15,7 @@ import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
  * @author Yusuf
  *
  */
-class Route implements IRoute, Path {
+class Route implements Path {
 	
 	private final Distance totalDistance;
 	private final List<Track> trackList;

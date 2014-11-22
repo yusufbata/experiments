@@ -8,13 +8,8 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.Distance;
-import za.co.thoughtworks.trains.application.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.TrackDescriptorList;
-import za.co.thoughtworks.trains.model.IRoute;
 import za.co.thoughtworks.trains.model.MatchingRoutes;
 import za.co.thoughtworks.trains.test.TestUtils;
 

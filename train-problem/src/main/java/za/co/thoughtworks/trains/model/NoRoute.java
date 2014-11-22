@@ -5,7 +5,7 @@ import java.util.List;
 import za.co.thoughtworks.trains.application.Distance;
 
 
-public class NoRoute extends MatchingRoutes implements IRoute {
+public class NoRoute extends MatchingRoutes implements Path {
 
 	@Override
 	public Distance getTotalDistance() {
