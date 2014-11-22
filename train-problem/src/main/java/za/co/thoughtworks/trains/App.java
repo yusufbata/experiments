@@ -29,6 +29,7 @@ public class App {
 		if (args.length != 2) {
 			System.err.println("Expected exactly 2 input arguments but found " + args.length + ". Provided arguments=" + Arrays.asList(args));
 			System.err.println("Please provide exactly 2 file names as input in the correct order. Example: /tracks.txt /routespecs.txt");
+			System.err.println("You can also run the JUnit test [za.co.thoughtworks.trains.AppTest] to use the application with the default file names (including sample data). Sample files located in /src/main/resources/*");
 			return false;
 		}
 		return true;
