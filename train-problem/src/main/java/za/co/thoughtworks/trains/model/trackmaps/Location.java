@@ -26,7 +26,7 @@ public class Location {
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof Location) {
 			Location other = (Location)obj;
-			if (this.id == other.id) {
+			if (this.id.equals(other.id)) {
 				return true;
 			}
 		}
