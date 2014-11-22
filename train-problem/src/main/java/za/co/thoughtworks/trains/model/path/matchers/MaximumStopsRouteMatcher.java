@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
-import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.Track;
+import za.co.thoughtworks.trains.model.trackmaps.Location;
+import za.co.thoughtworks.trains.model.trackmaps.Track;
 
 public class MaximumStopsRouteMatcher  extends AbstractRouteMatcher  
 	implements RouteMatcher<MaximumStopsRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<MaximumStopsRouteMatcher> {

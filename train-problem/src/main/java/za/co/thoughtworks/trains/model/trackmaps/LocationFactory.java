@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.model;
+package za.co.thoughtworks.trains.model.trackmaps;
 
 import java.util.ArrayList;
 import java.util.List;

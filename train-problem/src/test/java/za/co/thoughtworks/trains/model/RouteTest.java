@@ -19,6 +19,8 @@ import za.co.thoughtworks.trains.application.TrackDescriptor;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
+import za.co.thoughtworks.trains.model.trackmaps.Location;
+import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
 
 public class RouteTest {
 

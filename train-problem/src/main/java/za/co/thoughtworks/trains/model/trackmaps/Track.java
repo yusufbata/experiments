@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.model;
+package za.co.thoughtworks.trains.model.trackmaps;
 
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.application.TrackDescriptor;

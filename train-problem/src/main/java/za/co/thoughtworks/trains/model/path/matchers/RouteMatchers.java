@@ -3,7 +3,7 @@ package za.co.thoughtworks.trains.model.path.matchers;
 import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
-import za.co.thoughtworks.trains.model.Location;
+import za.co.thoughtworks.trains.model.trackmaps.Location;
 
 public class RouteMatchers implements RouteMatcher<RouteMatchers>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<RouteMatchers> {
 

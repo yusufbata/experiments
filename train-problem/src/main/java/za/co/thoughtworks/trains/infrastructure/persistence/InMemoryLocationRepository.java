@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import za.co.thoughtworks.trains.application.LocationRepository;
-import za.co.thoughtworks.trains.model.Location;
+import za.co.thoughtworks.trains.model.trackmaps.Location;
 
 public class InMemoryLocationRepository implements LocationRepository {
 
