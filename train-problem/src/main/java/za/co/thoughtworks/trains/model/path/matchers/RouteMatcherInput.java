@@ -8,13 +8,10 @@ import za.co.thoughtworks.trains.model.Track;
 
 public class RouteMatcherInput {
 	public Route route;
-	public List<Location> completedLocationList;
 	public List<Route> allCompletedRoutes;
 
-	private RouteMatcherInput(Route route,
-			List<Location> completedLocationList, List<Route> allCompletedRoutes) {
+	private RouteMatcherInput(Route route, List<Route> allCompletedRoutes) {
 		this.route = route;
-		this.completedLocationList = completedLocationList;
 		this.allCompletedRoutes = allCompletedRoutes;
 	}
 
@@ -22,9 +19,9 @@ public class RouteMatcherInput {
 		return route;
 	}
 
-	public List<Location> getCompletedLocationList() {
+	/*public List<Location> getCompletedLocationList() {
 		return completedLocationList;
-	}
+	}*/
 
 	public List<Route> getAllCompletedRoutes() {
 		return allCompletedRoutes;
@@ -32,7 +29,7 @@ public class RouteMatcherInput {
 
 	public static RouteMatcherInput construct(
 			Route route, List<Location> completedLocationList, List<Route> allCompletedRoutes) {
-		return new RouteMatcherInput(route, completedLocationList, allCompletedRoutes);
+		return new RouteMatcherInput(route, allCompletedRoutes);
 	}
 	
 	

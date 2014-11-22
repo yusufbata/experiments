@@ -16,8 +16,8 @@ public class ExactRouteMatcher  extends AbstractRouteMatcher
 
 	@Override
 	public boolean isRouteValid(RouteMatcherInput routeMatcherInput) {
-		if(routeMatcherInput.getCompletedLocationList().size() <= targetPath.size()
-				&& completedLocationListMatchesTargetPath(routeMatcherInput.getCompletedLocationList()))
+		if(numberOfHopsIsLessThanOrEqualToTargetPath(routeMatcherInput.getRoute().getCurrentNumberOfStops())
+				&& routeMatcherInput.getRoute().completedLocationListMatchesTargetPath(this.targetPath))
 		{
 			return true;
 		}
@@ -38,21 +38,13 @@ public class ExactRouteMatcher  extends AbstractRouteMatcher
 	private boolean numberOfHopsIsSameAsTargetPath(int numberOfHops) {
 		return this.targetPath.size() == (numberOfHops + 1);
 	}
+	
+	private boolean numberOfHopsIsLessThanOrEqualToTargetPath(int numberOfHops) {
+		return this.targetPath.size() >= (numberOfHops + 1);
+	}
 
 	@Override
 	public ExactRouteMatcher clone() {		
 		return new ExactRouteMatcher(new ArrayList<String>(this.targetPath));
-	}
-	
-	private boolean completedLocationListMatchesTargetPath(List<Location> completedLocationList) {
-		int completedLocationCount = completedLocationList.size();
-		for (int i = 0; i < completedLocationCount; i++) {
-			Location completedLocation = completedLocationList.get(i);
-			String targetPathItem = this.targetPath.get(i);
-			if (!completedLocation.hasId(targetPathItem)) {
-				return false;
-			}
-		}
-		return true;
 	}
 }

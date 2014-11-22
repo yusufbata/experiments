@@ -150,4 +150,16 @@ public class Route implements IRoute {
 		Track lastTrack = ListUtils.getLastItemFromList(this.trackList);
 		return lastTrack.endLocationHasId(lastLocationId);
 	}
+	
+	public boolean completedLocationListMatchesTargetPath(List<String> targetPath) {
+		int completedLocationCount = completedLocationList.size();
+		for (int i = 0; i < completedLocationCount; i++) {
+			Location completedLocation = completedLocationList.get(i);
+			String targetPathItem = targetPath.get(i);
+			if (!completedLocation.hasId(targetPathItem)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
