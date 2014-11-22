@@ -58,8 +58,12 @@ public class RouteSpec {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[RouteSpec fromTown=").append(this.fromTown)
+		sb.append("[RouteSpec from=").append(this.fromTown)
 			.append(" targetPath=").append(this.targetPath)
+			.append(" maximumStops=").append(this.maximumStops)
+			.append(" exactStops=").append(this.exactNumberOfStops)
+			.append(" maximumDistance=").append(this.maximumDistance)
+			.append(" findRouteWithShortestDistance=").append(this.findRouteWithShortestDistance)
 			.append("]");
 		return sb.toString();
 	}

@@ -19,7 +19,7 @@ import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
 public class RouteSpecParser {
 
 	/**
-	 * Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAXHOPS/EXACTSTOPS/MAXDISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  DISTANCE/PATH_COUNT
+	 * Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  DISTANCE/PATH_COUNT
 	 * 
 	 * Element separators '|' . Note that they can't be used for values.
 	 * Exactly one item required per element (NONE allowed if not required).
@@ -60,7 +60,7 @@ public class RouteSpecParser {
 		String pathElementValue = getValueFromElement(pathElement);
 		
 		String measureElementKey = getKeyFromElement(measureElement);
-		String measureElementValue = getKeyFromElement(measureElement);
+		String measureElementValue = getValueFromElement(measureElement);
 
 		String[] pathElementValueItems = pathElementValue.split("-");
 		
@@ -72,6 +72,36 @@ public class RouteSpecParser {
 		RouteSpecBuilder aRouteSpec = aRouteSpec().fromTown(pathElementValueItems[0]);
 		for (int i = 1; i < pathElementValueItems.length; i++) {
 			aRouteSpec.toTown(pathElementValueItems[i]);
+		}
+		
+		if (measureElementKey != null && measureElementValue != null) {
+			Integer value = convertStringToInt(measureElementValue);
+			if (value != null) {
+				switch (measureElementKey) {
+				case "MAX_HOPS":
+					aRouteSpec.withMaximumStops(value);
+					break;
+				case "EXACT_STOPS":
+					aRouteSpec.withExactNumberOfStops(value);
+					break;
+				case "MAX_DISTANCE":
+					aRouteSpec.withMaximumDistance(value);
+				default:
+					System.err.println("Ignoring unknown measureElementKey: " + measureElementKey);
+					break;
+				}
+			}
+		}
+		
+		if (pathFilterElement != null && pathFilterElement.compareTo("NONE") != 0) {
+			switch (pathFilterElement) {
+			case "SHORTEST_DISTANCE":
+				aRouteSpec.withShortestDistance();
+				break;
+			default:
+				System.err.println("Ignoring unknown pathFilterElement: " + pathFilterElement);
+				break;
+			}
 		}
 		
 //		RouteSpec routeSpec = 
