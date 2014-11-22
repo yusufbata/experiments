@@ -5,6 +5,7 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
+import za.co.thoughtworks.trains.model.Path;
 import za.co.thoughtworks.trains.model.Route;
 import za.co.thoughtworks.trains.model.Track;
 
@@ -23,10 +24,10 @@ public class ShortestDistanceRouteMatcher  extends AbstractRouteMatcher
 		return true;
 	}
 
-	private int findShortestDistanceInRoutes(List<Route> routes) {
+	private int findShortestDistanceInRoutes(List<? extends Path> routes) {
 		int shortestDistance = Integer.MAX_VALUE; 
 		
-		for (Route route : routes) {
+		for (Path route : routes) {
 			int routeDistance = route.getTotalDistance().value();
 			if (routeDistance < shortestDistance) {
 				shortestDistance = routeDistance;

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
-import za.co.thoughtworks.trains.model.Location;
-import za.co.thoughtworks.trains.model.Track;
 
 public class ExactNumberOfStopsRouteMatcher extends AbstractRouteMatcher 
 	implements RouteMatcher<ExactNumberOfStopsRouteMatcher>, za.co.thoughtworks.trains.infrastructure.utils.Cloneable<ExactNumberOfStopsRouteMatcher> {
@@ -25,7 +23,7 @@ public class ExactNumberOfStopsRouteMatcher extends AbstractRouteMatcher
 	@Override
 	public boolean isRouteComplete(RouteMatcherInput routeMatcherInput) {
 		// TODO: Perhaps add isValid check here as well
-		if (routeMatcherInput.getRoute().getCurrentNumberOfStopsUsingTracks() == exactNumberOfStops) {
+		if (routeMatcherInput.getRoute().getCurrentNumberOfStops() == exactNumberOfStops) {
 			String lastLocationId = ListUtils.getLastItemFromList(targetPath);
 			if (routeMatcherInput.getRoute().getCurrentNumberOfStops() > 0) {
 				return routeMatcherInput.getRoute().hasEndLocationId(lastLocationId);

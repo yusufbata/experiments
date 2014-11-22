@@ -15,7 +15,7 @@ import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
  * @author Yusuf
  *
  */
-public class Route implements IRoute {
+public class Route implements IRoute, Path {
 	
 	private final Distance totalDistance;
 	private final List<Track> trackList;
@@ -60,11 +60,11 @@ public class Route implements IRoute {
 	}
 
 	public boolean isValid(List<Route> allCompletedRoutes) {
-		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, completedLocationList, allCompletedRoutes));
+		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, allCompletedRoutes));
 	}
 	
 	public boolean isComplete(List<Route> allCompletedRoutes) {
-		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, completedLocationList, allCompletedRoutes));
+		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, allCompletedRoutes));
 	}
 
 	/*private boolean hasRepeatingLocation() {
@@ -94,6 +94,10 @@ public class Route implements IRoute {
 		return this.completedLocationList.get(0);
 	}
 
+	/* (non-Javadoc)
+	 * @see za.co.thoughtworks.trains.model.Path#findNextPossibleRoutes()
+	 */
+	@Override
 	public List<Route> findNextPossibleRoutes() {
 		Location currentLocation = getCurrentLocation();
 		
@@ -134,6 +138,10 @@ public class Route implements IRoute {
 		return sb.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see za.co.thoughtworks.trains.model.Path#hasPath(java.lang.String)
+	 */
+	@Override
 	public boolean hasPath(String routePath) {
 		return this.createRoutePath().compareTo(routePath) == 0;
 	}
@@ -142,15 +150,21 @@ public class Route implements IRoute {
 		return trackList.size();
 	}
 	
+	/* (non-Javadoc)
+	 * @see za.co.thoughtworks.trains.model.Path#getCurrentNumberOfStops()
+	 */
+	@Override
 	public int getCurrentNumberOfStops() {
 		return completedLocationList.size() - 1;
 	}
 
+	@Override
 	public boolean hasEndLocationId(String lastLocationId) {
 		Track lastTrack = ListUtils.getLastItemFromList(this.trackList);
 		return lastTrack.endLocationHasId(lastLocationId);
 	}
-	
+
+	@Override
 	public boolean completedLocationListMatchesTargetPath(List<String> targetPath) {
 		int completedLocationCount = completedLocationList.size();
 		for (int i = 0; i < completedLocationCount; i++) {

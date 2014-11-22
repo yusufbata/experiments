@@ -3,32 +3,28 @@ package za.co.thoughtworks.trains.model.path.matchers;
 import java.util.List;
 
 import za.co.thoughtworks.trains.model.Location;
+import za.co.thoughtworks.trains.model.Path;
 import za.co.thoughtworks.trains.model.Route;
-import za.co.thoughtworks.trains.model.Track;
 
 public class RouteMatcherInput {
-	public Route route;
-	public List<Route> allCompletedRoutes;
+	public Path route;
+	public List<? extends Path> allCompletedRoutes;
 
-	private RouteMatcherInput(Route route, List<Route> allCompletedRoutes) {
+	private RouteMatcherInput(Path route, List<? extends Path> allCompletedRoutes) {
 		this.route = route;
 		this.allCompletedRoutes = allCompletedRoutes;
 	}
 
-	public Route getRoute() {
+	public Path getRoute() {
 		return route;
 	}
 
-	/*public List<Location> getCompletedLocationList() {
-		return completedLocationList;
-	}*/
-
-	public List<Route> getAllCompletedRoutes() {
+	public List<? extends Path> getAllCompletedRoutes() {
 		return allCompletedRoutes;
 	}
 
 	public static RouteMatcherInput construct(
-			Route route, List<Location> completedLocationList, List<Route> allCompletedRoutes) {
+			Path route, List<? extends Path> allCompletedRoutes) {
 		return new RouteMatcherInput(route, allCompletedRoutes);
 	}
 	

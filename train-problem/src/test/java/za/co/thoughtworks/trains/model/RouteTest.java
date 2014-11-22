@@ -22,7 +22,7 @@ import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
 
 public class RouteTest {
 
-	private Route route;
+	private Path route;
 	
 	@Test
 	public void testFindNextPossibleRoutesForSingleTrack() {
