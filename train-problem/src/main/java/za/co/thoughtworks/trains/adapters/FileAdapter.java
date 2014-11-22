@@ -51,16 +51,18 @@ public class FileAdapter {
 
 	private List<String> readLinesFromFile(File inputFile)
 			throws FileNotFoundException, IOException {
-		List<String> lines;
+		List<String> lines = new ArrayList<String>();
 		final BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-		lines = new ArrayList<String>();
-		while (reader.ready()) {
-			String currentLine = reader.readLine().trim();
-			if (!lineIsEmptyOrHasComments(currentLine)) {
-				lines.add(currentLine);
+		try {
+			while (reader.ready()) {
+				String currentLine = reader.readLine().trim();
+				if (!lineIsEmptyOrHasComments(currentLine)) {
+					lines.add(currentLine);
+				}
 			}
+		} finally {
+			reader.close();
 		}
-		reader.close();
 		return lines;
 	}
 
