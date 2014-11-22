@@ -30,9 +30,4 @@ public class TrackDescriptorList {
 	public List<TrackDescriptor> getTrackDescriptorList() {
 		return trackList;
 	}
-
-	public static TrackDescriptorList constructFromFileWithName(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

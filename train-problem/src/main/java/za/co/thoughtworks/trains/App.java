@@ -3,6 +3,7 @@ package za.co.thoughtworks.trains;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.adapters.FileAdapter;
 import za.co.thoughtworks.trains.application.RailroadApplicationService;
 import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.application.TrackDescriptorList;
@@ -20,12 +21,17 @@ public class App {
 			System.err.println("Please provide exactly 2 file names as input. Example: tracks.txt routespecs.txt");
 		}
 		
-		List<String> fileNames = new ArrayList<String>(2);
+		String trackDescriptorFileName = args[0];
+		String routeSpecsFileName = args[1];
 		
-		TrackDescriptorList trackDescriptorList = TrackDescriptorList.constructFromFileWithName(fileNames.get(0));
-		RailroadApplicationService railroadService = new RailroadApplicationService(trackDescriptorList);
+		runApplicationUsingInputFiles(trackDescriptorFileName, routeSpecsFileName);
+	}
+
+	private static void runApplicationUsingInputFiles(String trackDescriptorFileName,
+			String routeSpecsFileName) {
+		RailroadApplicationService railroadService = FileAdapter.configureRailroadApplicationServiceWith(trackDescriptorFileName);		
+		List<RouteSpec> routeSpecList = FileAdapter.constructRouteSpecsFromFileWithName(routeSpecsFileName);
 		
-		List<RouteSpec> routeSpecList = RouteSpec.constructFromFileWithName(fileNames.get(1));
 		for (RouteSpec routeSpec : routeSpecList) {
 			MatchingRoutes allMatchingRoutesForSpec = railroadService.findAllRoutesUsing(routeSpec);
 			System.out.println(allMatchingRoutesForSpec);

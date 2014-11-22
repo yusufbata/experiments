@@ -53,12 +53,5 @@ public class RouteSpec {
 
 	public boolean shouldFindRouteWithShortestDistance() {
 		return findRouteWithShortestDistance;
-	}
-
-	public static List<RouteSpec> constructFromFileWithName(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
+	}	
 }
