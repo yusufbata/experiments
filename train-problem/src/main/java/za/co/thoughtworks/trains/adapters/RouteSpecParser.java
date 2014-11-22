@@ -37,9 +37,8 @@ public class RouteSpecParser {
 		String[] elements = stringPattern.split("\\|");
 		
 		if (elements.length != 4) {
-			System.err.println("Line does not have EXACTLY 4 elements. Ignoring: " + stringPattern 
+			throw new IllegalArgumentException("Line does not have EXACTLY 4 elements. Ignoring: " + stringPattern 
 					+ ". Elements=" + Arrays.asList(elements));
-			return null;
 		}
 		
 		String pathElement = elements[0].trim();
@@ -47,37 +46,58 @@ public class RouteSpecParser {
 		String pathFilterElement = elements[2].trim();
 		String outputElement = elements[3].trim();
 		
-		if (elementsAreEmptyOrNone(pathElement, outputElement)) {
-			System.err.println("Path and Output elements cannot be empty or NONE. Ignoring: " + stringPattern);
-			return null;
-		}
-		if (measureElement.isEmpty() || pathFilterElement.isEmpty()) {
-			System.err.println("Measure and Path Filter elements cannot be empty. Ignoring: " + stringPattern);
+		if(!lineElementsAreValid(stringPattern, pathElement, measureElement,
+				pathFilterElement, outputElement)) {
 			return null;
 		}
 		
-		String pathElementKey = getKeyFromElement(pathElement);
-		String pathElementValue = getValueFromElement(pathElement);
+		RouteSpecBuilder aRouteSpec = aRouteSpec();
 		
+		configurePathElements(stringPattern, pathElement, aRouteSpec);
+		configureMeasurementElements(measureElement, aRouteSpec);
+		configurePathFilterElements(pathFilterElement, aRouteSpec);
+		configureOutputElement(outputElement, aRouteSpec);
+
+		return aRouteSpec.build();
+	}
+
+	private void configureOutputElement(String outputElement,
+			RouteSpecBuilder aRouteSpec) {
+		if (outputElement != null) {
+			switch (outputElement) {
+			case "PATH_DISTANCE":
+				aRouteSpec.with(OutputMeasurement.PathDistance);
+				break;
+			case "PATH_COUNT":
+				aRouteSpec.with(OutputMeasurement.PathCount);
+			default:
+				break;
+			}
+		}
+	}
+
+	private void configurePathFilterElements(String pathFilterElement,
+			RouteSpecBuilder aRouteSpec) {
+		if (pathFilterElement != null && pathFilterElement.compareTo("NONE") != 0) {
+			switch (pathFilterElement) {
+			case "SHORTEST_DISTANCE":
+				aRouteSpec.withShortestDistance();
+				break;
+			default:
+				System.err.println("Ignoring unknown pathFilterElement: " + pathFilterElement);
+				break;
+			}
+		}
+	}
+
+	private void configureMeasurementElements(String measureElement,
+			RouteSpecBuilder aRouteSpec) {
 		String measureElementKey = null;
 		String measureElementValue = null;
 		if (measureElement.compareTo("NONE") != 0) {
 			measureElementKey = getKeyFromElement(measureElement);
 			measureElementValue = getValueFromElement(measureElement);
 		}
-
-		String[] pathElementValueItems = pathElementValue.split("-");
-		
-		if (pathElementValueItems.length < 2) {
-			System.err.println("Path elements must be at least 2 [A-B]. Ignoring: " + stringPattern);
-			return null;
-		}
-		
-		RouteSpecBuilder aRouteSpec = aRouteSpec().fromTown(pathElementValueItems[0]);
-		for (int i = 1; i < pathElementValueItems.length; i++) {
-			aRouteSpec.toTown(pathElementValueItems[i]);
-		}
-		
 		if (measureElementKey != null && measureElementValue != null) {
 			Integer value = convertStringToInt(measureElementValue);
 			if (value != null) {
@@ -97,34 +117,36 @@ public class RouteSpecParser {
 				}
 			}
 		}
+	}
+
+	private void configurePathElements(String stringPattern,
+			String pathElement, RouteSpecBuilder aRouteSpec) {
+		String pathElementKey = getKeyFromElement(pathElement);
+		String pathElementValue = getValueFromElement(pathElement);
+		String[] pathElementValueItems = pathElementValue.split("-");
 		
-		if (pathFilterElement != null && pathFilterElement.compareTo("NONE") != 0) {
-			switch (pathFilterElement) {
-			case "SHORTEST_DISTANCE":
-				aRouteSpec.withShortestDistance();
-				break;
-			default:
-				System.err.println("Ignoring unknown pathFilterElement: " + pathFilterElement);
-				break;
-			}
+		if (pathElementValueItems.length < 2) {
+			throw new IllegalArgumentException("Path elements must be at least 2 [A-B]. Line: " + stringPattern);
 		}
 		
-		if (outputElement != null) {
-			switch (outputElement) {
-			case "PATH_DISTANCE":
-				aRouteSpec.with(OutputMeasurement.PathDistance);
-				break;
-			case "PATH_COUNT":
-				aRouteSpec.with(OutputMeasurement.PathCount);
-			default:
-				break;
-			}
+		aRouteSpec.fromTown(pathElementValueItems[0]);
+		for (int i = 1; i < pathElementValueItems.length; i++) {
+			aRouteSpec.toTown(pathElementValueItems[i]);
 		}
-		
-//		RouteSpec routeSpec = 
-				//new RouteSpec(fromTown, targetPath, maximumStops, exactNumberOfStops, maximumDistance, findRouteWithShortestDistance);
-//				null;
-		return aRouteSpec.build();
+	}
+
+	private boolean lineElementsAreValid(String stringPattern, String pathElement,
+			String measureElement, String pathFilterElement,
+			String outputElement) {
+		if (elementsAreEmptyOrNone(pathElement, outputElement)) {
+			System.err.println("Path and Output elements cannot be empty or NONE. Ignoring: " + stringPattern);
+			return false;
+		}
+		if (measureElement.isEmpty() || pathFilterElement.isEmpty()) {
+			System.err.println("Measure and Path Filter elements cannot be empty. Ignoring: " + stringPattern);
+			return false;
+		}
+		return true;
 	}
 	
 	public List<RouteSpec> constructRouteSpecListUsing(
@@ -182,10 +204,6 @@ public class RouteSpecParser {
 		}
 		return null;
 	}
-	
-	/*privateString getItemFromElementWithIndex(String element, int index, String separator) {
-		return getItemFromElementWithIndex(element, index, separator, 0);
-	}*/
 
 	private Integer convertStringToInt(String string) {
 		Integer distance = null;

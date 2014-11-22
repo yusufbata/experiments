@@ -36,9 +36,13 @@ public class BatchApplicationRunner {
 		for (int index = 0; index < routeSpecList.size(); index++) {
 			RouteSpec routeSpec = routeSpecList.get(index);
 			MatchingPaths allMatchingRoutesForSpec = railroadService.findAllRoutesUsing(routeSpec);
-			
-			String outputMessage = String.format("Output #%s: %s", index + 1, allMatchingRoutesForSpec.getOutputMeasurement(routeSpec));
-			printer.printLine(outputMessage);
+			printOutputForResult(index, routeSpec, allMatchingRoutesForSpec);
 		}
+	}
+
+	private void printOutputForResult(int index, RouteSpec routeSpec,
+			MatchingPaths allMatchingRoutesForSpec) {
+		String outputMessage = String.format("Output #%s: %s", index + 1, allMatchingRoutesForSpec.getOutputMeasurement(routeSpec));
+		printer.printLine(outputMessage);
 	}
 }
