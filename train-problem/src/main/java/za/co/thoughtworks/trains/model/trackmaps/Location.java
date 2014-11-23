@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 
@@ -58,16 +59,15 @@ public class Location {
 	}
 
 	public void addOutgoingTrack(Track track) {
-		// TODO: Validate duplicates here!!!
+		validateNewTrack(track);
 		this.outgoingTracks.add(track);
-		/*List<Track> outgoingTracksClone = getCloneOfOutgoingTracks();
-		outgoingTracksClone.add(track);
-		Location clone = new Location(this.id, outgoingTracksClone);
-		return clone;*/
 	}
 
-	/*private List<Track> getCloneOfOutgoingTracks() {
-		List<Track> currentOutgoingTracks = ListUtils.cloneListWithContents(this.getOutgoingTracks());
-		return currentOutgoingTracks;
-	}*/
+	private void validateNewTrack(Track newTrack) {
+		for (Track track : outgoingTracks) {
+			if (track.hasSameEndpoints(newTrack)) {
+				throw new InvalidConfigurationException("Cannot add more than one track with same end points to location");
+			}
+		}
+	}
 }

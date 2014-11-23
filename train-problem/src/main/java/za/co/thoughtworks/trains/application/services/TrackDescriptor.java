@@ -1,14 +1,18 @@
 package za.co.thoughtworks.trains.application.services;
 
-import za.co.thoughtworks.trains.model.trackmaps.Location;
+import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
+
 
 public class TrackDescriptor {
 
-	private String fromLocationId;
-	private String toLocationId;
-	private Distance distance;
+	private final String fromLocationId;
+	private final String toLocationId;
+	private final Distance distance;
 
 	public TrackDescriptor(String fromLocationId, String toLocationId, Distance trackDistance) {
+		if (fromLocationId.compareTo(toLocationId) == 0) {
+			throw new InvalidConfigurationException("Track cannot have same start and end locations. location: " + fromLocationId);
+		}
 		this.fromLocationId = fromLocationId;
 		this.toLocationId = toLocationId;
 		this.distance = trackDistance;
@@ -28,7 +32,7 @@ public class TrackDescriptor {
 	}
 	
 	@Override
-	public Object clone() {
+	public TrackDescriptor clone() {
 		TrackDescriptor clone = new TrackDescriptor(this.fromLocationId, this.toLocationId, this.distance);
 		return clone;
 	}
@@ -41,6 +45,34 @@ public class TrackDescriptor {
 		return toLocationId;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof TrackDescriptor) {
+			TrackDescriptor other = (TrackDescriptor)obj;
+			if (this.fromLocationId.compareTo(other.fromLocationId) == 0
+					&& this.toLocationId.compareTo(other.toLocationId) == 0
+					&& this.distance.equals(other.distance)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
+	@Override
+	public int hashCode() {
+		int prime = 13;
+		int hash = prime * (prime + this.fromLocationId.hashCode());
+		hash = prime * (hash + this.fromLocationId.hashCode());
+		hash =  prime * (hash + this.fromLocationId.hashCode());
+		return hash;
+	}
+
+	public boolean hasSameEndpoints(TrackDescriptor anotherTrack) {
+		if (this.fromLocationId.compareTo(anotherTrack.fromLocationId) == 0
+				&& this.toLocationId.compareTo(anotherTrack.toLocationId) == 0) {
+			return true;
+		}
+		return false;
+	}
 
 }

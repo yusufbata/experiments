@@ -3,28 +3,29 @@ package za.co.thoughtworks.trains.application.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
+
 
 public class TrackDescriptorList {
 
 	private List<TrackDescriptor> trackList;
-//	private Map<Location, List<TrackDescriptor>> locationList;
 	
 	public TrackDescriptorList() {
 		trackList = new ArrayList<TrackDescriptor>();
-//		locationList = new HashMap<Location, List<TrackDescriptor>>();
 	}
 
 	public void add(TrackDescriptor aTrack) {
+		validateNewTrack(aTrack);
 		this.trackList.add(aTrack);
-		/*Location fromLocation = aTrack.getFromLocation();
-		if(locationList.containsKey(fromLocation)) {
-			locationList.get(fromLocation).add(aTrack);
+	}
+
+	private void validateNewTrack(TrackDescriptor newTrack) {
+		for (TrackDescriptor currentTrack : trackList) {
+			if (currentTrack.hasSameEndpoints(newTrack)) {
+				throw new InvalidConfigurationException(
+						"Cannot add more than one track with same start and end locations. " + newTrack);
+			}
 		}
-		else {
-			List<TrackDescriptor> trackListForLocation = new ArrayList<TrackDescriptor>();
-			trackListForLocation.add(aTrack);
-			locationList.put(fromLocation, trackListForLocation);
-		}*/
 	}
 
 	public List<TrackDescriptor> getTrackDescriptorList() {

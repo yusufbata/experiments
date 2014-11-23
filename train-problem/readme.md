@@ -1,5 +1,5 @@
 # Overview
-xxx
+This project aims to solve the thoughtworks train problem.
 
 # Goals
 Maintainability over performance - allows optimisation
@@ -11,7 +11,7 @@ Run: mvn clean install
 xxx
 java -jar train-problem-0.0.1-SNAPSHOT.jar classes/sample-tracks.txt classes/sample-routespecs.txt
 
-# Understanding the application
+# Application design
 xxx
 
 ## Application Structure
