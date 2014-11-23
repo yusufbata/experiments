@@ -37,15 +37,18 @@ public class FileAdapter {
 			File inputFile = getFile(trackDescriptorFileName);
 			lines = readLinesFromFile(inputFile);
 		} catch (Exception e) {
-			throw new IllegalArgumentException("Failed to create file using path: " + trackDescriptorFileName, e);
+			throw new InvalidConfigurationException("Failed to create file using path: " + trackDescriptorFileName, e);
 		}
 		return lines;
 	}
 
-	private File getFile(String trackDescriptorFileName)
+	private File getFile(String fileName)
 			throws URISyntaxException {
-		URL urlResource = FileAdapter.class.getResource(trackDescriptorFileName);
-		File inputFile = new File(urlResource.toURI());
+		/*URL urlResource = FileAdapter.class.getResource(fileName);
+		if (urlResource == null) {
+			throw new InvalidConfigurationException("Provided file name doesn't exist on path: " + fileName);
+		}*/
+		File inputFile = new File(fileName);
 		return inputFile;
 	}
 

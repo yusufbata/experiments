@@ -5,11 +5,11 @@ xxx
 Maintainability over performance - allows optimisation
 
 # Building the application
-xxx
+Run: mvn clean install
 
 # Using the application
 xxx
-Sample file inputs
+java -jar train-problem-0.0.1-SNAPSHOT.jar classes/sample-tracks.txt classes/sample-routespecs.txt
 
 # Understanding the application
 xxx

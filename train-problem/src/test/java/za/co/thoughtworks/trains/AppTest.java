@@ -3,7 +3,7 @@
  */
 package za.co.thoughtworks.trains;
 
-import static org.junit.Assert.*;
+import java.io.File;
 
 import org.junit.Test;
 
@@ -15,8 +15,7 @@ public class AppTest {
 
 	@Test
 	public void testApplicationWithSampleData() {
-		String[] args = {"/sample-tracks.txt", "/sample-routespecs.txt"};
+		String[] args = {"src/main/resources/sample-tracks.txt", "src/main/resources/sample-routespecs.txt"};
 		App.main(args);
 	}
-
 }
