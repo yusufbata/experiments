@@ -51,6 +51,12 @@ public class Route implements Path {
 		return totalDistanceRunningTotal;
 	}
 
+	/**
+	 * Constructs a new Route with the additional track.
+	 * 
+	 * @param track
+	 * @return
+	 */
 	private Route addTrack(Track track)  {
 		List<Track> newTrackList = new ArrayList<Track>(this.trackList);
 		newTrackList.add(track);
@@ -82,8 +88,7 @@ public class Route implements Path {
 		List<Path> nextPossibleRoutes = new ArrayList<Path>();
 		List<Track> outgoingTracks = currentLocation.getOutgoingTracks();
 		for (Track track : outgoingTracks) {
-			Route newPotentialRoute = this.addTrack(track);
-			nextPossibleRoutes.add(newPotentialRoute);
+			nextPossibleRoutes.add(addTrack(track));
 		}
 
 		return nextPossibleRoutes;
