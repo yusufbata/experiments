@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import za.co.thoughtworks.trains.adapters.OutputMeasurement;
-
 
 public class RouteSpecBuilder {
 
