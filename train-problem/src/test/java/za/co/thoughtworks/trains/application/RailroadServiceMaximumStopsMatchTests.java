@@ -11,11 +11,11 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.services.Distance;
-import za.co.thoughtworks.trains.application.services.MatchingPaths;
-import za.co.thoughtworks.trains.application.services.NoPathFound;
-import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
 import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
+import za.co.thoughtworks.trains.model.path.MatchingPaths;
+import za.co.thoughtworks.trains.model.path.NoPathFound;
+import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.test.TestUtils;
 
 /**

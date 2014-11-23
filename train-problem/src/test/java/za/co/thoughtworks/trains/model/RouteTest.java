@@ -14,14 +14,15 @@ import org.junit.Test;
 import za.co.thoughtworks.trains.application.ApplicationRegistry;
 import za.co.thoughtworks.trains.application.LocationRepository;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
-import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.application.services.RouteSpec;
 import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
 import za.co.thoughtworks.trains.application.services.TrackDescriptor;
+import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
+import za.co.thoughtworks.trains.model.trackmaps.Route;
 
 public class RouteTest {
 

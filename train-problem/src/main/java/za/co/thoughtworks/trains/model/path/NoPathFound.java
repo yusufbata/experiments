@@ -1,7 +1,9 @@
-package za.co.thoughtworks.trains.application.services;
+package za.co.thoughtworks.trains.model.path;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import za.co.thoughtworks.trains.application.services.Distance;
 
 
 public class NoPathFound extends MatchingPaths implements Path {

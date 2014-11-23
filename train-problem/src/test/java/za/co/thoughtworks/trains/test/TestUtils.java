@@ -4,8 +4,8 @@ import static org.fest.assertions.Assertions.assertThat;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
-import za.co.thoughtworks.trains.application.services.MatchingPaths;
-import za.co.thoughtworks.trains.application.services.NoPathFound;
+import za.co.thoughtworks.trains.model.path.MatchingPaths;
+import za.co.thoughtworks.trains.model.path.NoPathFound;
 
 public class TestUtils {
 

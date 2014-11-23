@@ -1,14 +1,13 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains.model;
+package za.co.thoughtworks.trains.model.path.finders;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.MatchingPaths;
-import za.co.thoughtworks.trains.application.services.NoPathFound;
-import za.co.thoughtworks.trains.application.services.Path;
+import za.co.thoughtworks.trains.model.path.MatchingPaths;
+import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 
@@ -17,39 +16,16 @@ import za.co.thoughtworks.trains.model.trackmaps.Location;
  * @author Yusuf
  *
  */
-public class RoutingEngine {
+public class RoutingEngine implements PathFinder {
 
-	private final Location startLocation;
-	private final Location endLocation;
-	
-//	private int maxIterations = 20;
-//	private int currentIterations = 0;
+	public RoutingEngine() {}
 
-	public RoutingEngine(Location startLocation, Location endLocation) {
-		this.startLocation = startLocation;
-		this.endLocation = endLocation;
-	}
-
-	public MatchingPaths findRoute(RouteMatchers routeMatchers) {
-		if (startLocation == null || endLocation == null) {
-			throw new IllegalArgumentException("Routing failed. Start location and End location cannot be null");
-		}
-		
-		// Get all tracks from start location
-//		startLocation.getOutgoingTracks();
-		
-		// Create new Route for each track, using RouteMatchers copy for each one -> RouteList created
-		
-		// For 'incomplete' routes
-		// Remove routes that do not match route spec
-		// Get next location from each valid track
-		// repeat above steps for each location
-		
+	@Override
+	public MatchingPaths findPath(Path startingPath, RouteMatchers routeMatchers) {
 		List<Path> completedRoutes = new ArrayList<Path>();
 		List<Path> incompleteMatchingRoutes = new ArrayList<>();
 		
-		Path startingRoute = new Route(routeMatchers, startLocation);
-		incompleteMatchingRoutes.add(startingRoute);
+		incompleteMatchingRoutes.add(startingPath);
 		
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		

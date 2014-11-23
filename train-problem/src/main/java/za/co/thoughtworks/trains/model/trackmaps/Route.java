@@ -1,24 +1,22 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains.model;
+package za.co.thoughtworks.trains.model.trackmaps;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.application.services.Distance;
-import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
+import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatcherInput;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
-import za.co.thoughtworks.trains.model.trackmaps.Location;
-import za.co.thoughtworks.trains.model.trackmaps.Track;
 
 /**
  * @author Yusuf
  *
  */
-class Route implements Path {
+public class Route implements Path {
 	
 	private final Distance totalDistance;
 	private final List<Track> trackList;
