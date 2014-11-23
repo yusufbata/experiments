@@ -1,17 +1,18 @@
 package za.co.thoughtworks.trains.application;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrack;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrackList;
 
 import java.util.List;
 
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 import za.co.thoughtworks.trains.infrastructure.persistence.InMemoryLocationRepository;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
+import za.co.thoughtworks.trains.model.trackmaps.LocationRepository;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorList;
 
 public class LocationFactoryTest {
 

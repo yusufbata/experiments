@@ -1,7 +1,7 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains.application.services;
+package za.co.thoughtworks.trains.application;
 
 import java.util.List;
 

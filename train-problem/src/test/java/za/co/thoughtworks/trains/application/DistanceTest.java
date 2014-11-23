@@ -5,8 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.services.Distance;
-
 public class DistanceTest {
 
 	@Test

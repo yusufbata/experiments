@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import za.co.thoughtworks.trains.application.LocationRepository;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
+import za.co.thoughtworks.trains.model.trackmaps.LocationRepository;
 
 /**
  * Implementation of application-service LocationRepository dependency

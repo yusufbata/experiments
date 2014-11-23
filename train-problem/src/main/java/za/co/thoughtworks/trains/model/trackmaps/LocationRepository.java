@@ -1,6 +1,5 @@
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.model.trackmaps;
 
-import za.co.thoughtworks.trains.model.trackmaps.Location;
 
 /**
  * Used to store an retrieve a collection of Location entities. 

@@ -1,9 +1,9 @@
-package za.co.thoughtworks.trains.application.services;
+package za.co.thoughtworks.trains.model.trackmaps;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
+import za.co.thoughtworks.trains.application.InvalidConfigurationException;
 
 /**
  * A collection of TrackDescriptors.

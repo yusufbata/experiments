@@ -5,8 +5,7 @@ package za.co.thoughtworks.trains.application.services;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.ApplicationRegistry;
-import za.co.thoughtworks.trains.application.LocationRepository;
+import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
 import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.model.path.finders.PathFinder;
@@ -14,7 +13,9 @@ import za.co.thoughtworks.trains.model.path.matchers.PathMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.PathMatchersFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
+import za.co.thoughtworks.trains.model.trackmaps.LocationRepository;
 import za.co.thoughtworks.trains.model.trackmaps.Route;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorList;
 
 /**
  * Used for interacting with the application via adapters.

@@ -3,9 +3,6 @@ package za.co.thoughtworks.trains.model.trackmaps;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.TrackDescriptor;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
-
 public class LocationFactory {
 	
 	private List<Location> locationList = new ArrayList<>();

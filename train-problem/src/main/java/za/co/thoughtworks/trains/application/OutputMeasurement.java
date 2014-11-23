@@ -1,7 +1,7 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains.application.services;
+package za.co.thoughtworks.trains.application;
 
 /**
  * Describes the output result required. Specified by route spec. 

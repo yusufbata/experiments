@@ -1,7 +1,6 @@
 package za.co.thoughtworks.trains.model.trackmaps;
 
-import za.co.thoughtworks.trains.application.services.Distance;
-import za.co.thoughtworks.trains.application.services.TrackDescriptor;
+import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 
 /**

@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.application.services;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import za.co.thoughtworks.trains.infrastructure.persistence.InMemoryLocationRepo
 import za.co.thoughtworks.trains.model.path.finders.PathFinderFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
+import za.co.thoughtworks.trains.model.trackmaps.LocationRepository;
 
 /**
  * Used by the application to load various interface types (in absence of DI framework).

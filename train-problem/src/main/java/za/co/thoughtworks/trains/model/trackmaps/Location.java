@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
+import za.co.thoughtworks.trains.application.InvalidConfigurationException;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 

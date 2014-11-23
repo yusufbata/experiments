@@ -1,8 +1,7 @@
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.model.trackmaps;
 
-import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorBuilder;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorListBuilder;
+import za.co.thoughtworks.trains.application.RouteSpecBuilder;
+
 
 
 /**

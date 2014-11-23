@@ -5,9 +5,9 @@ package za.co.thoughtworks.trains.adapters;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.Distance;
-import za.co.thoughtworks.trains.application.services.TrackDescriptor;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
+import za.co.thoughtworks.trains.application.Distance;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptor;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorList;
 
 /**
  * constructs TrackDescriptor from line of text.

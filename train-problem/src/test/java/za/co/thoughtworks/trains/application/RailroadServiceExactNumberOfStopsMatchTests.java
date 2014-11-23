@@ -4,17 +4,16 @@
 package za.co.thoughtworks.trains.application;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aRouteSpec;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrack;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrackList;
 
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.services.Distance;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorListBuilder;
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorList;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorListBuilder;
 import za.co.thoughtworks.trains.test.TestUtils;
 
 /**

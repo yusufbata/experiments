@@ -3,15 +3,15 @@
  */
 package za.co.thoughtworks.trains.adapters;
 
-import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aRouteSpec;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.OutputMeasurement;
-import za.co.thoughtworks.trains.application.services.RouteSpec;
-import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
+import za.co.thoughtworks.trains.application.OutputMeasurement;
+import za.co.thoughtworks.trains.application.RouteSpec;
+import za.co.thoughtworks.trains.application.RouteSpecBuilder;
 
 /**
  * Constructs route specs by parsing lines of text.

@@ -5,8 +5,8 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.adapters.RouteInputFileAdapter;
 import za.co.thoughtworks.trains.application.BatchApplicationRunner;
+import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.services.RouteSpec;
 
 /**
  * Used to run the application via the command line.

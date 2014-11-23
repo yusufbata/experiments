@@ -1,4 +1,4 @@
-package za.co.thoughtworks.trains.adapters;
+package za.co.thoughtworks.trains.application;
 
 public class InvalidConfigurationException extends RuntimeException {
 

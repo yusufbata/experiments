@@ -13,9 +13,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.thoughtworks.trains.application.InvalidConfigurationException;
+import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.services.RouteSpec;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorList;
 
 /**
  * Used for providing input to the application via files.

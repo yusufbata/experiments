@@ -3,7 +3,7 @@ package za.co.thoughtworks.trains.model.path.matchers;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.RouteSpec;
+import za.co.thoughtworks.trains.application.RouteSpec;
 
 public class PathMatchersFactory {
 

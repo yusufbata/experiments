@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.services.Distance;
+import za.co.thoughtworks.trains.application.Distance;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.Track;
 

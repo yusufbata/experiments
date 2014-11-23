@@ -1,6 +1,8 @@
-package za.co.thoughtworks.trains.application.services;
+package za.co.thoughtworks.trains.model.trackmaps;
 
-import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
+import za.co.thoughtworks.trains.application.Distance;
+import za.co.thoughtworks.trains.application.InvalidConfigurationException;
+
 
 /**
  * Value type describing a track that is used to build up a track map and route (graph).

@@ -1,11 +1,11 @@
 package za.co.thoughtworks.trains.test;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorListBuilder;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrack;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrackList;
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
 import za.co.thoughtworks.trains.model.path.NoPathFound;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorListBuilder;
 
 public class TestUtils {
 

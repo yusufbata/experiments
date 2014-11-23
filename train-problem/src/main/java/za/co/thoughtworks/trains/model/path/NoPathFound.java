@@ -3,7 +3,7 @@ package za.co.thoughtworks.trains.model.path;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.Distance;
+import za.co.thoughtworks.trains.application.Distance;
 
 /**
  * Special path representing a non-existing path. 

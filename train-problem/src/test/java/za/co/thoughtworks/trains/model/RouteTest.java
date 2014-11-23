@@ -1,9 +1,9 @@
 package za.co.thoughtworks.trains.model;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
-import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aRouteSpec;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrack;
+import static za.co.thoughtworks.trains.model.trackmaps.BuilderFactory.aTrackList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,18 +11,18 @@ import java.util.List;
 
 import org.junit.Test;
 
-import za.co.thoughtworks.trains.application.ApplicationRegistry;
-import za.co.thoughtworks.trains.application.LocationRepository;
-import za.co.thoughtworks.trains.application.services.RouteSpec;
-import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
-import za.co.thoughtworks.trains.application.services.TrackDescriptor;
-import za.co.thoughtworks.trains.application.services.TrackDescriptorListBuilder;
+import za.co.thoughtworks.trains.application.RouteSpec;
+import za.co.thoughtworks.trains.application.RouteSpecBuilder;
+import za.co.thoughtworks.trains.application.services.ApplicationRegistry;
 import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.model.path.matchers.PathMatchers;
 import za.co.thoughtworks.trains.model.path.matchers.PathMatchersFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
+import za.co.thoughtworks.trains.model.trackmaps.LocationRepository;
 import za.co.thoughtworks.trains.model.trackmaps.Route;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptor;
+import za.co.thoughtworks.trains.model.trackmaps.TrackDescriptorListBuilder;
 
 public class RouteTest {
 

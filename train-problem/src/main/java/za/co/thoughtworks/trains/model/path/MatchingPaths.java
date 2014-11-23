@@ -5,7 +5,7 @@ package za.co.thoughtworks.trains.model.path;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.RouteSpec;
+import za.co.thoughtworks.trains.application.RouteSpec;
 
 /**
  * Representing a collection of Paths.
