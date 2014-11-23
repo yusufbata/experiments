@@ -22,11 +22,28 @@ This project aims to solve the thoughtworks train problem.
 1: Navigate to the target directory after building application -> train-problem/target/
 2: Run: java -jar train-problem-0.0.1-SNAPSHOT.jar classes/sample-tracks.txt classes/sample-routespecs.txt
 3: You will see the output of the application on the command-line. Note that the sample files used in the previous step have the problem input specified in the problem statement.
-3: (optional) Modify the sample input files and run again, or use your own input files (then remember to change the file paths above accordingly).
+4: (optional) Modify the sample input files and run again, or use your own input files (then remember to change the file paths above accordingly).
 
 ## File input format
- xxx
+The application uses 2 files:
+ 1: tracks - used to define track map (graph structure).
+ 2: route-specs - used to define required route specifications (matchers).  
+
+Comments (lines starting with '#') and blank lines are allowed and ignored in both the files.
+
+### tracks file format
+Expected pattern: From-To-DistanceInteger
+Expected pattern example: A-B-4
+Items separated using '-'
  
+### route-specs file format
+Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
+
+Element separators '|' . Note that they can't be used for values.
+Exactly one item required per element (NONE allowed if element not required).
+Exact number of elements (4) required in every line, including NONE if element not required.
+Key value separators '='. Values ignored when NONE specified.
+
 # Application Structure
 The application has a modular structure following the ports-adapters architecture style:
 

@@ -1,4 +1,6 @@
-# My comment
+# Expected pattern: From-To-DistanceInteger
+# Expected pattern example: A-B-4
+# Items separated using '-'
 
 A-B-5
 B-C-4
