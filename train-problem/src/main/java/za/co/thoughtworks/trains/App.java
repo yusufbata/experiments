@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import za.co.thoughtworks.trains.adapters.RouteInputFileAdapter;
-import za.co.thoughtworks.trains.application.BatchApplicationRunner;
 import za.co.thoughtworks.trains.application.RouteSpec;
+import za.co.thoughtworks.trains.application.services.BatchApplicationRunner;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
 
 /**

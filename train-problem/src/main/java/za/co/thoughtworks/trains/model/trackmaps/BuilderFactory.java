@@ -2,8 +2,6 @@ package za.co.thoughtworks.trains.model.trackmaps;
 
 import za.co.thoughtworks.trains.application.RouteSpecBuilder;
 
-
-
 /**
  * Util to add syntactic sugar to creation of builders. Import static used to achieve this.
  * 

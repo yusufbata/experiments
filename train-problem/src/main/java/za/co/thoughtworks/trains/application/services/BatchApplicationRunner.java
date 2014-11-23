@@ -1,11 +1,11 @@
 /**
  * 
  */
-package za.co.thoughtworks.trains.application;
+package za.co.thoughtworks.trains.application.services;
 
 import java.util.List;
 
-import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
+import za.co.thoughtworks.trains.application.RouteSpec;
 import za.co.thoughtworks.trains.infrastructure.utils.Printer;
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
 
