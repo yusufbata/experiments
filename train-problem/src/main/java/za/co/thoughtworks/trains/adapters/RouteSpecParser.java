@@ -32,7 +32,7 @@ public class RouteSpecParser {
 	 */
 	protected RouteSpec constructRouteSpecFromStringPattern(
 			String stringPattern) {
-		stringPattern = stringPattern.trim().toUpperCase();
+		stringPattern = stringPattern.trim(); //.toUpperCase();
 
 		// Escape required for PIPE character
 		String[] elements = stringPattern.split("\\|");

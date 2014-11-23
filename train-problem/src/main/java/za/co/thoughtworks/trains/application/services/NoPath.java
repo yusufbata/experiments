@@ -31,7 +31,7 @@ public class NoPath extends MatchingPaths implements Path {
 	}
 
 	@Override
-	public List<Path> findNextPossibleRoutes() {
+	public List<Path> findNextPossiblePaths() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -59,7 +59,6 @@ public class RailroadServiceExactRouteMatchTests {
 		theTotalDistanceOfTheRouteIs(15, resultRoute);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
 	public void findsNoRouteBetweenTwoTownsWhenEndTownDoesntExist() {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));
@@ -71,7 +70,6 @@ public class RailroadServiceExactRouteMatchTests {
 		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
 	public void findsNoRouteBetweenTwoTownsWhenStartTownDoesntExist() {
 		havingConfigured(aTrackList()
 				.with(aTrack().fromTown("A").toTown("B").withADistanceOf(5)));

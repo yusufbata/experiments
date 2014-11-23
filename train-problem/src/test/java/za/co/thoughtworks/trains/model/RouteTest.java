@@ -35,7 +35,7 @@ public class RouteTest {
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 		);
 		
-		List<Path> nextPossibleRoutes = route.findNextPossibleRoutes();
+		List<Path> nextPossibleRoutes = route.findNextPossiblePaths();
 		
 		assertThat(nextPossibleRoutes).isNotNull().isNotEmpty().hasSize(1);
 //		assertThat(nextPossibleRoutes.get(0)).isEqualTo(route.);
@@ -50,7 +50,7 @@ public class RouteTest {
 				aRouteSpec().fromTown("A").toTown("B").toTown("C")
 		);
 		
-		List<Path> nextPossibleRoutes = route.findNextPossibleRoutes();
+		List<Path> nextPossibleRoutes = route.findNextPossiblePaths();
 		
 		assertThat(nextPossibleRoutes).isNotNull().isNotEmpty().hasSize(2);
 //		assertThat(nextPossibleRoutes.get(0)).isEqualTo(route.);

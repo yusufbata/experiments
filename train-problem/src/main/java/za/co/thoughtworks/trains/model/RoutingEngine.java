@@ -32,7 +32,7 @@ public class RoutingEngine {
 
 	public MatchingPaths findRoute(RouteMatchers routeMatchers) {
 		if (startLocation == null || endLocation == null) {
-			throw new IllegalArgumentException("Start location and End location cannot be null");
+			throw new IllegalArgumentException("Routing failed. Start location and End location cannot be null");
 		}
 		
 		// Get all tracks from start location
@@ -82,7 +82,7 @@ public class RoutingEngine {
 					completedRoutes.add(potentialRoute);
 				}
 
-				List<Path> morePotentialRoutes = potentialRoute.findNextPossibleRoutes();
+				List<Path> morePotentialRoutes = potentialRoute.findNextPossiblePaths();
 				newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
 			}
 		}

@@ -98,7 +98,7 @@ class Route implements Path {
 	}
 
 	@Override
-	public List<Path> findNextPossibleRoutes() {
+	public List<Path> findNextPossiblePaths() {
 		Location currentLocation = getCurrentLocation();
 		
 		List<Path> nextPossibleRoutes = new ArrayList<Path>();

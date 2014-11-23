@@ -33,14 +33,36 @@ public class RailroadApplicationService {
 	}
 
 	public MatchingPaths findAllRoutesUsing(RouteSpec routeSpec) {
-		// System.out.println("finding all routes using: " + routeSpec);
-		RouteMatchers routeMatchers = RouteMatchersFactory.constructRouteMatchers(routeSpec);
-		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
+		try {
+			RouteMatchers routeMatchers = RouteMatchersFactory.constructRouteMatchers(routeSpec);
+			Location startLocation = findStartLocation(routeSpec);
+			Location endLocation = findEndLocation(routeSpec);
+			RoutingEngine routingEngine = ApplicationRegistry.getRoutingEngineFactory().constructRoutingEngine(routeSpec, startLocation, endLocation);
+			
+			MatchingPaths matchingPaths = routingEngine.findRoute(routeMatchers);
+			return matchingPaths;
+		} catch (Exception e) {
+			System.err.println("Returning NoPath. Ignoring error: " + e);
+			return new NoPath();
+		}
+	}
+
+	private Location findEndLocation(RouteSpec routeSpec) {
 		Location endLocation = locationRepository.findLocationWithId(routeSpec.getEndLocationId());
-		RoutingEngine routingEngine = ApplicationRegistry.getRoutingEngineFactory().constructRoutingEngine(routeSpec, startLocation, endLocation);
-		
-		MatchingPaths matchingPaths = routingEngine.findRoute(routeMatchers);
-		return matchingPaths;
+		validateLocationExists(endLocation, routeSpec.getEndLocationId());
+		return endLocation;
+	}
+
+	private Location findStartLocation(RouteSpec routeSpec) {
+		Location startLocation = locationRepository.findLocationWithId(routeSpec.getStartLocationId());
+		validateLocationExists(startLocation, routeSpec.getStartLocationId());
+		return startLocation;
+	}
+
+	private void validateLocationExists(Location locationToVerify, String locationId) {
+		if (locationToVerify == null) {
+			throw new IllegalArgumentException("Location specified does not exist [" + locationId + "]. Routing not possible");
+		}
 	}
 
 }

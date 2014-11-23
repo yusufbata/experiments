@@ -5,7 +5,7 @@ import java.util.List;
 public interface Path {
 
 	Distance getTotalDistance();
-	List<Path> findNextPossibleRoutes();
+	List<Path> findNextPossiblePaths();
 	boolean hasPath(String routePath);
 	int getCurrentNumberOfStops();
 	boolean hasEndLocationId(String lastLocationId);
@@ -14,5 +14,4 @@ public interface Path {
 	boolean isValid(List<Path> allCompletedRoutes);
 	boolean isComplete(List<Path> completedRoutes);
 	String getPrintString();
-
 }
