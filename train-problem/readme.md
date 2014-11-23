@@ -1,7 +1,7 @@
 # Overview
-This project aims to solve the thoughtworks train problem.
+This project aims to solve the thoughtworks train problem. The Java programming language (1.7) was used along with JUnit and Fest assertions (for testing) and maven (for building the application).
 
-# Priorities & status
+# Prioritised goals & status
 1: Complete all application features (requirement): Completed - proven using acceptance test cases and sample input files.
 2: Maintainability: Not perfect due to time constraints. In particular, unit-level tests would result in more robustness. Acceptance tests do however enable safe refactoring while maintaining existing functionality.
 3: Performance: Not measured due to time constraints. IF measurements indicate bottlenecks, maintainability will allow changes to be made much more easily. Most likely area of performance change will be Path module (path finder implementation).
