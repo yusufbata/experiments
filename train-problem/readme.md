@@ -6,7 +6,7 @@ This project aims to solve the thoughtworks train problem.
 2: Maintainability: Not perfect due to time constraints. In particular, unit-level tests would result in more robustness. Acceptance tests do however enable safe refactoring while maintaining existing functionality.
 3: Performance: Not measured due to time constraints. IF measurements indicate bottlenecks, maintainability will allow changes to be made much more easily. Most likely area of performance change will be Path module (path finder implementation).
 
-# Running the application
+# Using the application
 ## Prerequisites for running application
 - Unzip utility (like 7zip) -> to unpackage compressed file.
 - Maven (tested on 3.1.1) -> to build executable from source code.
@@ -18,17 +18,20 @@ This project aims to solve the thoughtworks train problem.
 2: Navigate to unzipped directory -> train-problem/
 3: Run: mvn clean install
 
-## Using the application
+## Running the application
 1: Navigate to the target directory after building application -> train-problem/target/
 2: Run: java -jar train-problem-0.0.1-SNAPSHOT.jar classes/sample-tracks.txt classes/sample-routespecs.txt
 3: You will see the output of the application on the command-line. Note that the sample files used in the previous step have the problem input specified in the problem statement.
 3: (optional) Modify the sample input files and run again, or use your own input files (then remember to change the file paths above accordingly).
 
+## File input format
+ xxx
+ 
 # Application Structure
 The application has a modular structure following the ports-adapters architecture style:
 
 - adapters -> RouteInputFileAdapter: Used for providing input to the application via files. This is currently the only supported interaction with the application (other than unit tests). More adapters can however easily be added.
-- application-services -> RailroadApplicationService: Used for interacting with the application via adapters.
+- application-services -> RailroadApplicationService: Used for interacting with the application via adapters. Uses the input RouteSpec (route specification) to finds matching paths in the trackmap.
 - model -> TrackMaps (Entity) and Path (Value) domain components. Used by the application-services to compose application features.
 - infrastructure -> Implementation of application-service dependencies (like Repos).
 - runner -> App class used to launch the application via the command-line.
