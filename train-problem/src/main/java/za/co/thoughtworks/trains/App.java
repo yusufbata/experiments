@@ -3,7 +3,7 @@ package za.co.thoughtworks.trains;
 import java.util.Arrays;
 import java.util.List;
 
-import za.co.thoughtworks.trains.adapters.FileAdapter;
+import za.co.thoughtworks.trains.adapters.RouteInputFileAdapter;
 import za.co.thoughtworks.trains.application.BatchApplicationRunner;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
 import za.co.thoughtworks.trains.application.services.RouteSpec;
@@ -43,9 +43,9 @@ public class App {
 	private static void runApplicationUsingInputFiles(String trackDescriptorFileName,
 			String routeSpecsFileName) {
 		try {
-			FileAdapter fileAdapter = new FileAdapter();
-			RailroadApplicationService railroadService = fileAdapter.configureRailroadApplicationServiceWith(trackDescriptorFileName);		
-			List<RouteSpec> routeSpecList = fileAdapter.constructRouteSpecsFromFileWithName(routeSpecsFileName);
+			RouteInputFileAdapter routeInputFileAdapter = new RouteInputFileAdapter();
+			RailroadApplicationService railroadService = routeInputFileAdapter.configureRailroadApplicationServiceWith(trackDescriptorFileName);		
+			List<RouteSpec> routeSpecList = routeInputFileAdapter.constructRouteSpecsFromFileWithName(routeSpecsFileName);
 			BatchApplicationRunner runner = new BatchApplicationRunner(railroadService, routeSpecList);
 			runner.run();
 		} catch (Exception e) {

@@ -21,7 +21,7 @@ import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
  * @author Yusuf
  *
  */
-public class FileAdapter {
+public class RouteInputFileAdapter {
 
 	public RailroadApplicationService configureRailroadApplicationServiceWith(
 			String trackDescriptorFileName) {
@@ -44,7 +44,7 @@ public class FileAdapter {
 
 	private File getFile(String fileName)
 			throws URISyntaxException {
-		/*URL urlResource = FileAdapter.class.getResource(fileName);
+		/*URL urlResource = RouteInputFileAdapter.class.getResource(fileName);
 		if (urlResource == null) {
 			throw new InvalidConfigurationException("Provided file name doesn't exist on path: " + fileName);
 		}*/
