@@ -11,6 +11,8 @@ import za.co.thoughtworks.trains.infrastructure.utils.Printer;
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
 
 /**
+ * Runs a batch of route specs against the application and prints the results.
+ * 
  * @author Yusuf
  *
  */

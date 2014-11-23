@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Used to build a RouteSpec
+ * 
+ * @author Yusuf
+ *
+ */
 public class RouteSpecBuilder {
 
 	private String fromTown;

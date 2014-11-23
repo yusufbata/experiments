@@ -6,6 +6,8 @@ package za.co.thoughtworks.trains.application.services;
 
 
 /**
+ * Builds a collection of TrackDescriptors (TrackDescriptorList).
+ * 
  * @author Yusuf
  *
  */

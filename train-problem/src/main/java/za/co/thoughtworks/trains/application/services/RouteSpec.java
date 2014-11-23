@@ -6,6 +6,8 @@ package za.co.thoughtworks.trains.application.services;
 import java.util.List;
 
 /**
+ * Specifies the required route specifications. 
+ * 
  * @author Yusuf
  *
  */

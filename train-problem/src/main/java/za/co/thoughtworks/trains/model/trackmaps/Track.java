@@ -5,7 +5,12 @@ import za.co.thoughtworks.trains.application.services.TrackDescriptor;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 
 
-
+/**
+ * Represents a specific track linked to a start location and end location.
+ * 
+ * @author Yusuf
+ *
+ */
 public class Track extends TrackDescriptor {
 
 	private final Location fromLocation;

@@ -8,6 +8,13 @@ import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
 import za.co.thoughtworks.trains.infrastructure.utils.Cloneable;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 
+/**
+ * Entity representing a specific location on a track map.
+ * Has links to the outgoing set of tracks.
+ * 
+ * @author Yusuf
+ *
+ */
 public class Location {
 
 	private final String id;

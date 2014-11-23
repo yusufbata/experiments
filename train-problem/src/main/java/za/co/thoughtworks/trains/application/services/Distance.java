@@ -4,6 +4,8 @@
 package za.co.thoughtworks.trains.application.services;
 
 /**
+ * A value type representing distance. 
+ * 
  * @author Yusuf
  *
  */

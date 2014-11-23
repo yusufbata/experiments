@@ -7,6 +7,8 @@ import za.co.thoughtworks.trains.application.services.RouteSpec;
 
 public class PathMatchersFactory {
 
+	private PathMatchersFactory(){}
+	
 	public static PathMatchers constructRouteMatchers(RouteSpec routeSpec) {
 		List<PathMatcher<?>> routeMatcherItemList = new ArrayList<PathMatcher<?>>();
 
@@ -33,7 +35,7 @@ public class PathMatchersFactory {
 			routeMatcherItemList.add(shortestDistancePathMatcher);
 		}
 		
-		if (routeMatcherItemList.size() == 0) {
+		if (routeMatcherItemList.isEmpty()) {
 			ExactPathMatcher exactPathMatcher = new ExactPathMatcher(routeSpec.getTargetPath());
 			routeMatcherItemList.add(exactPathMatcher);
 		}

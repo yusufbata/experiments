@@ -2,7 +2,12 @@ package za.co.thoughtworks.trains.application.services;
 
 import za.co.thoughtworks.trains.adapters.InvalidConfigurationException;
 
-
+/**
+ * Value type describing a track that is used to build up a track map and route (graph).
+ * 
+ * @author Yusuf
+ *
+ */
 public class TrackDescriptor {
 
 	private final String fromLocationId;

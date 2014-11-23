@@ -8,6 +8,8 @@ import java.util.List;
 import za.co.thoughtworks.trains.application.services.RouteSpec;
 
 /**
+ * Representing a collection of Paths.
+ * Also has special path representing no matching paths (NoPathFound).
  * 
  * @author Yusuf
  *

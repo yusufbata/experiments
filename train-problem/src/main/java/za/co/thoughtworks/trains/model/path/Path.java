@@ -4,6 +4,12 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.application.services.Distance;
 
+/**
+ * Represents a directed path through nodes/locations.
+ * 
+ * @author Yusuf
+ *
+ */
 public interface Path {
 
 	Distance getTotalDistance();
@@ -14,6 +20,6 @@ public interface Path {
 	boolean completedLocationListMatchesTargetPath(
 			List<String> targetPath);
 	boolean isValid(List<Path> allCompletedRoutes);
-	boolean isComplete(List<Path> completedRoutes);
+	boolean isComplete(List<Path> allCompletedRoutes);
 	String getPrintString();
 }

@@ -10,6 +10,8 @@ import za.co.thoughtworks.trains.application.services.TrackDescriptor;
 import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 
 /**
+ * constructs TrackDescriptor from line of text.
+ * 
  * @author Yusuf
  *
  */

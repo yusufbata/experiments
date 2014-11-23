@@ -13,6 +13,10 @@ import za.co.thoughtworks.trains.model.trackmaps.Location;
 
 
 /**
+ * Finds a path using the PathMatchers specified.
+ * Steps through each node one step at a time starting from startingPath (node).
+ * At each step evaluates next possible nodes for validity and completeness.
+ * 
  * @author Yusuf
  *
  */
@@ -29,7 +33,7 @@ public class ExploratorySingleStepRoutingEngine implements PathFinder {
 		
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		
-		if (completedRoutes.size() > 0) {
+		if (!completedRoutes.isEmpty()) {
 			// required for shortest distance matcher
 			// perhaps only run required matchers - will need flag to identify global matchers
 			completedRoutes = validateAllCompletedRoutes(completedRoutes);
@@ -62,7 +66,7 @@ public class ExploratorySingleStepRoutingEngine implements PathFinder {
 				newIncompleteMatchingRoutes.addAll(morePotentialRoutes);
 			}
 		}
-		if (newIncompleteMatchingRoutes.size() > 0) {
+		if (!newIncompleteMatchingRoutes.isEmpty()) {
 			findAllValidRoutes(completedRoutes, newIncompleteMatchingRoutes);
 		}
 	}

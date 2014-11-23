@@ -9,6 +9,10 @@ import za.co.thoughtworks.trains.application.services.RailroadApplicationService
 import za.co.thoughtworks.trains.application.services.RouteSpec;
 
 /**
+ * Used to run the application via the command line.
+ * Uses path to 2 specified input files to create a map of the tracks (graph) 
+ * and finds paths based on route specifications.
+ * 
  * @author Yusuf
  * 
  */

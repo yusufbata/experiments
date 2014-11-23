@@ -14,6 +14,8 @@ import za.co.thoughtworks.trains.application.services.RouteSpec;
 import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
 
 /**
+ * Constructs route specs by parsing lines of text.
+ * 
  * @author Yusuf
  *
  */

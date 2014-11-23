@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ListUtils {
 
+	private ListUtils() {}
+
 	public static <T extends Cloneable> List<T> cloneListWithContents(List<T> aListToClone) {
 		List<T> clone = new ArrayList<T>(aListToClone.size());
 		for (T track : aListToClone) {

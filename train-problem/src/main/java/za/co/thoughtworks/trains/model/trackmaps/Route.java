@@ -13,6 +13,9 @@ import za.co.thoughtworks.trains.model.path.matchers.PathMatcherInput;
 import za.co.thoughtworks.trains.model.path.matchers.PathMatchers;
 
 /**
+ * A specific route from a start location via a list of tracks.
+ * An implementation of a directed graph.
+ * 
  * @author Yusuf
  *
  */
@@ -103,7 +106,7 @@ public class Route implements Path {
 	}
 
 	private String createRoutePath() {
-		if (this.trackList.size() == 0) {
+		if (this.trackList.isEmpty()) {
 			return "No Tracks";
 		}
 		StringBuilder sb = new StringBuilder(this.trackList.get(0).getFromLocationId());

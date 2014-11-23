@@ -18,6 +18,7 @@ import za.co.thoughtworks.trains.model.trackmaps.Route;
 
 /**
  * Used for interacting with the application via adapters.
+ * Primary entry point for core application.
  * 
  * @author Yusuf
  *

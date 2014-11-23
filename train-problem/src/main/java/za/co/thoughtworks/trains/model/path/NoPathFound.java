@@ -5,7 +5,12 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.application.services.Distance;
 
-
+/**
+ * Special path representing a non-existing path. 
+ * 
+ * @author Yusuf
+ *
+ */
 public class NoPathFound extends MatchingPaths implements Path {
 
 	protected NoPathFound(){};
