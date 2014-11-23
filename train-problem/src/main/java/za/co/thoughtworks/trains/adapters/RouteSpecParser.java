@@ -81,13 +81,13 @@ public class RouteSpecParser {
 		if (outputElement != null) {
 			switch (outputElement) {
 			case "PATH_DISTANCE":
-				aRouteSpec.with(OutputMeasurement.PathDistance);
+				aRouteSpec.with(OutputMeasurement.PATH_DISTANCE);
 				break;
 			case "PATH_COUNT":
-				aRouteSpec.with(OutputMeasurement.PathCount);
+				aRouteSpec.with(OutputMeasurement.PATH_COUNT);
 				break;
 			default:
-				aRouteSpec.with(OutputMeasurement.PathCount);
+				aRouteSpec.with(OutputMeasurement.PATH_COUNT);
 				System.out.println("outputElement unknown. Defaulting to PATH_COUNT");
 				break;
 			}

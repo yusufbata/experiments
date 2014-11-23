@@ -10,6 +10,6 @@ package za.co.thoughtworks.trains.application;
  *
  */
 public enum OutputMeasurement {
-	PathDistance,
-	PathCount
+	PATH_DISTANCE,
+	PATH_COUNT
 }

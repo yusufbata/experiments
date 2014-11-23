@@ -29,7 +29,7 @@ public class RouteSpec {
 		this.exactNumberOfStops = exactNumberOfStops;
 		this.maximumDistance = maximumDistance;
 		this.findRouteWithShortestDistance = findRouteWithShortestDistance;
-		this.outputMeasurement = (outputMeasurement != null) ? outputMeasurement : OutputMeasurement.PathCount;
+		this.outputMeasurement = (outputMeasurement != null) ? outputMeasurement : OutputMeasurement.PATH_COUNT;
 	}
 
 	public String getStartLocationId() {

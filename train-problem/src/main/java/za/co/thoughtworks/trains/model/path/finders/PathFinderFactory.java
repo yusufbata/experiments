@@ -1,7 +1,5 @@
 package za.co.thoughtworks.trains.model.path.finders;
 
-import za.co.thoughtworks.trains.application.RouteSpec;
-import za.co.thoughtworks.trains.model.trackmaps.Location;
 
 /**
  * 
@@ -10,7 +8,7 @@ import za.co.thoughtworks.trains.model.trackmaps.Location;
  */
 public class PathFinderFactory {
 
-	public PathFinder constructPathFinder(RouteSpec routeSpec) {
+	public PathFinder constructPathFinder() {
 		return new ExploratorySingleStepRoutingEngine();
 	}
 

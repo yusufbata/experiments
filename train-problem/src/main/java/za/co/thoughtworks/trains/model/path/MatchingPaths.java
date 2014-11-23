@@ -68,9 +68,9 @@ public class MatchingPaths {
 
 	public Object getOutputMeasurement(RouteSpec routeSpec) {
 		switch (routeSpec.getOutputMeasurement()) {
-		case PathDistance:
+		case PATH_DISTANCE:
 			return this.findTheOnlyPath().getPrintString();
-		case PathCount:
+		case PATH_COUNT:
 			return this.getNumberOfRoutes();
 		default:
 			System.err.println("Unknown OutputMeasurement: " + routeSpec.getOutputMeasurement());

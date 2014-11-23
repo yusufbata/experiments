@@ -42,7 +42,7 @@ public class RailroadApplicationService {
 	public MatchingPaths findAllRoutesUsing(RouteSpec routeSpec) {
 		try {
 			PathMatchers pathMatchers = PathMatchersFactory.constructRouteMatchers(routeSpec);
-			PathFinder pathFinder = ApplicationRegistry.getPathFinderFactory().constructPathFinder(routeSpec);
+			PathFinder pathFinder = ApplicationRegistry.getPathFinderFactory().constructPathFinder();
 			Path startingPath = constructInitialPathWithStartNode(routeSpec, pathMatchers);
 			
 			MatchingPaths matchingPaths = pathFinder.findPath(startingPath, pathMatchers);
