@@ -8,16 +8,12 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aRouteSpec;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.Test;
 
 import za.co.thoughtworks.trains.application.services.Distance;
-import za.co.thoughtworks.trains.application.services.NoPath;
+import za.co.thoughtworks.trains.application.services.MatchingPaths;
 import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.application.services.RailroadApplicationService;
-import za.co.thoughtworks.trains.application.services.RouteSpec;
 import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 import za.co.thoughtworks.trains.test.TestUtils;
 
@@ -38,7 +34,7 @@ public class RailroadServiceExactRouteMatchTests {
 				.build());
 		
 		// System.out.println(resultRoute);
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoPath());
+		assertThat(resultRoute).isNotNull().isNotEqualTo(MatchingPaths.noPathFound());
 //		
 //		BatchApplicationRunner runner = new BatchApplicationRunner(railroadService, 
 //				new ArrayList<RouteSpec>(Arrays.asList(aRouteSpec().fromTown("A").toTown("B").build())));
@@ -67,7 +63,7 @@ public class RailroadServiceExactRouteMatchTests {
 				aRouteSpec().fromTown("A").toTown("C")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
+		assertThat(resultRoute).isNotNull().isEqualTo(MatchingPaths.noPathFound());
 	}
 	
 	public void findsNoRouteBetweenTwoTownsWhenStartTownDoesntExist() {
@@ -78,7 +74,7 @@ public class RailroadServiceExactRouteMatchTests {
 				aRouteSpec().fromTown("C").toTown("A")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
+		assertThat(resultRoute).isNotNull().isEqualTo(MatchingPaths.noPathFound());
 	}
 	
 	@Test
@@ -93,7 +89,7 @@ public class RailroadServiceExactRouteMatchTests {
 				aRouteSpec().fromTown("A").toTown("D")
 				.build());
 		
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
+		assertThat(resultRoute).isNotNull().isEqualTo(MatchingPaths.noPathFound());
 	}
 	
 	@Test
@@ -181,11 +177,8 @@ public class RailroadServiceExactRouteMatchTests {
 		
 		resultRoute = railroadService.findSingleRouteUsing(
 				aRouteSpec().fromTown("A").toTown("E").toTown("D").build());
-		assertThat(resultRoute).isNotNull().isEqualTo(new NoPath());
+		assertThat(resultRoute).isNotNull().isEqualTo(MatchingPaths.noPathFound());
 	}
-	
-	
-	
 	
 	private void havingConfigured(TrackDescriptorListBuilder aTrackListBuilder) {
 		TrackDescriptorList trackDescriptorList = aTrackListBuilder.build();
@@ -193,7 +186,7 @@ public class RailroadServiceExactRouteMatchTests {
 	}
 
 	private void theTotalDistanceOfTheRouteIs(int distance, Path resultRoute) {
-		assertThat(resultRoute).isNotNull().isNotEqualTo(new NoPath());
+		assertThat(resultRoute).isNotNull().isNotEqualTo(MatchingPaths.noPathFound());
 		assertThat(resultRoute.getTotalDistance()).isEqualTo(Distance.valueOf(distance));
 	}
 

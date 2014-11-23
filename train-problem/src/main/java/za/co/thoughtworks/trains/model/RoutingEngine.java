@@ -60,7 +60,7 @@ public class RoutingEngine {
 			return MatchingPaths.construct(completedRoutes);
 		}
 		
-		return new NoPath();
+		return MatchingPaths.noPathFound();
 	}
 
 	private List<Path> validateAllCompletedRoutes(List<Path> allCompletedRoutes) {

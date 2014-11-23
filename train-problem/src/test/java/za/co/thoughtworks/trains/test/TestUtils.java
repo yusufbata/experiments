@@ -24,6 +24,6 @@ public class TestUtils {
 
 	public static void containsASingleValidRoute(MatchingPaths matchingPaths) {
 		assertThat(matchingPaths).isNotNull();
-		assertThat(matchingPaths.findTheOnlyPath()).isNotNull().isNotEqualTo(new NoPath());
+		assertThat(matchingPaths.findTheOnlyPath()).isNotNull().isNotEqualTo(MatchingPaths.noPathFound());
 	}
 }

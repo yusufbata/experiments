@@ -43,7 +43,7 @@ public class RailroadApplicationService {
 			return matchingPaths;
 		} catch (Exception e) {
 			System.err.println("Returning NoPath. Ignoring error: " + e);
-			return new NoPath();
+			return MatchingPaths.noPathFound();
 		}
 	}
 

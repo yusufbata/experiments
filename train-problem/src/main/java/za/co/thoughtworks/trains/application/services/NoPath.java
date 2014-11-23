@@ -1,10 +1,13 @@
 package za.co.thoughtworks.trains.application.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class NoPath extends MatchingPaths implements Path {
 
+	protected NoPath(){};
+	
 	@Override
 	public Distance getTotalDistance() {
 		return Distance.infinite();
@@ -32,8 +35,7 @@ public class NoPath extends MatchingPaths implements Path {
 
 	@Override
 	public List<Path> findNextPossiblePaths() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Path>();
 	}
 
 	@Override
@@ -64,8 +66,7 @@ public class NoPath extends MatchingPaths implements Path {
 
 	@Override
 	public boolean isComplete(List<Path> completedRoutes) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

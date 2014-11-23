@@ -70,29 +70,6 @@ class Route implements Path {
 		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, allCompletedRoutes));
 	}
 
-	/*private boolean hasRepeatingLocation() {
-		for (int currentLocationIndex = 0; currentLocationIndex < this.completedLocationList
-				.size(); currentLocationIndex++) {
-			for (int currentListIndex = currentLocationIndex + 1; currentListIndex < this.completedLocationList
-					.size() - currentListIndex; currentListIndex++) {
-				Location currentLocation = this.completedLocationList
-						.get(currentLocationIndex);
-				Location otherLocation = this.completedLocationList
-						.get(currentListIndex);
-				if (currentLocation.equals(otherLocation)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}*/
-	
-	/*@Override
-	public Route clone() {
-		Route newRoute = new Route(this.getStartLocation().clone(), this.toTownList, ListUtils.cloneListWithContents(this.trackList));
-		return newRoute;
-	}*/
-
 	private Location getStartLocation() {
 		return this.completedLocationList.get(0);
 	}
@@ -138,9 +115,6 @@ class Route implements Path {
 		return sb.toString();
 	}
 
-	/* (non-Javadoc)
-	 * @see za.co.thoughtworks.trains.model.Path#hasPath(java.lang.String)
-	 */
 	@Override
 	public boolean hasPath(String routePath) {
 		return this.createRoutePath().compareTo(routePath) == 0;
@@ -149,10 +123,7 @@ class Route implements Path {
 	public int getCurrentNumberOfStopsUsingTracks() {
 		return trackList.size();
 	}
-	
-	/* (non-Javadoc)
-	 * @see za.co.thoughtworks.trains.model.Path#getCurrentNumberOfStops()
-	 */
+
 	@Override
 	public int getCurrentNumberOfStops() {
 		return completedLocationList.size() - 1;

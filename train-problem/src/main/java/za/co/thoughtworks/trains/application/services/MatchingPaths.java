@@ -13,6 +13,7 @@ import java.util.List;
 public class MatchingPaths {
 
 	private final List<Path> completedRoutes;
+	private static final NoPath NO_PATH_FOUND = new NoPath();
 
 	protected MatchingPaths(){
 		completedRoutes = null;
@@ -55,6 +56,10 @@ public class MatchingPaths {
 			}
 		}
 		return new NoPath();
+	}
+	
+	public static NoPath noPathFound(){
+		return NO_PATH_FOUND;
 	}
 
 	public Object getOutputMeasurement(RouteSpec routeSpec) {
