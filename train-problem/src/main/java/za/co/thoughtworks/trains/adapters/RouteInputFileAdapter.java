@@ -47,10 +47,6 @@ public class RouteInputFileAdapter {
 
 	private File getFile(String fileName)
 			throws URISyntaxException {
-		/*URL urlResource = RouteInputFileAdapter.class.getResource(fileName);
-		if (urlResource == null) {
-			throw new InvalidConfigurationException("Provided file name doesn't exist on path: " + fileName);
-		}*/
 		File inputFile = new File(fileName);
 		return inputFile;
 	}
@@ -61,15 +57,20 @@ public class RouteInputFileAdapter {
 		final BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		try {
 			while (reader.ready()) {
-				String currentLine = reader.readLine().trim();
-				if (!lineIsEmptyOrHasComments(currentLine)) {
-					lines.add(currentLine);
-				}
+				addLineToListIfValid(lines, reader);
 			}
 		} finally {
 			reader.close();
 		}
 		return lines;
+	}
+
+	private void addLineToListIfValid(List<String> lines,
+			final BufferedReader reader) throws IOException {
+		String currentLine = reader.readLine().trim();
+		if (!lineIsEmptyOrHasComments(currentLine)) {
+			lines.add(currentLine);
+		}
 	}
 
 	private boolean lineIsEmptyOrHasComments(String currentLine) {
