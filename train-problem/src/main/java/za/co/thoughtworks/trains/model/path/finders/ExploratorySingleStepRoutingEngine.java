@@ -8,7 +8,7 @@ import java.util.List;
 
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
 import za.co.thoughtworks.trains.model.path.Path;
-import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
+import za.co.thoughtworks.trains.model.path.matchers.PathMatchers;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 
 
@@ -16,12 +16,12 @@ import za.co.thoughtworks.trains.model.trackmaps.Location;
  * @author Yusuf
  *
  */
-public class RoutingEngine implements PathFinder {
+public class ExploratorySingleStepRoutingEngine implements PathFinder {
 
-	public RoutingEngine() {}
+	public ExploratorySingleStepRoutingEngine() {}
 
 	@Override
-	public MatchingPaths findPath(Path startingPath, RouteMatchers routeMatchers) {
+	public MatchingPaths findPath(Path startingPath, PathMatchers pathMatchers) {
 		List<Path> completedRoutes = new ArrayList<Path>();
 		List<Path> incompleteMatchingRoutes = new ArrayList<>();
 		

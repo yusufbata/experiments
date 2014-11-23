@@ -9,8 +9,8 @@ import java.util.List;
 import za.co.thoughtworks.trains.application.services.Distance;
 import za.co.thoughtworks.trains.infrastructure.utils.ListUtils;
 import za.co.thoughtworks.trains.model.path.Path;
-import za.co.thoughtworks.trains.model.path.matchers.RouteMatcherInput;
-import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
+import za.co.thoughtworks.trains.model.path.matchers.PathMatcherInput;
+import za.co.thoughtworks.trains.model.path.matchers.PathMatchers;
 
 /**
  * @author Yusuf
@@ -21,18 +21,18 @@ public class Route implements Path {
 	private final Distance totalDistance;
 	private final List<Track> trackList;
 	private final List<Location> completedLocationList;
-	private final RouteMatchers routeMatchers;
+	private final PathMatchers pathMatchers;
 
-	public Route(RouteMatchers routeMatchers, Location startLocation) {
-		this(routeMatchers, startLocation, new ArrayList<Track>());
+	public Route(PathMatchers pathMatchers, Location startLocation) {
+		this(pathMatchers, startLocation, new ArrayList<Track>());
 	}
 	
-	public Route(RouteMatchers routeMatchers, Location startLocation, List<Track> trackList) {
-		if (routeMatchers == null) throw new IllegalArgumentException("routeMatchers cannot be null");
+	public Route(PathMatchers pathMatchers, Location startLocation, List<Track> trackList) {
+		if (pathMatchers == null) throw new IllegalArgumentException("pathMatchers cannot be null");
 		if (startLocation == null) throw new IllegalArgumentException("startLocation cannot be null");
 		if (trackList == null) throw new IllegalArgumentException("Route cannot be initialised with null track list");
 		
-		this.routeMatchers = routeMatchers;
+		this.pathMatchers = pathMatchers;
 		this.completedLocationList = new ArrayList<Location>();
 		this.completedLocationList.add(startLocation);
 		this.trackList = trackList;
@@ -51,7 +51,7 @@ public class Route implements Path {
 	private Route addTrack(Track track)  {
 		List<Track> newTrackList = new ArrayList<Track>(this.trackList);
 		newTrackList.add(track);
-		Route newRoute = new Route(this.routeMatchers.clone(), this.getStartLocation(), newTrackList);
+		Route newRoute = new Route(this.pathMatchers.clone(), this.getStartLocation(), newTrackList);
 		return newRoute;
 	}
 
@@ -61,11 +61,11 @@ public class Route implements Path {
 	}
 
 	public boolean isValid(List<Path> allCompletedRoutes) {
-		return this.routeMatchers.isRouteValid(RouteMatcherInput.construct(this, allCompletedRoutes));
+		return this.pathMatchers.isRouteValid(PathMatcherInput.construct(this, allCompletedRoutes));
 	}
 	
 	public boolean isComplete(List<Path> allCompletedRoutes) {
-		return this.routeMatchers.isRouteComplete(RouteMatcherInput.construct(this, allCompletedRoutes));
+		return this.pathMatchers.isRouteComplete(PathMatcherInput.construct(this, allCompletedRoutes));
 	}
 
 	private Location getStartLocation() {

@@ -10,8 +10,8 @@ import za.co.thoughtworks.trains.application.LocationRepository;
 import za.co.thoughtworks.trains.model.path.MatchingPaths;
 import za.co.thoughtworks.trains.model.path.Path;
 import za.co.thoughtworks.trains.model.path.finders.PathFinder;
-import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
-import za.co.thoughtworks.trains.model.path.matchers.RouteMatchersFactory;
+import za.co.thoughtworks.trains.model.path.matchers.PathMatchers;
+import za.co.thoughtworks.trains.model.path.matchers.PathMatchersFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Route;
@@ -37,14 +37,14 @@ public class RailroadApplicationService {
 
 	public MatchingPaths findAllRoutesUsing(RouteSpec routeSpec) {
 		try {
-			RouteMatchers routeMatchers = RouteMatchersFactory.constructRouteMatchers(routeSpec);
+			PathMatchers pathMatchers = PathMatchersFactory.constructRouteMatchers(routeSpec);
 			Location startLocation = findStartLocation(routeSpec);
 			Location endLocation = findEndLocation(routeSpec);
-			Path startingPath = new Route(routeMatchers, startLocation);
+			Path startingPath = new Route(pathMatchers, startLocation);
 			
 			PathFinder pathFinder = ApplicationRegistry.getPathFinderFactory().constructPathFinder(routeSpec, startLocation, endLocation);
 			
-			MatchingPaths matchingPaths = pathFinder.findPath(startingPath, routeMatchers);
+			MatchingPaths matchingPaths = pathFinder.findPath(startingPath, pathMatchers);
 			return matchingPaths;
 		} catch (Exception e) {
 			System.err.println("Returning NoPathFound. Ignoring error: " + e);

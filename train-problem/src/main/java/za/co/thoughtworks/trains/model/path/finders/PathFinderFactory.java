@@ -6,7 +6,7 @@ import za.co.thoughtworks.trains.model.trackmaps.Location;
 public class PathFinderFactory {
 
 	public PathFinder constructPathFinder(RouteSpec routeSpec, Location startLocation, Location endLocation) {
-		return new RoutingEngine();
+		return new ExploratorySingleStepRoutingEngine();
 	}
 
 }
