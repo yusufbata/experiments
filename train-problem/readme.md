@@ -49,7 +49,7 @@ Followed an outside-in development process. Used acceptance tests to guide imple
 - Measure performance and optimise bottlenecks if required.
 
 # Assumptions
-- NOT found message specified for exact path search option. Assume the use of same NOT found message for other options as well.
+- Requirement specified "For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'". Assume the use of same NOT found message for other (non-exact search) options as well.
 - Test input specified "the towns are named using the first few letters of the alphabet from A to D", but tracks included "E" as well. Assumed this is a typo.
 
 # Other notes
