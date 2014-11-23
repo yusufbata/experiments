@@ -19,8 +19,11 @@ import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
  */
 public class RouteSpecParser {
 
+	private final static String FORMAT_OPTIONS_PATTERN = "EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT";
+	
 	/**
-	 * Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
+	 * Format options: 
+	 * EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
 	 * 
 	 * Element separators '|' . Note that they can't be used for values.
 	 * Exactly one item required per element (NONE allowed if not required).
@@ -38,8 +41,9 @@ public class RouteSpecParser {
 		String[] elements = stringPattern.split("\\|");
 		
 		if (elements.length != 4) {
-			throw new IllegalArgumentException("Line does not have EXACTLY 4 elements. Ignoring: " + stringPattern 
+			System.err.println("Line does not have EXACTLY 4 elements. Ignoring line: " + stringPattern 
 					+ ". Elements=" + Arrays.asList(elements));
+			return null;
 		}
 		
 		String pathElement = elements[0].trim();
@@ -162,7 +166,9 @@ public class RouteSpecParser {
 				routeSpecList.add(routeSpec);
 			}
 			else {
-				System.err.println("Line doesn't conform to RouteSpec format [XXX]. Ignoring line [" + line + "]");
+				System.err.println("Line doesn't conform to RouteSpec format ["
+						+ FORMAT_OPTIONS_PATTERN
+						+ "]. Ignoring line [" + line + "]");
 			}
 		}
 		return routeSpecList;

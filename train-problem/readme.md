@@ -70,7 +70,7 @@ Followed an outside-in development process. Used acceptance tests to guide imple
 
 # Possible improvements
 - Add more thorough unit test coverage. Including testing of various input options and parsers.
-- Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Would do this if more input variance is introduced into application requirements in future.
+- Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Would do this if more input variance is introduced into application requirements in future. Would also consider moving route matching options to enums to structure parsing and matching logic.
 - Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense and possible optimisation.
 - Measure performance and optimise bottlenecks if required.
 
