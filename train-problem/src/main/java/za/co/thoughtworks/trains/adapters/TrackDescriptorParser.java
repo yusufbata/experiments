@@ -10,7 +10,7 @@ import za.co.thoughtworks.trains.application.services.TrackDescriptor;
 import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 
 /**
- * @author F3657051
+ * @author Yusuf
  *
  */
 public class TrackDescriptorParser {

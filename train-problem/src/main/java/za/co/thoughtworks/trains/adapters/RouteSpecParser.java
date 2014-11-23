@@ -14,7 +14,7 @@ import za.co.thoughtworks.trains.application.services.RouteSpec;
 import za.co.thoughtworks.trains.application.services.RouteSpecBuilder;
 
 /**
- * @author F3657051
+ * @author Yusuf
  *
  */
 public class RouteSpecParser {
