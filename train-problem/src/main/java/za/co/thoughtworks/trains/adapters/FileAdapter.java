@@ -79,7 +79,4 @@ public class FileAdapter {
 		List<RouteSpec> routeSpecList = new RouteSpecParser().constructRouteSpecListUsing(lines);
 		return routeSpecList;
 	}
-
-	
-
 }
