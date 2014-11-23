@@ -33,7 +33,7 @@ public class TrackDescriptorParser {
 			trackDescriptorList.add(trackDescriptor);
 		}
 		else {
-			System.err.println("Line doesn't conform to TrackDescriptor format [From-To-Distance]. Ignoring line [" + line + "]");
+			System.err.println("Line doesn't conform to TrackDescriptor format [FromLocation-ToLocation-DistanceInteger]. Ignoring line [" + line + "]");
 		}
 	}
 	

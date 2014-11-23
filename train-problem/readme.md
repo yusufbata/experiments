@@ -25,25 +25,26 @@ This project aims to solve the thoughtworks train problem. The Java programming 
 
 ## Running the application
 1: Navigate to the target directory after building application (see previous step) -> /train-problem/target/
-2: Run: java -jar train-problem.jar classes/sample-tracks.txt classes/sample-routespecs.txt
-3: You will see the output of the application on the command-line. Note that the sample files used in the previous step have the exact problem input specified in the problem statement.
-4: (optional) Modify the sample input files and run again, or use your own input files (then remember to change the file paths above to point to your files).
+2: Run command: java -jar train-problem.jar classes/sample-tracks.txt classes/sample-routespecs.txt
+3: You will see the output of the application on the command-line. Note that the sample files used in the previous step have the exact problem input specified in the problem statement and generate the expected output.
+4: (optional) Modify the sample input files in the classes folder and run again, or use your own input files (then remember to change the file paths above to point to your files).
 
 ## File input format
 The application uses 2 files:
- 1: tracks file - used to define track map (graph structure).
- 2: route-specs file - used to define required route specifications (matchers).  
+ 1: tracks file - used to define track map (directed graph structure).
+ 2: route-specs file - used to define required route specifications (path matchers).  
 
 NOTE: Comments (lines starting with '#') and blank lines are allowed and ignored in both the files.
 NOTE: Input is case sensitive.
 
-The application output is directed to standard out (command-line by default).
+The application output is directed to standard.out (command-line by default).
 
 ### tracks file format
-Expected pattern: {From}-{To}-{DistanceInteger}
+Expected pattern: {FromLocation}-{ToLocation}-{DistanceInteger}
 Expected pattern example: A-B-4
-Items separated using '-'
- 
+Elements separated using '-'
+NOTE: Every item must be on a new line.
+
 ### route-specs file format
 Format pattern: {NODE-MATCH STRATEGY} = {NODE-MATCH VALUE} | {PATH-MATCHER TYPE} = {PATH-MATCHER VALUE} | {OPTIMUM-PATH-SELECTOR} | {OUTPUT-MEASURE}
 
