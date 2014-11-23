@@ -37,14 +37,19 @@ The application has a modular structure following the ports-adapters architectur
 - runner -> App class used to launch the application via the command-line.
 
 ## Application Design
-xxx
+The problem contains 2 distinct domains: trackmaps and paths.
 
-# Process?
-Design principles?
-Methodologies?
+- trackmaps: a map of the tracks and their locations. These are entities with identity that can potentially be persisted for long term storage in the application. The Route is used by the path component by implementing the Path interface. 
+- paths: the logic for finding paths that match the path specifications. Composed of PathFinder and PathMatchers. Currently one implementation of PathFinder algorithm: ExploratorySingleStepRoutingEngine. Can easily be optimised or replaced due to clean separation and acceptance tests.
+
+# Development process
+Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness.
 
 # Possible improvements
-- xx
+- Add more thorough unit test coverage.
+- Structure PathMatchers better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Could do this if application requirements include this in future.
+- Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense.
+- Measure performance and optimise bottlenecks if required.
 
 # Limitations
-- External libraries for build and testing ONLY. This resulted in some ugly System.out stuff from diagnostics and application output :)
+- External libraries allowed for build and testing ONLY. This resulted in some ugly System.out stuff for diagnostics and application output :)
