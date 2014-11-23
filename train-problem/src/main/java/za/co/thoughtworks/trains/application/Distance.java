@@ -26,7 +26,7 @@ public class Distance {
 	
 	@Override
 	public int hashCode() {
-		return (31 * (31 + this.units));
+		return 31 * (31 + this.units);
 	}
 
 	@Override

@@ -30,6 +30,7 @@ The application uses 2 files:
  2: route-specs file - used to define required route specifications (matchers).  
 
 NOTE: Comments (lines starting with '#') and blank lines are allowed and ignored in both the files.
+NOTE: Input is case sensitive.
 
 The application output is directed to standard out (command-line by default).
 

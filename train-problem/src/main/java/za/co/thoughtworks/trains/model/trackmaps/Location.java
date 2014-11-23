@@ -43,7 +43,7 @@ public class Location {
 	
 	@Override
 	public int hashCode() {
-		return (37 * (37 + this.id.hashCode()));
+		return 37 * (37 + this.id.hashCode());
 	}
 
 	public String getId() {

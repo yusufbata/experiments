@@ -32,12 +32,14 @@ public class RouteSpecParser {
 	 * Exact number of elements (4) required in every line, including NONE if element not required.
 	 * Key value separators '='. Values ignored when NONE specified.
 	 * 
+	 * NOTE: Options are case sensitive.
+	 * 
 	 * @param line
 	 * @return
 	 */
 	protected RouteSpec constructRouteSpecFromStringPattern(
 			String stringPattern) {
-		stringPattern = stringPattern.trim(); //.toUpperCase();
+		stringPattern = stringPattern.trim();
 
 		// Escape required for PIPE character
 		String[] elements = stringPattern.split("\\|");
@@ -214,10 +216,8 @@ public class RouteSpecParser {
 			if (exactSize == 0) {
 				return items[index].trim();
 			}
-			else if(exactSize > 0){
-				if (items.length == exactSize) {
-					return items[index].trim();
-				}
+			else if(exactSize > 0 && items.length == exactSize){
+				return items[index].trim();
 			}
 		}
 		return null;

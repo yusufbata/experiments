@@ -13,7 +13,7 @@ import za.co.thoughtworks.trains.application.Distance;
  */
 public class NoPathFound extends MatchingPaths implements Path {
 
-	protected NoPathFound(){};
+	protected NoPathFound(){}
 	
 	@Override
 	public Distance getTotalDistance() {
