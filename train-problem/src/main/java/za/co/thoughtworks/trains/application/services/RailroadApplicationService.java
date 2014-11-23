@@ -17,6 +17,8 @@ import za.co.thoughtworks.trains.model.trackmaps.LocationFactory;
 import za.co.thoughtworks.trains.model.trackmaps.Route;
 
 /**
+ * Used for interacting with the application via adapters.
+ * 
  * @author Yusuf
  *
  */
@@ -38,11 +40,8 @@ public class RailroadApplicationService {
 	public MatchingPaths findAllRoutesUsing(RouteSpec routeSpec) {
 		try {
 			PathMatchers pathMatchers = PathMatchersFactory.constructRouteMatchers(routeSpec);
-			Location startLocation = findStartLocation(routeSpec);
-			Location endLocation = findEndLocation(routeSpec);
-			Path startingPath = new Route(pathMatchers, startLocation);
-			
-			PathFinder pathFinder = ApplicationRegistry.getPathFinderFactory().constructPathFinder(routeSpec, startLocation, endLocation);
+			PathFinder pathFinder = ApplicationRegistry.getPathFinderFactory().constructPathFinder(routeSpec);
+			Path startingPath = constructInitialPathWithStartNode(routeSpec, pathMatchers);
 			
 			MatchingPaths matchingPaths = pathFinder.findPath(startingPath, pathMatchers);
 			return matchingPaths;
@@ -50,6 +49,14 @@ public class RailroadApplicationService {
 			System.err.println("Returning NoPathFound. Ignoring error: " + e);
 			return MatchingPaths.noPathFound();
 		}
+	}
+
+	private Path constructInitialPathWithStartNode(RouteSpec routeSpec,
+			PathMatchers pathMatchers) {
+		Location startLocation = findStartLocation(routeSpec);
+		Location endLocation = findEndLocation(routeSpec);
+		Path startingPath = new Route(pathMatchers, startLocation);
+		return startingPath;
 	}
 
 	private Location findEndLocation(RouteSpec routeSpec) {

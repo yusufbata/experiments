@@ -18,6 +18,8 @@ import za.co.thoughtworks.trains.application.services.RouteSpec;
 import za.co.thoughtworks.trains.application.services.TrackDescriptorList;
 
 /**
+ * Used for providing input to the application via files
+ * 
  * @author Yusuf
  *
  */

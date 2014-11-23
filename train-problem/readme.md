@@ -2,9 +2,9 @@
 This project aims to solve the thoughtworks train problem.
 
 # Priorities & status
-1: Complete all application features (requirement): Completed - proven using acceptance test cases.
-2: Maintainability: Not perfect due to time constraints. In particular, unit-level tests would result in more robustness. The application structure could also be more isolated.
-3: Performance: Not measured due to time constraints. IF measurements indicate bottlenecks, maintainability will allow changes to be made much more easily. Most likely area of change will be RoutingEngine.
+1: Complete all application features (requirement): Completed - proven using acceptance test cases and sample input files.
+2: Maintainability: Not perfect due to time constraints. In particular, unit-level tests would result in more robustness. Acceptance tests do however enable safe refactoring while maintaining existing functionality.
+3: Performance: Not measured due to time constraints. IF measurements indicate bottlenecks, maintainability will allow changes to be made much more easily. Most likely area of performance change will be Path module (path finder implementation).
 
 # Running the application
 ## Prerequisites for running application
@@ -28,13 +28,13 @@ This project aims to solve the thoughtworks train problem.
 xxx
 
 ## Application Structure
-The application has a modular structure:
+The application has a modular structure following the ports-adapters architecture style:
 
-- runner
-- adapters -> FileAdapter: Used for 
-- application-services -> 
-- model
-- infrastructure
+- adapters -> RouteInputFileAdapter: Used for providing input to the application via files. This is currently the only supported interaction with the application (other than unit tests). More adapters can however easily be added.
+- application-services -> RailroadApplicationService: Used for interacting with the application via adapters.
+- model -> TrackMaps (Entity) and Path (Value) domain components. Used by the application-services to compose application features.
+- infrastructure -> Implementation of application-service dependencies (like Repos).
+- runner -> App class used to launch the application via the command-line.
 
 ## Application Design
 xxx

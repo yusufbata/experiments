@@ -7,6 +7,12 @@ import java.util.Map;
 import za.co.thoughtworks.trains.application.LocationRepository;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
 
+/**
+ * Implementation of application-service LocationRepository dependency
+ * 
+ * @author Yusuf
+ *
+ */
 public class InMemoryLocationRepository implements LocationRepository {
 
 	private Map<String, Location> locationsMap;
