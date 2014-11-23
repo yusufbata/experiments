@@ -70,7 +70,10 @@ public class RouteSpecParser {
 				break;
 			case "PATH_COUNT":
 				aRouteSpec.with(OutputMeasurement.PathCount);
+				break;
 			default:
+				aRouteSpec.with(OutputMeasurement.PathCount);
+				System.out.println("outputElement unknown. Defaulting to PATH_COUNT");
 				break;
 			}
 		}

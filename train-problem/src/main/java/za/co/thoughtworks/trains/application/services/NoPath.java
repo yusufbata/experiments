@@ -19,6 +19,11 @@ public class NoPath extends MatchingPaths implements Path {
 	}
 	
 	@Override
+	public int hashCode() {
+		return 7;
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[NoPath]");

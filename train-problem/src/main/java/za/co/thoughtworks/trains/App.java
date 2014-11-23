@@ -49,8 +49,7 @@ public class App {
 			BatchApplicationRunner runner = new BatchApplicationRunner(railroadService, routeSpecList);
 			runner.run();
 		} catch (Exception e) {
-			System.err.println("Application failure occurred");
-			e.printStackTrace();
+			System.err.println("Application failure occurred: " + e);
 		}
 	}
 }
