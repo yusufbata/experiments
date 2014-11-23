@@ -43,43 +43,49 @@ The application output is directed to standard.out (command-line by default).
 Expected pattern: {FromLocation}-{ToLocation}-{DistanceInteger}
 Expected pattern example: A-B-4
 Elements separated using '-'
+Only Integers currently supported for distance.
 NOTE: Every item must be on a new line.
 
 ### route-specs file format
-Format pattern: {NODE-MATCH STRATEGY} = {NODE-MATCH VALUE} | {PATH-MATCHER TYPE} = {PATH-MATCHER VALUE} | {OPTIMUM-PATH-SELECTOR} | {OUTPUT-MEASURE}
+Format pattern: {NODE-MATCH STRATEGY} = {NODE-MATCH VALUE} | {PATH-MATCHER-TYPE} = {PATH-MATCHER VALUE} | {OPTIMUM-PATH-SELECTOR} | {OUTPUT-MEASURE}
 
-Format example: EXACT_PATH = A-B-C-D | NONE = 3 | NONE | PATH_DISTANCE
+Format examples: 
+EXACT_PATH = A-B-C-D | NONE | NONE | PATH_DISTANCE
+START_AND_END = C-C | MAX_HOPS = 3 | NONE | PATH_COUNT
 
 Format options: EXACT_PATH/START_AND_END = {A-B-C-D} | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = {3} | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
 
-Element separators '|' . Note that they can't be used for values.
-Exactly one item required per element (NONE allowed if element not required).
-Exact number of elements (4) required in every line, including NONE if element not required.
-Key value separators '='. Values ignored when NONE specified.
+Element separators '|' . Note that this character can't be used for values.
+Exactly one item required per element (NONE element allowed if element is not required).
+Exact number of elements (4) required in every line, including NONE if element is not required.
+Key value separator is '='. Values ignored when NONE specified.
+Only Integers currently supported for measure values.
+
+NOTE: Every item must be on a new line.
 
 # Application Structure
 The application has a modular structure following the ports-adapters architecture style:
 
 - adapters -> RouteInputFileAdapter: Used for providing input to the application via files. This is currently the only supported interaction with the application (other than unit tests). More adapters can however easily be added.
-- application-services -> RailroadApplicationService: Used for interacting with the application via adapters. Uses the input RouteSpec (route specification) to finds matching paths in the trackmap.
+- application-services -> RailroadApplicationService: Used for interacting with the application via adapters. Uses the input RouteSpec (route specification) to finds matching paths in the trackmap. BatchApplicationRunner can be used to run a batch of route specs and print results.
 - model -> TrackMaps (Entity) and Path (Value) domain components. Used by the application-services to compose application features.
-- infrastructure -> Implementation of application-service dependencies (like Repos).
+- infrastructure -> Implementation of application-service dependencies (like Repositories).
 - runner -> App class used to launch the application via the command-line.
 
 # Application domain components
-The problem contains 2 distinct domains: trackmaps and paths.
+The problem contains 2 distinct domains: track maps (locations and tracks) and paths.
 
-- trackmaps: a map of the tracks and their locations. These are entities with identity that can potentially be persisted for long term storage in the application. The Route is used by the path component by implementing the Path interface. 
-- paths: the logic for finding paths that match the path specifications (built using route specifications). Composed of PathFinder and PathMatchers. Currently one implementation of PathFinder algorithm: ExploratorySingleStepRoutingEngine. Can easily be optimised or replaced due to clean separation and acceptance tests.
+- trackmaps: a map of the tracks and their locations. These are entities with identity that can potentially be persisted for long term storage by the application. The Route is used by the path component by implementing the Path (role-based) interface.
+- paths: the logic for finding paths that match the path specifications (built using route specifications). Composed of PathFinder and PathMatchers. Currently one implementation of PathFinder algorithm: ExploratorySingleStepRoutingEngine. Can easily be optimised or replaced with alternative implementation due to clean separation of concerns and good acceptance test coverage.
 
 # Development process
-Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness. Used general OO design approach. Used a combination of top-down (conceptual) and bottom-up (heuristic) design.
+Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness (due to time-constraint). Used general OO design approach. Used a combination of top-down (conceptual) and bottom-up (heuristic) design.
 
 # Possible improvements
 - Add more thorough unit test coverage. Including testing of various input options and parsers.
-- Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Would do this if more input variance is introduced into application requirements in future. Would also consider moving route matching options to enums to structure parsing and matching logic.
-- Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense and possible optimisation.
+- Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Would do this if more input variance is introduced into application requirements in future. Would also consider moving route matching options to enums to structure parsing and matching logic more cleanly.
+- Distinguish PathOptimisationMatchers (like ShortestRoute) from single PathMatchers. Would make more conceptual sense and allow performance optimisations.
 - Measure performance and optimise bottlenecks if required.
 
 # Other notes
-- External libraries allowed for build and testing ONLY. This resulted in some ugly System.out stuff for diagnostics and application output :)
+- External libraries allowed ONLY for building and testing. This resulted in some ugly System.out stuff for diagnostics and application output :)
