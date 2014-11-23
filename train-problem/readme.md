@@ -1,10 +1,15 @@
 # Overview
-This project aims to solve the thoughtworks train problem. The Java programming language (1.7) was used along with JUnit and Fest assertions (for testing) and maven (for building the application).
+This project aims to solve the thoughtworks train problem. The Java programming language (1.7) was used along with JUnit and Fest assertions (for testing) and maven (for building the application). It was developed and tested on Windows 7 64 bit.
 
 # Prioritised goals & status
-1: Complete all application features (requirement): Completed - proven using acceptance test cases and sample input files.
-2: Maintainability: Not perfect due to time constraints. In particular, unit-level tests would result in more robustness. Acceptance tests do however enable safe refactoring while maintaining existing functionality.
-3: Performance: Not measured due to time constraints. IF measurements indicate bottlenecks, maintainability will allow changes to be made much more easily. Most likely area of performance change will be Path module (path finder implementation).
+1: Complete all application features (as specified in requirement): Completed - proven using acceptance test cases and sample input files. See RailroadServiceExactRouteMatchTests class for example.
+2: Maintainability: Not perfect due to time constraints. In particular, unit-level tests would result in more robustness. Acceptance tests do however enable safe refactoring while maintaining existing functionality. Test coverage is currently 78% (courtesy of JaCoCo). Naming and component isolation could also be improved with time.
+3: Performance: Not measured due to time constraints. IF measurements indicate bottlenecks, maintainability will allow changes to be made much more easily. Most likely area of performance change will be Path module (path finder implementation) - changes can be made in this class or a new implementation can be added without modifying any other existing code (Open Closed Principle).
+
+# Assumptions
+- Assume that file input format doesn't need to be exactly in the (free-form) format specified in the requirement. Specified a more constrained, structured input format. This can be modified if required without much risk and effort due to test coverage and separation of concerns.
+- The requirement specified "For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'". Assume the use of same "NOT found" message for other (non-exact search) options as well.
+- Problem specified: "the towns are named using the first few letters of the alphabet from A to D", but tracks included "E" as well. Assumed this is a typo.
 
 # Using the application
 ## Prerequisites for running application
@@ -19,8 +24,8 @@ This project aims to solve the thoughtworks train problem. The Java programming 
 3: Run: mvn clean install
 
 ## Running the application
-1: Navigate to the target directory after building application (see previous step) -> train-problem/target/
-2: Run: java -jar train-problem-0.0.1-SNAPSHOT.jar classes/sample-tracks.txt classes/sample-routespecs.txt
+1: Navigate to the target directory after building application (see previous step) -> /train-problem/target/
+2: Run: java -jar train-problem.jar classes/sample-tracks.txt classes/sample-routespecs.txt
 3: You will see the output of the application on the command-line. Note that the sample files used in the previous step have the exact problem input specified in the problem statement.
 4: (optional) Modify the sample input files and run again, or use your own input files (then remember to change the file paths above to point to your files).
 
@@ -74,10 +79,6 @@ Followed an outside-in development process. Used acceptance tests to guide imple
 - Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Would do this if more input variance is introduced into application requirements in future. Would also consider moving route matching options to enums to structure parsing and matching logic.
 - Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense and possible optimisation.
 - Measure performance and optimise bottlenecks if required.
-
-# Assumptions
-- Requirement specified "For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'". Assume the use of same NOT found message for other (non-exact search) options as well.
-- Test input specified "the towns are named using the first few letters of the alphabet from A to D", but tracks included "E" as well. Assumed this is a typo.
 
 # Other notes
 - External libraries allowed for build and testing ONLY. This resulted in some ugly System.out stuff for diagnostics and application output :)

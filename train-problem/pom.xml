@@ -37,6 +37,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.7 compatibility -->
 			<plugin>
