@@ -10,9 +10,6 @@ public class PathMatchers implements PathMatcher<PathMatchers>, za.co.thoughtwor
 	private final List<PathMatcher<?>> routeMatcherList;
 
 	public PathMatchers(List<PathMatcher<?>> routeMatcherList) {
-		/*if (this.routeMatcherList == null || this.routeMatcherList.size() == 0) {
-			throw new IllegalArgumentException("At least one route matcher has to be present");
-		}*/
 		this.routeMatcherList = routeMatcherList;
 	}
 

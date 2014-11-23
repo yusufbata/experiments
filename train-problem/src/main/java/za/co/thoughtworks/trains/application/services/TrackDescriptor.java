@@ -54,13 +54,17 @@ public class TrackDescriptor {
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof TrackDescriptor) {
 			TrackDescriptor other = (TrackDescriptor)obj;
-			if (this.fromLocationId.compareTo(other.fromLocationId) == 0
-					&& this.toLocationId.compareTo(other.toLocationId) == 0
-					&& this.distance.equals(other.distance)) {
+			if (locationsAndDistanceAreEqual(other)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private boolean locationsAndDistanceAreEqual(TrackDescriptor other) {
+		return this.fromLocationId.compareTo(other.fromLocationId) == 0
+				&& this.toLocationId.compareTo(other.toLocationId) == 0
+				&& this.distance.equals(other.distance);
 	}
 	
 	@Override

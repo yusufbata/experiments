@@ -6,7 +6,8 @@ package za.co.thoughtworks.trains.application.services;
 import java.util.List;
 
 /**
- * Specifies the required route specifications. 
+ * Specifies the required route specifications.
+ * TODO: Split into multiple enums instead, one per logical spec element. 
  * 
  * @author Yusuf
  *

@@ -12,36 +12,28 @@ public class PathMatchersFactory {
 	public static PathMatchers constructRouteMatchers(RouteSpec routeSpec) {
 		List<PathMatcher<?>> routeMatcherItemList = new ArrayList<PathMatcher<?>>();
 
-		if (routeSpec.getMaximumStops() > 0) {
-			MaximumStopsPathMatcher maximumStopsPathMatcher = 
-					new MaximumStopsPathMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumStops());
-			routeMatcherItemList.add(maximumStopsPathMatcher);
+		if (routeSpec.getMaximumStops() > 0) {					
+			routeMatcherItemList.add(
+					new MaximumStopsPathMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumStops()));
 		}
 		if (routeSpec.getExactNumberOfStops() > 0) {
-			ExactNumberOfStopsPathMatcher exactNumberOfStopsPathMatcher = 
-					new ExactNumberOfStopsPathMatcher(routeSpec.getTargetPath(), routeSpec.getExactNumberOfStops());
-			routeMatcherItemList.add(exactNumberOfStopsPathMatcher);
+			routeMatcherItemList.add(
+					new ExactNumberOfStopsPathMatcher(routeSpec.getTargetPath(), routeSpec.getExactNumberOfStops()));
 		}
 		if (routeSpec.getMaximumDistance() > 0) {
-			MaximumDistancePathMatcher maximumDistancePathMatcher = 
-					new MaximumDistancePathMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumDistance());
-			routeMatcherItemList.add(maximumDistancePathMatcher);
+			routeMatcherItemList.add(
+					new MaximumDistancePathMatcher(routeSpec.getTargetPath(), routeSpec.getMaximumDistance()));
 		}
-		
 		// NOTE: Order is important for this matcher
 		if (routeSpec.shouldFindRouteWithShortestDistance()) {
-			ShortestDistancePathMatcher shortestDistancePathMatcher = 
-					new ShortestDistancePathMatcher(routeSpec.getTargetPath());
-			routeMatcherItemList.add(shortestDistancePathMatcher);
+			routeMatcherItemList.add(
+					new ShortestDistancePathMatcher(routeSpec.getTargetPath()));
 		}
-		
 		if (routeMatcherItemList.isEmpty()) {
-			ExactPathMatcher exactPathMatcher = new ExactPathMatcher(routeSpec.getTargetPath());
-			routeMatcherItemList.add(exactPathMatcher);
+			routeMatcherItemList.add(new ExactPathMatcher(routeSpec.getTargetPath()));
 		}
 		
-		PathMatchers pathMatchers = new PathMatchers(routeMatcherItemList);
-		return pathMatchers;
+		return new PathMatchers(routeMatcherItemList);
 	}
 
 }

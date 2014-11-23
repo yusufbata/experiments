@@ -53,20 +53,19 @@ public class RouteSpecParser {
 		String pathFilterElement = elements[2].trim();
 		String outputElement = elements[3].trim();
 		
+		return constructRouteSpecUsingElements(stringPattern, pathElement, measureElement,
+				pathFilterElement, outputElement);
+	}
+
+	private RouteSpec constructRouteSpecUsingElements(String stringPattern,
+			String pathElement, String measureElement,
+			String pathFilterElement, String outputElement) {
 		if(!lineElementsAreValid(stringPattern, pathElement, measureElement,
 				pathFilterElement, outputElement)) {
 			return null;
 		}
 		
-		return configureElements(stringPattern, pathElement, measureElement,
-				pathFilterElement, outputElement);
-	}
-
-	private RouteSpec configureElements(String stringPattern,
-			String pathElement, String measureElement,
-			String pathFilterElement, String outputElement) {
 		RouteSpecBuilder aRouteSpec = aRouteSpec();
-		
 		configurePathElements(stringPattern, pathElement, aRouteSpec);
 		configureMeasurementElements(measureElement, aRouteSpec);
 		configurePathFilterElements(pathFilterElement, aRouteSpec);

@@ -34,8 +34,6 @@ public class ExploratorySingleStepRoutingEngine implements PathFinder {
 		findAllValidRoutes(completedRoutes, incompleteMatchingRoutes);
 		
 		if (!completedRoutes.isEmpty()) {
-			// required for shortest distance matcher
-			// perhaps only run required matchers - will need flag to identify global matchers
 			completedRoutes = validateAllCompletedRoutes(completedRoutes);
 			return MatchingPaths.construct(completedRoutes);
 		}
@@ -52,6 +50,12 @@ public class ExploratorySingleStepRoutingEngine implements PathFinder {
 		return validatedCompletedRoutes;
 	}
 
+	/**
+	 * Recursive method that steps through the paths and keeps track of completed paths.
+	 * 
+	 * @param completedRoutes
+	 * @param previousIncompleteMatchingRoutes
+	 */
 	private void findAllValidRoutes(List<Path> completedRoutes,
 			List<Path> previousIncompleteMatchingRoutes) {
 

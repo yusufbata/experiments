@@ -22,7 +22,6 @@ public class ExactNumberOfStopsPathMatcher extends AbstractPathMatcher
 
 	@Override
 	public boolean isRouteComplete(PathMatcherInput pathMatcherInput) {
-		// TODO: Perhaps add isValid check here as well
 		if (pathMatcherInput.getRoute().getCurrentNumberOfStops() == exactNumberOfStops) {
 			String lastLocationId = ListUtils.getLastItemFromList(targetPath);
 			if (pathMatcherInput.getRoute().getCurrentNumberOfStops() > 0) {

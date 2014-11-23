@@ -21,15 +21,20 @@ public class TrackDescriptorParser {
 			List<String> lines) {
 		TrackDescriptorList trackDescriptorList = new TrackDescriptorList();
 		for (String line : lines) {
-			TrackDescriptor trackDescriptor = constructTrackDescriptorFromStringPattern(line);
-			if (trackDescriptor != null) {
-				trackDescriptorList.add(trackDescriptor);
-			}
-			else {
-				System.err.println("Line doesn't conform to TrackDescriptor format [From-To-Distance]. Ignoring line [" + line + "]");
-			}
+			constructTrackDescriptorAndAddToList(trackDescriptorList, line);
 		}
 		return trackDescriptorList;
+	}
+
+	private void constructTrackDescriptorAndAddToList(
+			TrackDescriptorList trackDescriptorList, String line) {
+		TrackDescriptor trackDescriptor = constructTrackDescriptorFromStringPattern(line);
+		if (trackDescriptor != null) {
+			trackDescriptorList.add(trackDescriptor);
+		}
+		else {
+			System.err.println("Line doesn't conform to TrackDescriptor format [From-To-Distance]. Ignoring line [" + line + "]");
+		}
 	}
 	
 	/**
