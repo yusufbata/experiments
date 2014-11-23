@@ -47,7 +47,7 @@ public class LocationFactory {
 				return location;
 			}
 		}
-		throw new RuntimeException("Location not found for locationId=" + locationId);
+		throw new IllegalArgumentException("Location not found for locationId=" + locationId);
 	}
 
 	private void addLocationToListIfDoesntExist(List<Location> locationList, String locationId) {

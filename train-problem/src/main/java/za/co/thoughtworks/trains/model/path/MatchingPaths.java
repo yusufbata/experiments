@@ -34,7 +34,7 @@ public class MatchingPaths {
 			return (NoPathFound)this;
 		}
 		if (this.completedRoutes.size() != 1) {
-			throw new RuntimeException("More than one route not expected!");
+			throw new NotExactlyOneResultException();
 		}
 		return this.completedRoutes.get(0);
 	}
