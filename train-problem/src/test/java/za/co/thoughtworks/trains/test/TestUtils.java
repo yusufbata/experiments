@@ -5,7 +5,7 @@ import static za.co.thoughtworks.trains.application.BuilderFactory.aTrack;
 import static za.co.thoughtworks.trains.application.BuilderFactory.aTrackList;
 import za.co.thoughtworks.trains.application.TrackDescriptorListBuilder;
 import za.co.thoughtworks.trains.application.services.MatchingPaths;
-import za.co.thoughtworks.trains.application.services.NoPath;
+import za.co.thoughtworks.trains.application.services.NoPathFound;
 
 public class TestUtils {
 

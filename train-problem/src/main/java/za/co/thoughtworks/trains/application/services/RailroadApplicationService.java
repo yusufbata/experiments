@@ -42,7 +42,7 @@ public class RailroadApplicationService {
 			MatchingPaths matchingPaths = routingEngine.findRoute(routeMatchers);
 			return matchingPaths;
 		} catch (Exception e) {
-			System.err.println("Returning NoPath. Ignoring error: " + e);
+			System.err.println("Returning NoPathFound. Ignoring error: " + e);
 			return MatchingPaths.noPathFound();
 		}
 	}

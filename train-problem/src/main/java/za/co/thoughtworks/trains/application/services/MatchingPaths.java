@@ -13,7 +13,7 @@ import java.util.List;
 public class MatchingPaths {
 
 	private final List<Path> completedRoutes;
-	private static final NoPath NO_PATH_FOUND = new NoPath();
+	private static final NoPathFound NO_PATH_FOUND = new NoPathFound();
 
 	protected MatchingPaths(){
 		completedRoutes = null;
@@ -28,8 +28,8 @@ public class MatchingPaths {
 	}
 
 	public Path findTheOnlyPath() {
-		if (this instanceof NoPath) {
-			return (NoPath)this;
+		if (this instanceof NoPathFound) {
+			return (NoPathFound)this;
 		}
 		if (this.completedRoutes.size() != 1) {
 			throw new RuntimeException("More than one route not expected!");
@@ -55,10 +55,10 @@ public class MatchingPaths {
 				return route;
 			}
 		}
-		return new NoPath();
+		return new NoPathFound();
 	}
 	
-	public static NoPath noPathFound(){
+	public static NoPathFound noPathFound(){
 		return NO_PATH_FOUND;
 	}
 

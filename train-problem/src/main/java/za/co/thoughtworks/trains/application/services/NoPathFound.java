@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NoPath extends MatchingPaths implements Path {
+public class NoPathFound extends MatchingPaths implements Path {
 
-	protected NoPath(){};
+	protected NoPathFound(){};
 	
 	@Override
 	public Distance getTotalDistance() {
@@ -15,7 +15,7 @@ public class NoPath extends MatchingPaths implements Path {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof NoPath) {
+		if (obj != null && obj instanceof NoPathFound) {
 			return true;
 		}
 		return false;
@@ -29,7 +29,7 @@ public class NoPath extends MatchingPaths implements Path {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[NoPath]");
+		sb.append("[NoPathFound]");
 		return sb.toString();
 	}
 

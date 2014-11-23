@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.thoughtworks.trains.application.services.MatchingPaths;
-import za.co.thoughtworks.trains.application.services.NoPath;
+import za.co.thoughtworks.trains.application.services.NoPathFound;
 import za.co.thoughtworks.trains.application.services.Path;
 import za.co.thoughtworks.trains.model.path.matchers.RouteMatchers;
 import za.co.thoughtworks.trains.model.trackmaps.Location;
