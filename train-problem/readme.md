@@ -32,12 +32,17 @@ The application uses 2 files:
 Comments (lines starting with '#') and blank lines are allowed and ignored in both the files.
 
 ### tracks file format
-Expected pattern: From-To-DistanceInteger
+Expected pattern: {From}-{To}-{DistanceInteger}
 Expected pattern example: A-B-4
 Items separated using '-'
  
 ### route-specs file format
-Format example: EXACT_PATH/START_AND_END = A-B-C-D | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = 3 | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
+
+Format pattern: {NODE-MATCH STRATEGY} = {NODE-MATCH VALUE} | {PATH-MATCHER TYPE} = {PATH-MATCHER VALUE} | {OPTIMUM-PATH-SELECTOR} | {OUTPUT-MEASURE}
+
+Format options: EXACT_PATH/START_AND_END = {A-B-C-D} | MAX_HOPS/EXACT_STOPS/MAX_DISTANCE/NONE = {3} | NONE/SHORTEST_DISTANCE |  PATH_DISTANCE/PATH_COUNT
+
+Format example: EXACT_PATH = A-B-C-D | NONE = 3 | NONE | PATH_DISTANCE
 
 Element separators '|' . Note that they can't be used for values.
 Exactly one item required per element (NONE allowed if element not required).
@@ -63,7 +68,7 @@ The problem contains 2 distinct domains: trackmaps and paths.
 Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness. Used general OO design approach. Used a mixture of top-down (conceptual) and bottom-up (heuristic) design.
 
 # Possible improvements
-- Add more thorough unit test coverage.
+- Add more thorough unit test coverage. Including testing of various input options and parsers.
 - Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Could do this if application requirements include this in future.
 - Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense.
 - Measure performance and optimise bottlenecks if required.
