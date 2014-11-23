@@ -40,7 +40,7 @@ The problem contains 2 distinct domains: trackmaps and paths.
 - paths: the logic for finding paths that match the path specifications. Composed of PathFinder and PathMatchers. Currently one implementation of PathFinder algorithm: ExploratorySingleStepRoutingEngine. Can easily be optimised or replaced due to clean separation and acceptance tests.
 
 # Development process
-Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness. Used a mixture of top-down (conceptual) and bottom-up (heuristic) design approach.
+Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness. Used general OO design approach. Used a mixture of top-down (conceptual) and bottom-up (heuristic) design approach.
 
 # Possible improvements
 - Add more thorough unit test coverage.
