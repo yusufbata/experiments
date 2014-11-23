@@ -44,7 +44,7 @@ Followed an outside-in development process. Used acceptance tests to guide imple
 
 # Possible improvements
 - Add more thorough unit test coverage.
-- Structure PathMatchers better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Could do this if application requirements include this in future.
+- Structure PathMatchers (and parsers) better to allow path operators (like less than, equal to) to be reused across different path measures (like distance, hop count, etc). Could do this if application requirements include this in future.
 - Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense.
 - Measure performance and optimise bottlenecks if required.
 
