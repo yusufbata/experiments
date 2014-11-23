@@ -24,10 +24,7 @@ This project aims to solve the thoughtworks train problem.
 3: You will see the output of the application on the command-line. Note that the sample files used in the previous step have the problem input specified in the problem statement.
 3: (optional) Modify the sample input files and run again, or use your own input files (then remember to change the file paths above accordingly).
 
-# Application design
-xxx
-
-## Application Structure
+# Application Structure
 The application has a modular structure following the ports-adapters architecture style:
 
 - adapters -> RouteInputFileAdapter: Used for providing input to the application via files. This is currently the only supported interaction with the application (other than unit tests). More adapters can however easily be added.
@@ -36,14 +33,14 @@ The application has a modular structure following the ports-adapters architectur
 - infrastructure -> Implementation of application-service dependencies (like Repos).
 - runner -> App class used to launch the application via the command-line.
 
-## Application Design
+# Application Design
 The problem contains 2 distinct domains: trackmaps and paths.
 
 - trackmaps: a map of the tracks and their locations. These are entities with identity that can potentially be persisted for long term storage in the application. The Route is used by the path component by implementing the Path interface. 
 - paths: the logic for finding paths that match the path specifications. Composed of PathFinder and PathMatchers. Currently one implementation of PathFinder algorithm: ExploratorySingleStepRoutingEngine. Can easily be optimised or replaced due to clean separation and acceptance tests.
 
 # Development process
-Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness.
+Followed an outside-in development process. Used acceptance tests to guide implementation and enable refactoring. Sacrificed robustness (via thorough unit-test coverage) for functional completeness. Used a mixture of top-down (conceptual) and bottom-up (heuristic) design approach.
 
 # Possible improvements
 - Add more thorough unit test coverage.
@@ -51,5 +48,9 @@ Followed an outside-in development process. Used acceptance tests to guide imple
 - Distinguish PathOptimisationMatchers (like ShortestRoute) from PathMatchers. Would make more conceptual sense.
 - Measure performance and optimise bottlenecks if required.
 
-# Limitations
+# Assumptions
+- NOT found message specified for exact path search option. Assume the use of same NOT found message for other options as well.
+- Test input specified "the towns are named using the first few letters of the alphabet from A to D", but tracks included "E" as well. Assumed this is a typo.
+
+# Other notes
 - External libraries allowed for build and testing ONLY. This resulted in some ugly System.out stuff for diagnostics and application output :)
